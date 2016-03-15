@@ -1,7 +1,7 @@
 {
-  "name": "ionic-project",
-  "version": "1.1.1",
-  "description": "An Ionic project",
+  "name": "ZambiaReport",
+  "version": "1.0.0",
+  "description": "Zambia report project.",
   "dependencies": {
     "gulp": "^3.5.6",
     "gulp-sass": "^2.0.4",
