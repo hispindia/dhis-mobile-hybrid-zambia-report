@@ -1,0 +1,31 @@
+
+.bar1{
+    display: inline-block;
+    width: 15px;
+    height: 75px;
+    background-color: blueviolet;
+    margin: 0px 0px 0px 5px;
+}
+
+.bar2{
+    display: inline-block;
+    width: 15px;
+    height: 75px;
+    background-color: steelblue;
+    margin: 0px 5px 0px 0px;
+
+}
+
+.axis path,
+.axis line {
+    fill: none;
+    stroke: black;
+    shape-rendering: crispEdges;
+}
+
+
+.y.axis path,line {
+    fill: none;
+    stroke: black;
+    shape-rendering: crispEdges;
+}

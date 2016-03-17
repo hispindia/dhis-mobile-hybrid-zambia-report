@@ -1,0 +1,1343 @@
+{
+  "name": "Immunization",
+  "id": "s53RFfXA75f",
+  "programStageDataElements": [
+    {
+      "created": "2015-11-27T06:14:42.294+0000",
+      "lastUpdated": "2016-03-03T12:28:49.174+0000",
+      "id": "lertfGPuAZc",
+      "displayInReports": true,
+      "externalAccess": false,
+      "compulsory": true,
+      "allowProvidedElsewhere": false,
+      "sortOrder": 0,
+      "allowFutureDate": false,
+      "programStage": {
+        "id": "s53RFfXA75f"
+      },
+      "dataElement": {
+        "lastUpdated": "2015-11-05T20:08:19.448+0000",
+        "id": "HdzfEcDLnhX",
+        "created": "2015-11-05T20:08:19.445+0000",
+        "name": "Origin Code",
+        "shortName": "Origin Code",
+        "aggregationType": "SUM",
+        "dimensionType": "PROGRAM_DATAELEMENT",
+        "domainType": "TRACKER",
+        "displayName": "Origin Code",
+        "publicAccess": "rw------",
+        "displayShortName": "Origin Code",
+        "externalAccess": false,
+        "valueType": "TEXT",
+        "dimensionItem": "HdzfEcDLnhX",
+        "zeroIsSignificant": false,
+        "url": "",
+        "optionSetValue": true,
+        "optionSet": {
+          "id": "Xh725MLJ4nc"
+        },
+        "categoryCombo": {
+          "id": "It7gMGKk1A8"
+        },
+        "user": {
+          "id": "PoVRq5Jlbwo"
+        },
+        "userGroupAccesses": [],
+        "dataElementGroups": [],
+        "attributeValues": [],
+        "dataSets": [],
+        "aggregationLevels": []
+      },
+      "userGroupAccesses": [],
+      "attributeValues": []
+    },
+    {
+      "created": "2015-11-27T06:14:42.301+0000",
+      "lastUpdated": "2016-03-03T12:28:49.204+0000",
+      "id": "tkY0mEihZKB",
+      "displayInReports": true,
+      "externalAccess": false,
+      "compulsory": true,
+      "allowProvidedElsewhere": false,
+      "sortOrder": 1,
+      "allowFutureDate": false,
+      "programStage": {
+        "id": "s53RFfXA75f"
+      },
+      "dataElement": {
+        "lastUpdated": "2015-11-26T13:05:33.644+0000",
+        "id": "e89hG7SQsau",
+        "created": "2015-11-05T20:03:15.130+0000",
+        "name": "Weight (in kg)",
+        "shortName": "Weight (in kg)",
+        "aggregationType": "SUM",
+        "dimensionType": "PROGRAM_DATAELEMENT",
+        "domainType": "TRACKER",
+        "displayName": "Weight (in kg)",
+        "publicAccess": "rw------",
+        "displayShortName": "Weight (in kg)",
+        "externalAccess": false,
+        "valueType": "NUMBER",
+        "dimensionItem": "e89hG7SQsau",
+        "zeroIsSignificant": false,
+        "url": "",
+        "optionSetValue": false,
+        "categoryCombo": {
+          "id": "It7gMGKk1A8"
+        },
+        "user": {
+          "id": "PoVRq5Jlbwo"
+        },
+        "userGroupAccesses": [],
+        "dataElementGroups": [],
+        "attributeValues": [],
+        "dataSets": [],
+        "aggregationLevels": []
+      },
+      "userGroupAccesses": [],
+      "attributeValues": []
+    },
+    {
+      "created": "2015-11-27T06:14:42.307+0000",
+      "lastUpdated": "2016-03-03T12:28:49.210+0000",
+      "id": "vfXnaJ0l3Vy",
+      "displayInReports": false,
+      "externalAccess": false,
+      "compulsory": false,
+      "allowProvidedElsewhere": false,
+      "sortOrder": 2,
+      "allowFutureDate": false,
+      "programStage": {
+        "id": "s53RFfXA75f"
+      },
+      "dataElement": {
+        "lastUpdated": "2015-11-05T20:08:38.580+0000",
+        "id": "nblG1lFCRsO",
+        "created": "2015-11-05T20:08:38.577+0000",
+        "name": "Breast Feeding",
+        "shortName": "Breast Feeding",
+        "aggregationType": "SUM",
+        "dimensionType": "PROGRAM_DATAELEMENT",
+        "domainType": "TRACKER",
+        "displayName": "Breast Feeding",
+        "publicAccess": "rw------",
+        "displayShortName": "Breast Feeding",
+        "externalAccess": false,
+        "valueType": "TRUE_ONLY",
+        "dimensionItem": "nblG1lFCRsO",
+        "zeroIsSignificant": false,
+        "url": "",
+        "optionSetValue": false,
+        "categoryCombo": {
+          "id": "It7gMGKk1A8"
+        },
+        "user": {
+          "id": "PoVRq5Jlbwo"
+        },
+        "userGroupAccesses": [],
+        "dataElementGroups": [],
+        "attributeValues": [],
+        "dataSets": [],
+        "aggregationLevels": []
+      },
+      "userGroupAccesses": [],
+      "attributeValues": []
+    },
+    {
+      "created": "2015-11-27T06:14:42.312+0000",
+      "lastUpdated": "2016-03-03T12:28:49.214+0000",
+      "id": "lxLPHF69jPH",
+      "displayInReports": false,
+      "externalAccess": false,
+      "compulsory": false,
+      "allowProvidedElsewhere": false,
+      "sortOrder": 3,
+      "allowFutureDate": false,
+      "programStage": {
+        "id": "s53RFfXA75f"
+      },
+      "dataElement": {
+        "lastUpdated": "2015-12-30T09:32:59.030+0000",
+        "id": "bpBUOvqy1Jn",
+        "created": "2015-11-05T19:58:58.053+0000",
+        "name": "BCG",
+        "shortName": "BCG",
+        "aggregationType": "SUM",
+        "dimensionType": "PROGRAM_DATAELEMENT",
+        "domainType": "TRACKER",
+        "displayName": "BCG",
+        "publicAccess": "rw------",
+        "displayShortName": "BCG",
+        "externalAccess": false,
+        "valueType": "TRUE_ONLY",
+        "dimensionItem": "bpBUOvqy1Jn",
+        "zeroIsSignificant": false,
+        "url": "",
+        "optionSetValue": false,
+        "categoryCombo": {
+          "id": "It7gMGKk1A8"
+        },
+        "user": {
+          "id": "PoVRq5Jlbwo"
+        },
+        "userGroupAccesses": [],
+        "dataElementGroups": [],
+        "attributeValues": [],
+        "dataSets": [],
+        "aggregationLevels": []
+      },
+      "userGroupAccesses": [],
+      "attributeValues": []
+    },
+    {
+      "created": "2015-11-27T06:14:42.317+0000",
+      "lastUpdated": "2016-03-03T12:28:49.220+0000",
+      "id": "Oe5pxfVFihC",
+      "displayInReports": false,
+      "externalAccess": false,
+      "compulsory": false,
+      "allowProvidedElsewhere": false,
+      "sortOrder": 4,
+      "allowFutureDate": false,
+      "programStage": {
+        "id": "s53RFfXA75f"
+      },
+      "dataElement": {
+        "lastUpdated": "2015-11-25T14:49:29.875+0000",
+        "id": "EMcT5j5zR81",
+        "created": "2015-11-05T19:59:18.306+0000",
+        "name": "BCG scar",
+        "shortName": "BCG scar",
+        "aggregationType": "SUM",
+        "dimensionType": "PROGRAM_DATAELEMENT",
+        "domainType": "TRACKER",
+        "displayName": "BCG scar",
+        "publicAccess": "rw------",
+        "displayShortName": "BCG scar",
+        "externalAccess": false,
+        "valueType": "BOOLEAN",
+        "dimensionItem": "EMcT5j5zR81",
+        "zeroIsSignificant": false,
+        "url": "",
+        "optionSetValue": false,
+        "categoryCombo": {
+          "id": "It7gMGKk1A8"
+        },
+        "user": {
+          "id": "PoVRq5Jlbwo"
+        },
+        "userGroupAccesses": [],
+        "dataElementGroups": [],
+        "attributeValues": [],
+        "dataSets": [],
+        "aggregationLevels": []
+      },
+      "userGroupAccesses": [],
+      "attributeValues": []
+    },
+    {
+      "created": "2015-11-27T06:14:42.322+0000",
+      "lastUpdated": "2016-03-03T12:28:49.225+0000",
+      "id": "acTUfAVXPhX",
+      "displayInReports": false,
+      "externalAccess": false,
+      "compulsory": false,
+      "allowProvidedElsewhere": false,
+      "sortOrder": 5,
+      "allowFutureDate": false,
+      "programStage": {
+        "id": "s53RFfXA75f"
+      },
+      "dataElement": {
+        "lastUpdated": "2015-11-25T14:50:01.894+0000",
+        "id": "KRF40x6EILp",
+        "created": "2015-11-25T14:50:01.875+0000",
+        "name": "BCG repeat dose",
+        "shortName": "BCG repeat dose",
+        "aggregationType": "SUM",
+        "dimensionType": "PROGRAM_DATAELEMENT",
+        "domainType": "TRACKER",
+        "displayName": "BCG repeat dose",
+        "publicAccess": "rw------",
+        "displayShortName": "BCG repeat dose",
+        "externalAccess": false,
+        "valueType": "TRUE_ONLY",
+        "dimensionItem": "KRF40x6EILp",
+        "zeroIsSignificant": false,
+        "url": "",
+        "optionSetValue": false,
+        "categoryCombo": {
+          "id": "It7gMGKk1A8"
+        },
+        "user": {
+          "id": "zhLn86dmmcd"
+        },
+        "userGroupAccesses": [],
+        "dataElementGroups": [],
+        "attributeValues": [],
+        "dataSets": [],
+        "aggregationLevels": []
+      },
+      "userGroupAccesses": [],
+      "attributeValues": []
+    },
+    {
+      "created": "2015-11-27T06:14:42.328+0000",
+      "lastUpdated": "2016-03-03T12:28:49.244+0000",
+      "id": "WIrJOmC0KPj",
+      "displayInReports": false,
+      "externalAccess": false,
+      "compulsory": false,
+      "allowProvidedElsewhere": false,
+      "sortOrder": 6,
+      "allowFutureDate": false,
+      "programStage": {
+        "id": "s53RFfXA75f"
+      },
+      "dataElement": {
+        "lastUpdated": "2015-11-05T19:59:29.472+0000",
+        "id": "no7SkAxepi7",
+        "created": "2015-11-05T19:59:29.469+0000",
+        "name": "OPV 0",
+        "shortName": "OPV 0",
+        "aggregationType": "SUM",
+        "dimensionType": "PROGRAM_DATAELEMENT",
+        "domainType": "TRACKER",
+        "displayName": "OPV 0",
+        "publicAccess": "rw------",
+        "displayShortName": "OPV 0",
+        "externalAccess": false,
+        "valueType": "TRUE_ONLY",
+        "dimensionItem": "no7SkAxepi7",
+        "zeroIsSignificant": false,
+        "url": "",
+        "optionSetValue": false,
+        "categoryCombo": {
+          "id": "It7gMGKk1A8"
+        },
+        "user": {
+          "id": "PoVRq5Jlbwo"
+        },
+        "userGroupAccesses": [],
+        "dataElementGroups": [],
+        "attributeValues": [],
+        "dataSets": [],
+        "aggregationLevels": []
+      },
+      "userGroupAccesses": [],
+      "attributeValues": []
+    },
+    {
+      "created": "2015-11-27T06:14:42.332+0000",
+      "lastUpdated": "2016-03-03T12:28:49.274+0000",
+      "id": "Y1Lzbxj8chy",
+      "displayInReports": false,
+      "externalAccess": false,
+      "compulsory": false,
+      "allowProvidedElsewhere": false,
+      "sortOrder": 7,
+      "allowFutureDate": false,
+      "programStage": {
+        "id": "s53RFfXA75f"
+      },
+      "dataElement": {
+        "lastUpdated": "2015-11-05T19:59:36.455+0000",
+        "id": "CfPM8lsEMzH",
+        "created": "2015-11-05T19:59:36.451+0000",
+        "name": "OPV 1",
+        "shortName": "OPV 1",
+        "aggregationType": "SUM",
+        "dimensionType": "PROGRAM_DATAELEMENT",
+        "domainType": "TRACKER",
+        "displayName": "OPV 1",
+        "publicAccess": "rw------",
+        "displayShortName": "OPV 1",
+        "externalAccess": false,
+        "valueType": "TRUE_ONLY",
+        "dimensionItem": "CfPM8lsEMzH",
+        "zeroIsSignificant": false,
+        "url": "",
+        "optionSetValue": false,
+        "categoryCombo": {
+          "id": "It7gMGKk1A8"
+        },
+        "user": {
+          "id": "PoVRq5Jlbwo"
+        },
+        "userGroupAccesses": [],
+        "dataElementGroups": [],
+        "attributeValues": [],
+        "dataSets": [],
+        "aggregationLevels": []
+      },
+      "userGroupAccesses": [],
+      "attributeValues": []
+    },
+    {
+      "created": "2015-11-27T06:14:42.340+0000",
+      "lastUpdated": "2016-03-03T12:28:49.293+0000",
+      "id": "MvNPxPoEboS",
+      "displayInReports": false,
+      "externalAccess": false,
+      "compulsory": false,
+      "allowProvidedElsewhere": false,
+      "sortOrder": 8,
+      "allowFutureDate": false,
+      "programStage": {
+        "id": "s53RFfXA75f"
+      },
+      "dataElement": {
+        "lastUpdated": "2015-11-05T20:01:03.735+0000",
+        "id": "K3TcJM1ySQA",
+        "created": "2015-11-05T20:01:03.732+0000",
+        "name": "DPT-HepB-Hib1",
+        "shortName": "DPT-HepB-Hib1",
+        "aggregationType": "SUM",
+        "dimensionType": "PROGRAM_DATAELEMENT",
+        "domainType": "TRACKER",
+        "displayName": "DPT-HepB-Hib1",
+        "publicAccess": "rw------",
+        "displayShortName": "DPT-HepB-Hib1",
+        "externalAccess": false,
+        "valueType": "TRUE_ONLY",
+        "dimensionItem": "K3TcJM1ySQA",
+        "zeroIsSignificant": false,
+        "url": "",
+        "optionSetValue": false,
+        "categoryCombo": {
+          "id": "It7gMGKk1A8"
+        },
+        "user": {
+          "id": "PoVRq5Jlbwo"
+        },
+        "userGroupAccesses": [],
+        "dataElementGroups": [],
+        "attributeValues": [],
+        "dataSets": [],
+        "aggregationLevels": []
+      },
+      "userGroupAccesses": [],
+      "attributeValues": []
+    },
+    {
+      "created": "2015-11-27T06:14:42.344+0000",
+      "lastUpdated": "2016-03-03T12:28:49.301+0000",
+      "id": "mRK15k7M6Ns",
+      "displayInReports": false,
+      "externalAccess": false,
+      "compulsory": false,
+      "allowProvidedElsewhere": false,
+      "sortOrder": 9,
+      "allowFutureDate": false,
+      "programStage": {
+        "id": "s53RFfXA75f"
+      },
+      "dataElement": {
+        "lastUpdated": "2015-11-05T20:01:46.319+0000",
+        "id": "fmXCCPENnwR",
+        "created": "2015-11-05T20:01:46.316+0000",
+        "name": "PCV 1",
+        "shortName": "PCV 1",
+        "aggregationType": "SUM",
+        "dimensionType": "PROGRAM_DATAELEMENT",
+        "domainType": "TRACKER",
+        "displayName": "PCV 1",
+        "publicAccess": "rw------",
+        "displayShortName": "PCV 1",
+        "externalAccess": false,
+        "valueType": "TRUE_ONLY",
+        "dimensionItem": "fmXCCPENnwR",
+        "zeroIsSignificant": false,
+        "url": "",
+        "optionSetValue": false,
+        "categoryCombo": {
+          "id": "It7gMGKk1A8"
+        },
+        "user": {
+          "id": "PoVRq5Jlbwo"
+        },
+        "userGroupAccesses": [],
+        "dataElementGroups": [],
+        "attributeValues": [],
+        "dataSets": [],
+        "aggregationLevels": []
+      },
+      "userGroupAccesses": [],
+      "attributeValues": []
+    },
+    {
+      "created": "2015-11-27T06:14:42.349+0000",
+      "lastUpdated": "2016-03-03T12:28:49.307+0000",
+      "id": "v1s9VhV8JCb",
+      "displayInReports": false,
+      "externalAccess": false,
+      "compulsory": false,
+      "allowProvidedElsewhere": false,
+      "sortOrder": 10,
+      "allowFutureDate": false,
+      "programStage": {
+        "id": "s53RFfXA75f"
+      },
+      "dataElement": {
+        "lastUpdated": "2015-11-05T20:02:15.336+0000",
+        "id": "nIqQYeSwU9E",
+        "created": "2015-11-05T20:02:15.334+0000",
+        "name": "RV 1",
+        "shortName": "RV 1",
+        "aggregationType": "SUM",
+        "dimensionType": "PROGRAM_DATAELEMENT",
+        "domainType": "TRACKER",
+        "displayName": "RV 1",
+        "publicAccess": "rw------",
+        "displayShortName": "RV 1",
+        "externalAccess": false,
+        "valueType": "TRUE_ONLY",
+        "dimensionItem": "nIqQYeSwU9E",
+        "zeroIsSignificant": false,
+        "url": "",
+        "optionSetValue": false,
+        "categoryCombo": {
+          "id": "It7gMGKk1A8"
+        },
+        "user": {
+          "id": "PoVRq5Jlbwo"
+        },
+        "userGroupAccesses": [],
+        "dataElementGroups": [],
+        "attributeValues": [],
+        "dataSets": [],
+        "aggregationLevels": []
+      },
+      "userGroupAccesses": [],
+      "attributeValues": []
+    },
+    {
+      "created": "2015-11-27T06:14:42.355+0000",
+      "lastUpdated": "2016-03-03T12:28:49.312+0000",
+      "id": "FP1gtwehqJV",
+      "displayInReports": false,
+      "externalAccess": false,
+      "compulsory": false,
+      "allowProvidedElsewhere": false,
+      "sortOrder": 11,
+      "allowFutureDate": false,
+      "programStage": {
+        "id": "s53RFfXA75f"
+      },
+      "dataElement": {
+        "lastUpdated": "2015-11-05T19:59:44.740+0000",
+        "id": "sDORmAKh32v",
+        "created": "2015-11-05T19:59:44.737+0000",
+        "name": "OPV 2",
+        "shortName": "OPV 2",
+        "aggregationType": "SUM",
+        "dimensionType": "PROGRAM_DATAELEMENT",
+        "domainType": "TRACKER",
+        "displayName": "OPV 2",
+        "publicAccess": "rw------",
+        "displayShortName": "OPV 2",
+        "externalAccess": false,
+        "valueType": "TRUE_ONLY",
+        "dimensionItem": "sDORmAKh32v",
+        "zeroIsSignificant": false,
+        "url": "",
+        "optionSetValue": false,
+        "categoryCombo": {
+          "id": "It7gMGKk1A8"
+        },
+        "user": {
+          "id": "PoVRq5Jlbwo"
+        },
+        "userGroupAccesses": [],
+        "dataElementGroups": [],
+        "attributeValues": [],
+        "dataSets": [],
+        "aggregationLevels": []
+      },
+      "userGroupAccesses": [],
+      "attributeValues": []
+    },
+    {
+      "created": "2015-11-27T06:14:42.360+0000",
+      "lastUpdated": "2016-03-03T12:28:49.317+0000",
+      "id": "e9YHArVBuKv",
+      "displayInReports": false,
+      "externalAccess": false,
+      "compulsory": false,
+      "allowProvidedElsewhere": false,
+      "sortOrder": 12,
+      "allowFutureDate": false,
+      "programStage": {
+        "id": "s53RFfXA75f"
+      },
+      "dataElement": {
+        "lastUpdated": "2015-11-05T20:01:13.033+0000",
+        "id": "GPOoPDqle3V",
+        "created": "2015-11-05T20:01:13.029+0000",
+        "name": "DPT-HepB-Hib2",
+        "shortName": "DPT-HepB-Hib2",
+        "aggregationType": "SUM",
+        "dimensionType": "PROGRAM_DATAELEMENT",
+        "domainType": "TRACKER",
+        "displayName": "DPT-HepB-Hib2",
+        "publicAccess": "rw------",
+        "displayShortName": "DPT-HepB-Hib2",
+        "externalAccess": false,
+        "valueType": "TRUE_ONLY",
+        "dimensionItem": "GPOoPDqle3V",
+        "zeroIsSignificant": false,
+        "url": "",
+        "optionSetValue": false,
+        "categoryCombo": {
+          "id": "It7gMGKk1A8"
+        },
+        "user": {
+          "id": "PoVRq5Jlbwo"
+        },
+        "userGroupAccesses": [],
+        "dataElementGroups": [],
+        "attributeValues": [],
+        "dataSets": [],
+        "aggregationLevels": []
+      },
+      "userGroupAccesses": [],
+      "attributeValues": []
+    },
+    {
+      "created": "2015-11-27T06:14:42.364+0000",
+      "lastUpdated": "2016-03-03T12:28:49.321+0000",
+      "id": "jA26tgP2s0O",
+      "displayInReports": false,
+      "externalAccess": false,
+      "compulsory": false,
+      "allowProvidedElsewhere": false,
+      "sortOrder": 13,
+      "allowFutureDate": false,
+      "programStage": {
+        "id": "s53RFfXA75f"
+      },
+      "dataElement": {
+        "lastUpdated": "2015-11-05T20:01:55.322+0000",
+        "id": "PvHUllrtPiy",
+        "created": "2015-11-05T20:01:55.319+0000",
+        "name": "PCV 2",
+        "shortName": "PCV 2",
+        "aggregationType": "SUM",
+        "dimensionType": "PROGRAM_DATAELEMENT",
+        "domainType": "TRACKER",
+        "displayName": "PCV 2",
+        "publicAccess": "rw------",
+        "displayShortName": "PCV 2",
+        "externalAccess": false,
+        "valueType": "TRUE_ONLY",
+        "dimensionItem": "PvHUllrtPiy",
+        "zeroIsSignificant": false,
+        "url": "",
+        "optionSetValue": false,
+        "categoryCombo": {
+          "id": "It7gMGKk1A8"
+        },
+        "user": {
+          "id": "PoVRq5Jlbwo"
+        },
+        "userGroupAccesses": [],
+        "dataElementGroups": [],
+        "attributeValues": [],
+        "dataSets": [],
+        "aggregationLevels": []
+      },
+      "userGroupAccesses": [],
+      "attributeValues": []
+    },
+    {
+      "created": "2015-11-27T06:14:42.368+0000",
+      "lastUpdated": "2016-03-03T12:28:49.326+0000",
+      "id": "YxNQzR9kuF1",
+      "displayInReports": false,
+      "externalAccess": false,
+      "compulsory": false,
+      "allowProvidedElsewhere": false,
+      "sortOrder": 14,
+      "allowFutureDate": false,
+      "programStage": {
+        "id": "s53RFfXA75f"
+      },
+      "dataElement": {
+        "lastUpdated": "2015-11-05T20:02:22.706+0000",
+        "id": "wYg2gOWSyJG",
+        "created": "2015-11-05T20:02:22.702+0000",
+        "name": "RV 2",
+        "shortName": "RV 2",
+        "aggregationType": "SUM",
+        "dimensionType": "PROGRAM_DATAELEMENT",
+        "domainType": "TRACKER",
+        "displayName": "RV 2",
+        "publicAccess": "rw------",
+        "displayShortName": "RV 2",
+        "externalAccess": false,
+        "valueType": "TRUE_ONLY",
+        "dimensionItem": "wYg2gOWSyJG",
+        "zeroIsSignificant": false,
+        "url": "",
+        "optionSetValue": false,
+        "categoryCombo": {
+          "id": "It7gMGKk1A8"
+        },
+        "user": {
+          "id": "PoVRq5Jlbwo"
+        },
+        "userGroupAccesses": [],
+        "dataElementGroups": [],
+        "attributeValues": [],
+        "dataSets": [],
+        "aggregationLevels": []
+      },
+      "userGroupAccesses": [],
+      "attributeValues": []
+    },
+    {
+      "created": "2015-11-27T06:14:42.386+0000",
+      "lastUpdated": "2016-03-03T12:28:49.332+0000",
+      "id": "DLrGS6k1a7C",
+      "displayInReports": false,
+      "externalAccess": false,
+      "compulsory": false,
+      "allowProvidedElsewhere": false,
+      "sortOrder": 15,
+      "allowFutureDate": false,
+      "programStage": {
+        "id": "s53RFfXA75f"
+      },
+      "dataElement": {
+        "lastUpdated": "2015-11-05T20:00:38.002+0000",
+        "id": "nQeUfqPjK5o",
+        "created": "2015-11-05T20:00:37.999+0000",
+        "name": "OPV 3",
+        "shortName": "OPV 3",
+        "aggregationType": "SUM",
+        "dimensionType": "PROGRAM_DATAELEMENT",
+        "domainType": "TRACKER",
+        "displayName": "OPV 3",
+        "publicAccess": "rw------",
+        "displayShortName": "OPV 3",
+        "externalAccess": false,
+        "valueType": "TRUE_ONLY",
+        "dimensionItem": "nQeUfqPjK5o",
+        "zeroIsSignificant": false,
+        "url": "",
+        "optionSetValue": false,
+        "categoryCombo": {
+          "id": "It7gMGKk1A8"
+        },
+        "user": {
+          "id": "PoVRq5Jlbwo"
+        },
+        "userGroupAccesses": [],
+        "dataElementGroups": [],
+        "attributeValues": [],
+        "dataSets": [],
+        "aggregationLevels": []
+      },
+      "userGroupAccesses": [],
+      "attributeValues": []
+    },
+    {
+      "created": "2015-11-27T06:14:42.390+0000",
+      "lastUpdated": "2016-03-03T12:28:49.337+0000",
+      "id": "HZCXxbC5By3",
+      "displayInReports": false,
+      "externalAccess": false,
+      "compulsory": false,
+      "allowProvidedElsewhere": false,
+      "sortOrder": 16,
+      "allowFutureDate": false,
+      "programStage": {
+        "id": "s53RFfXA75f"
+      },
+      "dataElement": {
+        "lastUpdated": "2015-11-05T20:01:25.932+0000",
+        "id": "pxCZNoqDVJC",
+        "created": "2015-11-05T20:01:25.929+0000",
+        "name": "DPT-HepB-Hib3",
+        "shortName": "DPT-HepB-Hib3",
+        "aggregationType": "SUM",
+        "dimensionType": "PROGRAM_DATAELEMENT",
+        "domainType": "TRACKER",
+        "displayName": "DPT-HepB-Hib3",
+        "publicAccess": "rw------",
+        "displayShortName": "DPT-HepB-Hib3",
+        "externalAccess": false,
+        "valueType": "TRUE_ONLY",
+        "dimensionItem": "pxCZNoqDVJC",
+        "zeroIsSignificant": false,
+        "url": "",
+        "optionSetValue": false,
+        "categoryCombo": {
+          "id": "It7gMGKk1A8"
+        },
+        "user": {
+          "id": "PoVRq5Jlbwo"
+        },
+        "userGroupAccesses": [],
+        "dataElementGroups": [],
+        "attributeValues": [],
+        "dataSets": [],
+        "aggregationLevels": []
+      },
+      "userGroupAccesses": [],
+      "attributeValues": []
+    },
+    {
+      "created": "2015-11-27T06:14:42.394+0000",
+      "lastUpdated": "2016-03-03T12:28:49.341+0000",
+      "id": "MGb8cHcsdVP",
+      "displayInReports": false,
+      "externalAccess": false,
+      "compulsory": false,
+      "allowProvidedElsewhere": false,
+      "sortOrder": 17,
+      "allowFutureDate": false,
+      "programStage": {
+        "id": "s53RFfXA75f"
+      },
+      "dataElement": {
+        "lastUpdated": "2015-11-05T20:02:06.268+0000",
+        "id": "B4eJCy6LFLZ",
+        "created": "2015-11-05T20:02:06.266+0000",
+        "name": "PCV 3",
+        "shortName": "PCV 3",
+        "aggregationType": "SUM",
+        "dimensionType": "PROGRAM_DATAELEMENT",
+        "domainType": "TRACKER",
+        "displayName": "PCV 3",
+        "publicAccess": "rw------",
+        "displayShortName": "PCV 3",
+        "externalAccess": false,
+        "valueType": "TRUE_ONLY",
+        "dimensionItem": "B4eJCy6LFLZ",
+        "zeroIsSignificant": false,
+        "url": "",
+        "optionSetValue": false,
+        "categoryCombo": {
+          "id": "It7gMGKk1A8"
+        },
+        "user": {
+          "id": "PoVRq5Jlbwo"
+        },
+        "userGroupAccesses": [],
+        "dataElementGroups": [],
+        "attributeValues": [],
+        "dataSets": [],
+        "aggregationLevels": []
+      },
+      "userGroupAccesses": [],
+      "attributeValues": []
+    },
+    {
+      "created": "2015-11-27T06:14:42.411+0000",
+      "lastUpdated": "2016-03-03T12:28:49.344+0000",
+      "id": "jFIVhZtitSG",
+      "displayInReports": false,
+      "externalAccess": false,
+      "compulsory": false,
+      "allowProvidedElsewhere": false,
+      "sortOrder": 18,
+      "allowFutureDate": false,
+      "programStage": {
+        "id": "s53RFfXA75f"
+      },
+      "dataElement": {
+        "lastUpdated": "2015-11-05T20:00:44.743+0000",
+        "id": "cNA9EmFaiAa",
+        "created": "2015-11-05T20:00:44.740+0000",
+        "name": "OPV 4",
+        "shortName": "OPV 4",
+        "aggregationType": "SUM",
+        "dimensionType": "PROGRAM_DATAELEMENT",
+        "domainType": "TRACKER",
+        "displayName": "OPV 4",
+        "publicAccess": "rw------",
+        "displayShortName": "OPV 4",
+        "externalAccess": false,
+        "valueType": "TRUE_ONLY",
+        "dimensionItem": "cNA9EmFaiAa",
+        "zeroIsSignificant": false,
+        "url": "",
+        "optionSetValue": false,
+        "categoryCombo": {
+          "id": "It7gMGKk1A8"
+        },
+        "user": {
+          "id": "PoVRq5Jlbwo"
+        },
+        "userGroupAccesses": [],
+        "dataElementGroups": [],
+        "attributeValues": [],
+        "dataSets": [],
+        "aggregationLevels": []
+      },
+      "userGroupAccesses": [],
+      "attributeValues": []
+    },
+    {
+      "created": "2015-11-27T06:14:42.414+0000",
+      "lastUpdated": "2016-03-03T12:28:49.348+0000",
+      "id": "KvvJYqks8oX",
+      "displayInReports": false,
+      "externalAccess": false,
+      "compulsory": false,
+      "allowProvidedElsewhere": false,
+      "sortOrder": 19,
+      "allowFutureDate": false,
+      "programStage": {
+        "id": "s53RFfXA75f"
+      },
+      "dataElement": {
+        "lastUpdated": "2015-11-05T20:02:42.984+0000",
+        "id": "g8dMiUOTFla",
+        "created": "2015-11-05T20:02:42.981+0000",
+        "name": "Measles 1",
+        "shortName": "Measles 1",
+        "aggregationType": "SUM",
+        "dimensionType": "PROGRAM_DATAELEMENT",
+        "domainType": "TRACKER",
+        "displayName": "Measles 1",
+        "publicAccess": "rw------",
+        "displayShortName": "Measles 1",
+        "externalAccess": false,
+        "valueType": "TRUE_ONLY",
+        "dimensionItem": "g8dMiUOTFla",
+        "zeroIsSignificant": false,
+        "url": "",
+        "optionSetValue": false,
+        "categoryCombo": {
+          "id": "It7gMGKk1A8"
+        },
+        "user": {
+          "id": "PoVRq5Jlbwo"
+        },
+        "userGroupAccesses": [],
+        "dataElementGroups": [],
+        "attributeValues": [],
+        "dataSets": [],
+        "aggregationLevels": []
+      },
+      "userGroupAccesses": [],
+      "attributeValues": []
+    },
+    {
+      "created": "2015-11-27T06:14:42.418+0000",
+      "lastUpdated": "2016-03-03T12:28:49.352+0000",
+      "id": "cqsZ8cUjmOb",
+      "displayInReports": false,
+      "externalAccess": false,
+      "compulsory": false,
+      "allowProvidedElsewhere": false,
+      "sortOrder": 20,
+      "allowFutureDate": false,
+      "programStage": {
+        "id": "s53RFfXA75f"
+      },
+      "dataElement": {
+        "lastUpdated": "2015-11-05T20:02:50.336+0000",
+        "id": "Bxh1xgIY9nA",
+        "created": "2015-11-05T20:02:50.333+0000",
+        "name": "Measles 2",
+        "shortName": "Measles 2",
+        "aggregationType": "SUM",
+        "dimensionType": "PROGRAM_DATAELEMENT",
+        "domainType": "TRACKER",
+        "displayName": "Measles 2",
+        "publicAccess": "rw------",
+        "displayShortName": "Measles 2",
+        "externalAccess": false,
+        "valueType": "TRUE_ONLY",
+        "dimensionItem": "Bxh1xgIY9nA",
+        "zeroIsSignificant": false,
+        "url": "",
+        "optionSetValue": false,
+        "categoryCombo": {
+          "id": "It7gMGKk1A8"
+        },
+        "user": {
+          "id": "PoVRq5Jlbwo"
+        },
+        "userGroupAccesses": [],
+        "dataElementGroups": [],
+        "attributeValues": [],
+        "dataSets": [],
+        "aggregationLevels": []
+      },
+      "userGroupAccesses": [],
+      "attributeValues": []
+    },
+    {
+      "created": "2015-11-27T06:14:42.422+0000",
+      "lastUpdated": "2016-03-03T12:28:49.356+0000",
+      "id": "LR6okZqIms2",
+      "displayInReports": false,
+      "externalAccess": false,
+      "compulsory": false,
+      "allowProvidedElsewhere": false,
+      "sortOrder": 21,
+      "allowFutureDate": false,
+      "programStage": {
+        "id": "s53RFfXA75f"
+      },
+      "dataElement": {
+        "lastUpdated": "2015-11-25T14:31:59.820+0000",
+        "id": "LTdvha8zapG",
+        "created": "2015-11-25T14:31:59.807+0000",
+        "name": "BCG stockout",
+        "shortName": "BCG stockout",
+        "aggregationType": "SUM",
+        "dimensionType": "PROGRAM_DATAELEMENT",
+        "domainType": "TRACKER",
+        "displayName": "BCG stockout",
+        "publicAccess": "rw------",
+        "displayShortName": "BCG stockout",
+        "externalAccess": false,
+        "valueType": "TRUE_ONLY",
+        "formName": "BCG stockout",
+        "dimensionItem": "LTdvha8zapG",
+        "displayFormName": "BCG stockout",
+        "zeroIsSignificant": false,
+        "url": "",
+        "optionSetValue": false,
+        "categoryCombo": {
+          "id": "It7gMGKk1A8"
+        },
+        "user": {
+          "id": "zhLn86dmmcd"
+        },
+        "userGroupAccesses": [],
+        "dataElementGroups": [],
+        "attributeValues": [],
+        "dataSets": [],
+        "aggregationLevels": []
+      },
+      "userGroupAccesses": [],
+      "attributeValues": []
+    },
+    {
+      "created": "2015-11-27T06:14:42.426+0000",
+      "lastUpdated": "2016-03-03T12:28:49.361+0000",
+      "id": "r8ryBsxzbSy",
+      "displayInReports": false,
+      "externalAccess": false,
+      "compulsory": false,
+      "allowProvidedElsewhere": false,
+      "sortOrder": 22,
+      "allowFutureDate": false,
+      "programStage": {
+        "id": "s53RFfXA75f"
+      },
+      "dataElement": {
+        "lastUpdated": "2015-11-25T14:32:36.236+0000",
+        "id": "LQVqn0ghg99",
+        "created": "2015-11-25T14:32:36.230+0000",
+        "name": "DPT stockout",
+        "shortName": "DPT stockout",
+        "aggregationType": "SUM",
+        "dimensionType": "PROGRAM_DATAELEMENT",
+        "domainType": "TRACKER",
+        "displayName": "DPT stockout",
+        "publicAccess": "rw------",
+        "displayShortName": "DPT stockout",
+        "externalAccess": false,
+        "valueType": "TRUE_ONLY",
+        "dimensionItem": "LQVqn0ghg99",
+        "zeroIsSignificant": false,
+        "url": "",
+        "optionSetValue": false,
+        "categoryCombo": {
+          "id": "It7gMGKk1A8"
+        },
+        "user": {
+          "id": "zhLn86dmmcd"
+        },
+        "userGroupAccesses": [],
+        "dataElementGroups": [],
+        "attributeValues": [],
+        "dataSets": [],
+        "aggregationLevels": []
+      },
+      "userGroupAccesses": [],
+      "attributeValues": []
+    },
+    {
+      "created": "2015-11-27T06:14:42.429+0000",
+      "lastUpdated": "2016-03-03T12:28:49.365+0000",
+      "id": "oSaNpMjXbMj",
+      "displayInReports": false,
+      "externalAccess": false,
+      "compulsory": false,
+      "allowProvidedElsewhere": false,
+      "sortOrder": 23,
+      "allowFutureDate": false,
+      "programStage": {
+        "id": "s53RFfXA75f"
+      },
+      "dataElement": {
+        "lastUpdated": "2015-11-25T14:33:47.039+0000",
+        "id": "n4qKY8vxc7V",
+        "created": "2015-11-25T14:33:47.028+0000",
+        "name": "Measles stockout",
+        "shortName": "Measles stockout",
+        "aggregationType": "SUM",
+        "dimensionType": "PROGRAM_DATAELEMENT",
+        "domainType": "TRACKER",
+        "displayName": "Measles stockout",
+        "publicAccess": "rw------",
+        "displayShortName": "Measles stockout",
+        "externalAccess": false,
+        "valueType": "TRUE_ONLY",
+        "dimensionItem": "n4qKY8vxc7V",
+        "zeroIsSignificant": false,
+        "url": "",
+        "optionSetValue": false,
+        "categoryCombo": {
+          "id": "It7gMGKk1A8"
+        },
+        "user": {
+          "id": "zhLn86dmmcd"
+        },
+        "userGroupAccesses": [],
+        "dataElementGroups": [],
+        "attributeValues": [],
+        "dataSets": [],
+        "aggregationLevels": []
+      },
+      "userGroupAccesses": [],
+      "attributeValues": []
+    },
+    {
+      "created": "2015-11-27T06:14:42.438+0000",
+      "lastUpdated": "2016-03-03T12:28:49.369+0000",
+      "id": "QfrF6hRBHIC",
+      "displayInReports": false,
+      "externalAccess": false,
+      "compulsory": false,
+      "allowProvidedElsewhere": false,
+      "sortOrder": 24,
+      "allowFutureDate": false,
+      "programStage": {
+        "id": "s53RFfXA75f"
+      },
+      "dataElement": {
+        "lastUpdated": "2015-11-25T14:32:14.760+0000",
+        "id": "EYQp1U4tU9z",
+        "created": "2015-11-25T14:32:14.755+0000",
+        "name": "OPV stockout",
+        "shortName": "OPV stockout",
+        "aggregationType": "SUM",
+        "dimensionType": "PROGRAM_DATAELEMENT",
+        "domainType": "TRACKER",
+        "displayName": "OPV stockout",
+        "publicAccess": "rw------",
+        "displayShortName": "OPV stockout",
+        "externalAccess": false,
+        "valueType": "TRUE_ONLY",
+        "dimensionItem": "EYQp1U4tU9z",
+        "zeroIsSignificant": false,
+        "url": "",
+        "optionSetValue": false,
+        "categoryCombo": {
+          "id": "It7gMGKk1A8"
+        },
+        "user": {
+          "id": "zhLn86dmmcd"
+        },
+        "userGroupAccesses": [],
+        "dataElementGroups": [],
+        "attributeValues": [],
+        "dataSets": [],
+        "aggregationLevels": []
+      },
+      "userGroupAccesses": [],
+      "attributeValues": []
+    },
+    {
+      "created": "2015-11-27T06:14:42.442+0000",
+      "lastUpdated": "2016-03-03T12:28:49.373+0000",
+      "id": "xUUaxdxZu62",
+      "displayInReports": false,
+      "externalAccess": false,
+      "compulsory": false,
+      "allowProvidedElsewhere": false,
+      "sortOrder": 25,
+      "allowFutureDate": false,
+      "programStage": {
+        "id": "s53RFfXA75f"
+      },
+      "dataElement": {
+        "lastUpdated": "2015-11-25T14:32:54.690+0000",
+        "id": "fyvXreKLZNn",
+        "created": "2015-11-25T14:32:54.683+0000",
+        "name": "PCV stockout",
+        "shortName": "PCV stockout",
+        "aggregationType": "SUM",
+        "dimensionType": "PROGRAM_DATAELEMENT",
+        "domainType": "TRACKER",
+        "displayName": "PCV stockout",
+        "publicAccess": "rw------",
+        "displayShortName": "PCV stockout",
+        "externalAccess": false,
+        "valueType": "TRUE_ONLY",
+        "dimensionItem": "fyvXreKLZNn",
+        "zeroIsSignificant": false,
+        "url": "",
+        "optionSetValue": false,
+        "categoryCombo": {
+          "id": "It7gMGKk1A8"
+        },
+        "user": {
+          "id": "zhLn86dmmcd"
+        },
+        "userGroupAccesses": [],
+        "dataElementGroups": [],
+        "attributeValues": [],
+        "dataSets": [],
+        "aggregationLevels": []
+      },
+      "userGroupAccesses": [],
+      "attributeValues": []
+    },
+    {
+      "created": "2015-11-27T06:14:42.445+0000",
+      "lastUpdated": "2016-03-03T12:28:49.378+0000",
+      "id": "xMY7tFVpExj",
+      "displayInReports": false,
+      "externalAccess": false,
+      "compulsory": false,
+      "allowProvidedElsewhere": false,
+      "sortOrder": 26,
+      "allowFutureDate": false,
+      "programStage": {
+        "id": "s53RFfXA75f"
+      },
+      "dataElement": {
+        "lastUpdated": "2015-11-25T14:33:05.953+0000",
+        "id": "irQPcNG21Uf",
+        "created": "2015-11-25T14:33:05.949+0000",
+        "name": "RV stockout",
+        "shortName": "RV stockout",
+        "aggregationType": "SUM",
+        "dimensionType": "PROGRAM_DATAELEMENT",
+        "domainType": "TRACKER",
+        "displayName": "RV stockout",
+        "publicAccess": "rw------",
+        "displayShortName": "RV stockout",
+        "externalAccess": false,
+        "valueType": "TRUE_ONLY",
+        "dimensionItem": "irQPcNG21Uf",
+        "zeroIsSignificant": false,
+        "url": "",
+        "optionSetValue": false,
+        "categoryCombo": {
+          "id": "It7gMGKk1A8"
+        },
+        "user": {
+          "id": "zhLn86dmmcd"
+        },
+        "userGroupAccesses": [],
+        "dataElementGroups": [],
+        "attributeValues": [],
+        "dataSets": [],
+        "aggregationLevels": []
+      },
+      "userGroupAccesses": [],
+      "attributeValues": []
+    },
+    {
+      "created": "2016-03-03T12:28:49.382+0000",
+      "lastUpdated": "2016-03-03T12:28:49.382+0000",
+      "id": "qrkQfxZK4xf",
+      "displayInReports": false,
+      "externalAccess": false,
+      "compulsory": false,
+      "allowProvidedElsewhere": false,
+      "sortOrder": 27,
+      "allowFutureDate": false,
+      "programStage": {
+        "id": "s53RFfXA75f"
+      },
+      "dataElement": {
+        "lastUpdated": "2016-03-04T14:21:05.332+0000",
+        "id": "iKhCRO2G3aY",
+        "created": "2016-03-02T12:21:53.890+0000",
+        "name": "Calculated: OPV complete",
+        "shortName": "OPV complete",
+        "aggregationType": "COUNT",
+        "dimensionType": "PROGRAM_DATAELEMENT",
+        "domainType": "TRACKER",
+        "displayName": "Calculated: OPV complete",
+        "publicAccess": "rw------",
+        "displayShortName": "OPV complete",
+        "externalAccess": false,
+        "valueType": "BOOLEAN",
+        "dimensionItem": "iKhCRO2G3aY",
+        "zeroIsSignificant": false,
+        "optionSetValue": false,
+        "categoryCombo": {
+          "id": "It7gMGKk1A8"
+        },
+        "user": {
+          "id": "zi5zolv0McS"
+        },
+        "userGroupAccesses": [],
+        "dataElementGroups": [],
+        "attributeValues": [],
+        "dataSets": [],
+        "aggregationLevels": []
+      },
+      "userGroupAccesses": [],
+      "attributeValues": []
+    },
+    {
+      "created": "2016-03-03T12:28:49.388+0000",
+      "lastUpdated": "2016-03-03T12:28:49.388+0000",
+      "id": "g4LnPFFNNBM",
+      "displayInReports": false,
+      "externalAccess": false,
+      "compulsory": false,
+      "allowProvidedElsewhere": false,
+      "sortOrder": 28,
+      "allowFutureDate": false,
+      "programStage": {
+        "id": "s53RFfXA75f"
+      },
+      "dataElement": {
+        "lastUpdated": "2016-03-04T13:53:27.281+0000",
+        "id": "hVlJXbURJbt",
+        "created": "2016-03-02T12:21:53.890+0000",
+        "name": "Calculated: Fully immunized",
+        "shortName": "Fully immunized",
+        "aggregationType": "COUNT",
+        "dimensionType": "PROGRAM_DATAELEMENT",
+        "domainType": "TRACKER",
+        "displayName": "Calculated: Fully immunized",
+        "publicAccess": "rw------",
+        "displayShortName": "Fully immunized",
+        "externalAccess": false,
+        "valueType": "BOOLEAN",
+        "dimensionItem": "hVlJXbURJbt",
+        "zeroIsSignificant": false,
+        "optionSetValue": false,
+        "categoryCombo": {
+          "id": "It7gMGKk1A8"
+        },
+        "user": {
+          "id": "zi5zolv0McS"
+        },
+        "userGroupAccesses": [],
+        "dataElementGroups": [],
+        "attributeValues": [],
+        "dataSets": [],
+        "aggregationLevels": []
+      },
+      "userGroupAccesses": [],
+      "attributeValues": []
+    }
+  ]
+}

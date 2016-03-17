@@ -1,0 +1,2565 @@
+{
+  "programRules": [
+    {
+      "created": "2016-01-05T06:22:19.502+0000",
+      "lastUpdated": "2016-02-04T13:01:13.761+0000",
+      "name": "Assign age string days",
+      "id": "rhispzm1091",
+      "displayName": "Assign age string days",
+      "description": "Format and assign age string in days - Assign age string days",
+      "priority": 2,
+      "externalAccess": false,
+      "condition": "#{currentAgeDays} <= 7",
+      "program": {
+        "id": "SSLpOM0r1U7"
+      },
+      "userGroupAccesses": [],
+      "attributeValues": [],
+      "programRuleActions": [
+        {
+          "created": "2016-01-05T06:22:12.785+0000",
+          "lastUpdated": "2016-02-04T13:03:30.104+0000",
+          "id": "ahispzm1091",
+          "programRuleActionType": "ASSIGN",
+          "data": "d2:concatenate(#{currentAgeDays},' days')",
+          "content": "#{ageString}",
+          "externalAccess": false,
+          "location": "indicators",
+          "programRule": {
+            "id": "rhispzm1091"
+          },
+          "userGroupAccesses": [],
+          "attributeValues": []
+        }
+      ]
+    },
+    {
+      "created": "2016-01-05T06:22:24.707+0000",
+      "lastUpdated": "2016-02-04T13:09:23.811+0000",
+      "name": "Assign age string months",
+      "id": "rhispzm1093",
+      "displayName": "Assign age string months",
+      "description": "Format and assign age string in months - Assign age string months",
+      "priority": 2,
+      "externalAccess": false,
+      "condition": "#{currentAgeDays} >= 200",
+      "program": {
+        "id": "SSLpOM0r1U7"
+      },
+      "userGroupAccesses": [],
+      "attributeValues": [],
+      "programRuleActions": [
+        {
+          "created": "2016-01-05T06:22:52.908+0000",
+          "lastUpdated": "2016-02-04T13:09:31.983+0000",
+          "id": "ahispzm1093",
+          "programRuleActionType": "ASSIGN",
+          "data": "d2:concatenate(#{currentAgeMonths}, ' months')",
+          "content": "#{ageString}",
+          "externalAccess": false,
+          "location": "indicators",
+          "programRule": {
+            "id": "rhispzm1093"
+          },
+          "userGroupAccesses": [],
+          "attributeValues": []
+        }
+      ]
+    },
+    {
+      "created": "2016-01-05T06:22:24.338+0000",
+      "lastUpdated": "2016-02-04T13:06:23.612+0000",
+      "name": "Assign age string weeks",
+      "id": "rhispzm1092",
+      "displayName": "Assign age string weeks",
+      "description": "Format and assign age string in weeks - Assign age string weeks",
+      "priority": 2,
+      "externalAccess": false,
+      "condition": "#{currentAgeDays} > 7 && #{currentAgeDays} < 200",
+      "program": {
+        "id": "SSLpOM0r1U7"
+      },
+      "userGroupAccesses": [],
+      "attributeValues": [],
+      "programRuleActions": [
+        {
+          "created": "2016-01-05T06:22:52.266+0000",
+          "lastUpdated": "2016-02-04T13:06:49.985+0000",
+          "id": "ahispzm1092",
+          "programRuleActionType": "ASSIGN",
+          "data": "d2:concatenate(#{currentAgeWeeks}, ' weeks + ', d2:modulus(#{currentAgeDays},7),' days')",
+          "content": "#{ageString}",
+          "externalAccess": false,
+          "location": "indicators",
+          "programRule": {
+            "id": "rhispzm1092"
+          },
+          "userGroupAccesses": [],
+          "attributeValues": []
+        }
+      ]
+    },
+    {
+      "created": "2015-12-08T11:46:47.625+0000",
+      "lastUpdated": "2015-12-08T11:47:36.363+0000",
+      "name": "Assign BCG due",
+      "id": "rhispzm1087",
+      "displayName": "Assign BCG due",
+      "description": "Assign BCG due - Assign BCG due",
+      "priority": 3,
+      "externalAccess": false,
+      "condition": "(!#{bcgNotDue} || !#{bcgRepeatNotDue})",
+      "program": {
+        "id": "SSLpOM0r1U7"
+      },
+      "userGroupAccesses": [],
+      "attributeValues": [],
+      "programRuleActions": [
+        {
+          "created": "2015-12-08T11:48:16.601+0000",
+          "lastUpdated": "2015-12-08T11:49:02.830+0000",
+          "id": "ahispzm1087",
+          "programRuleActionType": "ASSIGN",
+          "data": "true",
+          "content": "#{bcgDue}",
+          "externalAccess": false,
+          "programRule": {
+            "id": "rhispzm1087"
+          },
+          "userGroupAccesses": [],
+          "attributeValues": []
+        }
+      ]
+    },
+    {
+      "created": "2015-11-26T15:39:17.350+0000",
+      "lastUpdated": "2015-12-08T11:47:35.675+0000",
+      "name": "Assign BCGNeeded",
+      "id": "rhispzm1058",
+      "displayName": "Assign BCGNeeded",
+      "description": "Assign BCGNeeded - Assign BCGNeeded",
+      "priority": 3,
+      "externalAccess": false,
+      "condition": "(!#{bcgNotShown} || !#{bcgRepeatNotShown})",
+      "program": {
+        "id": "SSLpOM0r1U7"
+      },
+      "userGroupAccesses": [],
+      "attributeValues": [],
+      "programRuleActions": [
+        {
+          "created": "2015-11-26T15:40:33.673+0000",
+          "lastUpdated": "2015-12-08T11:49:12.926+0000",
+          "id": "ahispzm1058",
+          "programRuleActionType": "ASSIGN",
+          "data": "true",
+          "content": "#{bcgNeeded}",
+          "externalAccess": false,
+          "programRule": {
+            "id": "rhispzm1058"
+          },
+          "userGroupAccesses": [],
+          "attributeValues": []
+        }
+      ]
+    },
+    {
+      "created": "2015-12-08T11:46:48.305+0000",
+      "lastUpdated": "2015-12-08T11:47:37.054+0000",
+      "name": "Assign BCG not due",
+      "id": "rhispzm1085",
+      "displayName": "Assign BCG not due",
+      "description": "Assign BCG not due - Assign BCG not due",
+      "priority": 2,
+      "externalAccess": false,
+      "condition": "#{bcgGiven}",
+      "program": {
+        "id": "SSLpOM0r1U7"
+      },
+      "userGroupAccesses": [],
+      "attributeValues": [],
+      "programRuleActions": [
+        {
+          "created": "2015-12-08T11:48:15.305+0000",
+          "lastUpdated": "2015-12-08T11:49:02.086+0000",
+          "id": "ahispzm1085",
+          "programRuleActionType": "ASSIGN",
+          "data": "true",
+          "content": "#{bcgNotDue}",
+          "externalAccess": false,
+          "programRule": {
+            "id": "rhispzm1085"
+          },
+          "userGroupAccesses": [],
+          "attributeValues": []
+        }
+      ]
+    },
+    {
+      "created": "2015-12-08T11:46:47.965+0000",
+      "lastUpdated": "2015-12-08T11:47:36.728+0000",
+      "name": "Assign BCG Repeat not due",
+      "id": "rhispzm1086",
+      "displayName": "Assign BCG Repeat not due",
+      "description": "Assign BCG Repeat not due - Assign BCG Repeat not due",
+      "priority": 2,
+      "externalAccess": false,
+      "condition": "!#{bcgGiven} || #{bcgRepeat} || #{bcgScar} || #{bcgscarcurrent} || #{ageWeeksDueDate} < 12",
+      "program": {
+        "id": "SSLpOM0r1U7"
+      },
+      "userGroupAccesses": [],
+      "attributeValues": [],
+      "programRuleActions": [
+        {
+          "created": "2015-12-08T11:48:15.950+0000",
+          "lastUpdated": "2015-12-08T11:49:02.427+0000",
+          "id": "ahispzm1086",
+          "programRuleActionType": "ASSIGN",
+          "data": "true",
+          "content": "#{bcgRepeatNotDue}",
+          "externalAccess": false,
+          "programRule": {
+            "id": "rhispzm1086"
+          },
+          "userGroupAccesses": [],
+          "attributeValues": []
+        }
+      ]
+    },
+    {
+      "created": "2015-12-08T11:33:09.344+0000",
+      "lastUpdated": "2015-12-08T11:47:41.663+0000",
+      "name": "Assign DPT1 not due",
+      "id": "rhispzm1071",
+      "displayName": "Assign DPT1 not due",
+      "description": "Assign DPT1 not due - Assign DPT1 not due",
+      "priority": 2,
+      "externalAccess": false,
+      "condition": "d2:hasValue('dpt1prev') || #{ageWeeksDueDate} < 6",
+      "program": {
+        "id": "SSLpOM0r1U7"
+      },
+      "userGroupAccesses": [],
+      "attributeValues": [],
+      "programRuleActions": [
+        {
+          "created": "2015-12-08T11:34:13.890+0000",
+          "lastUpdated": "2015-12-08T11:48:56.848+0000",
+          "id": "ahispzm1071",
+          "programRuleActionType": "ASSIGN",
+          "data": "true",
+          "content": "#{dpt1NotDue}",
+          "externalAccess": false,
+          "programRule": {
+            "id": "rhispzm1071"
+          },
+          "userGroupAccesses": [],
+          "attributeValues": []
+        }
+      ]
+    },
+    {
+      "created": "2015-12-08T11:33:09.031+0000",
+      "lastUpdated": "2015-12-08T11:47:41.354+0000",
+      "name": "Assign DPT2 not due",
+      "id": "rhispzm1072",
+      "displayName": "Assign DPT2 not due",
+      "description": "Assign DPT2 not due - Assign DPT2 not due",
+      "priority": 2,
+      "externalAccess": false,
+      "condition": "d2:hasValue('dpt2prev') || !d2:hasValue('dpt1prev') || d2:weeksBetween(d2:lastEventDate('dpt1prev'),V{due_date}) < 4",
+      "program": {
+        "id": "SSLpOM0r1U7"
+      },
+      "userGroupAccesses": [],
+      "attributeValues": [],
+      "programRuleActions": [
+        {
+          "created": "2015-12-08T11:34:14.567+0000",
+          "lastUpdated": "2015-12-08T11:48:57.204+0000",
+          "id": "ahispzm1072",
+          "programRuleActionType": "ASSIGN",
+          "data": "true",
+          "content": "#{dpt2NotDue}",
+          "externalAccess": false,
+          "programRule": {
+            "id": "rhispzm1072"
+          },
+          "userGroupAccesses": [],
+          "attributeValues": []
+        }
+      ]
+    },
+    {
+      "created": "2015-12-08T11:33:08.705+0000",
+      "lastUpdated": "2015-12-08T11:47:41.040+0000",
+      "name": "Assign DPT3 not due",
+      "id": "rhispzm1073",
+      "displayName": "Assign DPT3 not due",
+      "description": "Assign DPT3 not due - Assign DPT3 not due",
+      "priority": 2,
+      "externalAccess": false,
+      "condition": "d2:hasValue('dpt3prev') || !d2:hasValue('dpt2prev') || d2:weeksBetween(d2:lastEventDate('dpt2prev'),V{due_date}) < 4",
+      "program": {
+        "id": "SSLpOM0r1U7"
+      },
+      "userGroupAccesses": [],
+      "attributeValues": [],
+      "programRuleActions": [
+        {
+          "created": "2015-12-08T11:34:15.534+0000",
+          "lastUpdated": "2015-12-08T11:48:57.934+0000",
+          "id": "ahispzm1073",
+          "programRuleActionType": "ASSIGN",
+          "data": "true",
+          "content": "#{dpt3NotDue}",
+          "externalAccess": false,
+          "programRule": {
+            "id": "rhispzm1073"
+          },
+          "userGroupAccesses": [],
+          "attributeValues": []
+        }
+      ]
+    },
+    {
+      "created": "2015-12-08T11:33:08.397+0000",
+      "lastUpdated": "2015-12-08T11:47:40.709+0000",
+      "name": "Assign DPT due",
+      "id": "rhispzm1074",
+      "displayName": "Assign DPT due",
+      "description": "Assign DPT due - Assign DPT due",
+      "priority": 3,
+      "externalAccess": false,
+      "condition": "!#{dpt1NotDue} || !#{dpt2NotDue} || !#{dpt3NotDue}",
+      "program": {
+        "id": "SSLpOM0r1U7"
+      },
+      "userGroupAccesses": [],
+      "attributeValues": [],
+      "programRuleActions": [
+        {
+          "created": "2015-12-08T11:34:16.156+0000",
+          "lastUpdated": "2015-12-08T11:48:58.278+0000",
+          "id": "ahispzm1074",
+          "programRuleActionType": "ASSIGN",
+          "data": "true",
+          "content": "#{dptDue}",
+          "externalAccess": false,
+          "programRule": {
+            "id": "rhispzm1074"
+          },
+          "userGroupAccesses": [],
+          "attributeValues": []
+        }
+      ]
+    },
+    {
+      "created": "2015-11-26T10:07:34.967+0000",
+      "lastUpdated": "2015-12-08T11:47:45.021+0000",
+      "name": "Assign DPTNeeded",
+      "id": "rhispzm1030",
+      "displayName": "Assign DPTNeeded",
+      "description": "Assign DPTNeeded - Assign DPTNeeded",
+      "priority": 3,
+      "externalAccess": false,
+      "condition": "(!#{dpt1NotShown} || !#{dpt2NotShown} || !#{dpt3NotShown})",
+      "program": {
+        "id": "SSLpOM0r1U7"
+      },
+      "userGroupAccesses": [],
+      "attributeValues": [],
+      "programRuleActions": [
+        {
+          "created": "2015-11-26T10:08:08.332+0000",
+          "lastUpdated": "2015-12-08T11:49:11.575+0000",
+          "id": "ahispzm1030",
+          "programRuleActionType": "ASSIGN",
+          "data": "true",
+          "content": "#{dptNeeded}",
+          "externalAccess": false,
+          "programRule": {
+            "id": "rhispzm1030"
+          },
+          "userGroupAccesses": [],
+          "attributeValues": []
+        }
+      ]
+    },
+    {
+      "created": "2016-03-03T16:36:23.923+0000",
+      "lastUpdated": "2016-03-04T19:12:45.675+0000",
+      "name": "Assign fully immunized",
+      "id": "rhispzm1097",
+      "displayName": "Assign fully immunized",
+      "description": "Assign fully immunized - Assign fully immunized",
+      "externalAccess": false,
+      "condition": "!#{fullyImmunized}  && (#{bcgscarcurrent} || #{bcgScar}) && #{opvComplete} && (#{pcv3current} || #{pcv3prev}) && (#{dpt3current} || #{dpt3prev}) && (#{rv2current} || #{rv2prev}) && (#{measles1current} || #{measles1prev})",
+      "program": {
+        "id": "SSLpOM0r1U7"
+      },
+      "userGroupAccesses": [],
+      "attributeValues": [],
+      "programRuleActions": [
+        {
+          "created": "2016-03-03T16:36:37.975+0000",
+          "lastUpdated": "2016-03-04T19:12:49.599+0000",
+          "id": "ahispzm1097",
+          "programRuleActionType": "ASSIGN",
+          "data": "true",
+          "content": "#{fullyImmunized}",
+          "externalAccess": false,
+          "dataElement": {
+            "id": "hVlJXbURJbt"
+          },
+          "programRule": {
+            "id": "rhispzm1097"
+          },
+          "userGroupAccesses": [],
+          "attributeValues": []
+        }
+      ]
+    },
+    {
+      "created": "2015-12-08T11:46:49.330+0000",
+      "lastUpdated": "2015-12-08T11:47:37.382+0000",
+      "name": "Assign Measles1 not due",
+      "id": "rhispzm1082",
+      "displayName": "Assign Measles1 not due",
+      "description": "Assign Measles1 not due - Assign Measles1 not due",
+      "priority": 2,
+      "externalAccess": false,
+      "condition": "d2:hasValue('measles1prev') || #{ageWeeksDueDate} < 6",
+      "program": {
+        "id": "SSLpOM0r1U7"
+      },
+      "userGroupAccesses": [],
+      "attributeValues": [],
+      "programRuleActions": [
+        {
+          "created": "2015-12-08T11:48:13.370+0000",
+          "lastUpdated": "2015-12-08T11:49:01.063+0000",
+          "id": "ahispzm1082",
+          "programRuleActionType": "ASSIGN",
+          "data": "true",
+          "content": "#{measles1NotDue}",
+          "externalAccess": false,
+          "programRule": {
+            "id": "rhispzm1082"
+          },
+          "userGroupAccesses": [],
+          "attributeValues": []
+        }
+      ]
+    },
+    {
+      "created": "2015-12-08T11:46:48.987+0000",
+      "lastUpdated": "2015-12-08T11:47:38.068+0000",
+      "name": "Assign Measles2 not due",
+      "id": "rhispzm1083",
+      "displayName": "Assign Measles2 not due",
+      "description": "Assign Measles2 not due - Assign Measles2 not due",
+      "priority": 2,
+      "externalAccess": false,
+      "condition": "d2:hasValue('measles2prev') || !d2:hasValue('measles1prev') || d2:weeksBetween(d2:lastEventDate('measles1prev'),V{due_date}) < 4",
+      "program": {
+        "id": "SSLpOM0r1U7"
+      },
+      "userGroupAccesses": [],
+      "attributeValues": [],
+      "programRuleActions": [
+        {
+          "created": "2015-12-08T11:48:14.026+0000",
+          "lastUpdated": "2015-12-08T11:49:01.403+0000",
+          "id": "ahispzm1083",
+          "programRuleActionType": "ASSIGN",
+          "data": "true",
+          "content": "#{measles2NotDue}",
+          "externalAccess": false,
+          "programRule": {
+            "id": "rhispzm1083"
+          },
+          "userGroupAccesses": [],
+          "attributeValues": []
+        }
+      ]
+    },
+    {
+      "created": "2015-12-08T11:46:48.643+0000",
+      "lastUpdated": "2015-12-08T11:47:37.726+0000",
+      "name": "Assign Measles due",
+      "id": "rhispzm1084",
+      "displayName": "Assign Measles due",
+      "description": "Assign Measles due - Assign Measles due",
+      "priority": 3,
+      "externalAccess": false,
+      "condition": "!#{measles1NotDue} || !#{measles2NotDue}",
+      "program": {
+        "id": "SSLpOM0r1U7"
+      },
+      "userGroupAccesses": [],
+      "attributeValues": [],
+      "programRuleActions": [
+        {
+          "created": "2015-12-08T11:48:14.675+0000",
+          "lastUpdated": "2015-12-08T11:49:01.752+0000",
+          "id": "ahispzm1084",
+          "programRuleActionType": "ASSIGN",
+          "data": "true",
+          "content": "#{measlesDue}",
+          "externalAccess": false,
+          "programRule": {
+            "id": "rhispzm1084"
+          },
+          "userGroupAccesses": [],
+          "attributeValues": []
+        }
+      ]
+    },
+    {
+      "created": "2015-11-26T11:27:41.270+0000",
+      "lastUpdated": "2015-12-08T11:47:34.973+0000",
+      "name": "Assign measlesNeeded",
+      "id": "rhispzm1050",
+      "displayName": "Assign measlesNeeded",
+      "description": "Assign measlesNeeded - Assign measlesNeeded",
+      "priority": 3,
+      "externalAccess": false,
+      "condition": "(!#{measles1NotShown} || !#{measles2NotShown})",
+      "program": {
+        "id": "SSLpOM0r1U7"
+      },
+      "userGroupAccesses": [],
+      "attributeValues": [],
+      "programRuleActions": [
+        {
+          "created": "2015-11-26T11:28:16.389+0000",
+          "lastUpdated": "2015-12-08T11:49:07.734+0000",
+          "id": "ahispzm1050",
+          "programRuleActionType": "ASSIGN",
+          "data": "true",
+          "content": "#{measlesNeeded}",
+          "externalAccess": false,
+          "programRule": {
+            "id": "rhispzm1050"
+          },
+          "userGroupAccesses": [],
+          "attributeValues": []
+        }
+      ]
+    },
+    {
+      "created": "2016-03-04T19:56:41.271+0000",
+      "lastUpdated": "2016-03-04T19:56:41.273+0000",
+      "name": "Assign NO to fully immunized",
+      "id": "rhispzm1099",
+      "displayName": "Assign NO to fully immunized",
+      "description": "Assign NO to fully immunized if fully immunized is marked, but the conditions are not met - Assign NO to fully immunized",
+      "externalAccess": false,
+      "condition": "#{fullyImmunized} && ((!#{bcgscarcurrent} && !#{bcgScar}) || !#{opvComplete} || (!#{pcv3current} && !#{pcv3prev}) || (!#{dpt3current} && !#{dpt3prev}) || (!#{rv2current} && !#{rv2prev}) || (!#{measles1current} && !#{measles1prev}))",
+      "program": {
+        "id": "SSLpOM0r1U7"
+      },
+      "userGroupAccesses": [],
+      "attributeValues": [],
+      "programRuleActions": [
+        {
+          "created": "2016-03-04T19:56:58.282+0000",
+          "lastUpdated": "2016-03-04T19:56:58.283+0000",
+          "id": "ahispzm1099",
+          "programRuleActionType": "ASSIGN",
+          "data": "false",
+          "externalAccess": false,
+          "dataElement": {
+            "id": "hVlJXbURJbt"
+          },
+          "programRule": {
+            "id": "rhispzm1099"
+          },
+          "userGroupAccesses": [],
+          "attributeValues": []
+        }
+      ]
+    },
+    {
+      "created": "2016-03-04T18:35:33.354+0000",
+      "lastUpdated": "2016-03-04T18:35:33.356+0000",
+      "name": "Assign NO to OPV complete",
+      "id": "rhispzm1098",
+      "displayName": "Assign NO to OPV complete",
+      "description": "Assign NO to OPV complete if OPV3 or 4 is unticked - Assign NO to OPV complete",
+      "externalAccess": false,
+      "condition": "(d2:hasValue('opv4current') && !#{opv4current}) || (d2:hasValue('opv3current') && !#{opv3current})",
+      "program": {
+        "id": "SSLpOM0r1U7"
+      },
+      "userGroupAccesses": [],
+      "attributeValues": [],
+      "programRuleActions": [
+        {
+          "created": "2016-03-04T18:36:02.627+0000",
+          "lastUpdated": "2016-03-04T18:36:02.629+0000",
+          "id": "ahispzm1098",
+          "programRuleActionType": "ASSIGN",
+          "data": "false",
+          "content": "#{opvComplete}",
+          "externalAccess": false,
+          "dataElement": {
+            "id": "iKhCRO2G3aY"
+          },
+          "programRule": {
+            "id": "rhispzm1098"
+          },
+          "userGroupAccesses": [],
+          "attributeValues": []
+        }
+      ]
+    },
+    {
+      "created": "2015-12-07T08:08:45.883+0000",
+      "lastUpdated": "2015-12-08T11:47:36.031+0000",
+      "name": "Assign OPV0 not due",
+      "id": "rhispzm1065",
+      "displayName": "Assign OPV0 not due",
+      "description": "Assign OPV0 not due - Assign OPV0 not due",
+      "priority": 2,
+      "externalAccess": false,
+      "condition": "d2:hasValue('opv0prev') || #{ageDaysDueDate} > 13",
+      "program": {
+        "id": "SSLpOM0r1U7"
+      },
+      "userGroupAccesses": [],
+      "attributeValues": [],
+      "programRuleActions": [
+        {
+          "created": "2015-12-07T08:13:32.064+0000",
+          "lastUpdated": "2015-12-08T11:48:53.344+0000",
+          "id": "ahispzm1065",
+          "programRuleActionType": "ASSIGN",
+          "data": "true",
+          "content": "#{opv0NotDue}",
+          "externalAccess": false,
+          "programRule": {
+            "id": "rhispzm1065"
+          },
+          "userGroupAccesses": [],
+          "attributeValues": []
+        }
+      ]
+    },
+    {
+      "created": "2015-12-07T08:13:09.548+0000",
+      "lastUpdated": "2015-12-08T11:47:41.976+0000",
+      "name": "Assign OPV1 not due",
+      "id": "rhispzm1066",
+      "displayName": "Assign OPV1 not due",
+      "description": "Assign OPV1 not due - Assign OPV1 not due",
+      "priority": 2,
+      "externalAccess": false,
+      "condition": "d2:hasValue('opv1prev') || #{ageWeeksDueDate} < 6",
+      "program": {
+        "id": "SSLpOM0r1U7"
+      },
+      "userGroupAccesses": [],
+      "attributeValues": [],
+      "programRuleActions": [
+        {
+          "created": "2015-12-07T08:13:35.647+0000",
+          "lastUpdated": "2015-12-08T11:48:55.149+0000",
+          "id": "ahispzm1066",
+          "programRuleActionType": "ASSIGN",
+          "data": "true",
+          "content": "#{opv1NotDue}",
+          "externalAccess": false,
+          "programRule": {
+            "id": "rhispzm1066"
+          },
+          "userGroupAccesses": [],
+          "attributeValues": []
+        }
+      ]
+    },
+    {
+      "created": "2015-12-07T08:08:47.050+0000",
+      "lastUpdated": "2015-12-08T11:47:42.286+0000",
+      "name": "Assign OPV2 not due",
+      "id": "rhispzm1067",
+      "displayName": "Assign OPV2 not due",
+      "description": "Assign OPV2 not due - Assign OPV2 not due",
+      "priority": 2,
+      "externalAccess": false,
+      "condition": "d2:hasValue('opv2prev') || !d2:hasValue('opv1prev') || d2:weeksBetween(d2:lastEventDate('opv1prev'),V{due_date}) < 4",
+      "program": {
+        "id": "SSLpOM0r1U7"
+      },
+      "userGroupAccesses": [],
+      "attributeValues": [],
+      "programRuleActions": [
+        {
+          "created": "2015-12-07T08:13:34.474+0000",
+          "lastUpdated": "2015-12-08T11:48:55.828+0000",
+          "id": "ahispzm1067",
+          "programRuleActionType": "ASSIGN",
+          "data": "true",
+          "content": "#{opv2NotDue}",
+          "externalAccess": false,
+          "programRule": {
+            "id": "rhispzm1067"
+          },
+          "userGroupAccesses": [],
+          "attributeValues": []
+        }
+      ]
+    },
+    {
+      "created": "2015-12-07T08:11:49.768+0000",
+      "lastUpdated": "2015-12-08T11:47:30.092+0000",
+      "name": "Assign OPV3 not due",
+      "id": "rhispzm1068",
+      "displayName": "Assign OPV3 not due",
+      "description": "Assign OPV3 not due - Assign OPV3 not due",
+      "priority": 2,
+      "externalAccess": false,
+      "condition": "d2:hasValue('opv3prev') || !d2:hasValue('opv2prev') || d2:weeksBetween(d2:lastEventDate('opv2prev'),V{due_date}) < 4",
+      "program": {
+        "id": "SSLpOM0r1U7"
+      },
+      "userGroupAccesses": [],
+      "attributeValues": [],
+      "programRuleActions": [
+        {
+          "created": "2015-12-07T08:13:33.859+0000",
+          "lastUpdated": "2015-12-08T11:48:55.487+0000",
+          "id": "ahispzm1068",
+          "programRuleActionType": "ASSIGN",
+          "data": "true",
+          "content": "#{opv3NotDue}",
+          "externalAccess": false,
+          "programRule": {
+            "id": "rhispzm1068"
+          },
+          "userGroupAccesses": [],
+          "attributeValues": []
+        }
+      ]
+    },
+    {
+      "created": "2015-12-07T08:08:46.474+0000",
+      "lastUpdated": "2015-12-08T11:47:32.700+0000",
+      "name": "Assign OPV4 not due",
+      "id": "rhispzm1069",
+      "displayName": "Assign OPV4 not due",
+      "description": "Assign OPV4 not due - Assign OPV4 not due",
+      "priority": 2,
+      "externalAccess": false,
+      "condition": "d2:hasValue('opv4prev') || #{ageMonthsDueDate} < 9 || !d2:hasValue('opv3prev') || d2:hasValue('opv0prev')",
+      "program": {
+        "id": "SSLpOM0r1U7"
+      },
+      "userGroupAccesses": [],
+      "attributeValues": [],
+      "programRuleActions": [
+        {
+          "created": "2015-12-07T08:13:33.275+0000",
+          "lastUpdated": "2015-12-08T11:48:54.802+0000",
+          "id": "ahispzm1069",
+          "programRuleActionType": "ASSIGN",
+          "data": "true",
+          "content": "#{opv4NotDue}",
+          "externalAccess": false,
+          "programRule": {
+            "id": "rhispzm1069"
+          },
+          "userGroupAccesses": [],
+          "attributeValues": []
+        }
+      ]
+    },
+    {
+      "created": "2016-03-03T16:36:17.963+0000",
+      "lastUpdated": "2016-03-04T18:32:32.687+0000",
+      "name": "Assign OPV complete",
+      "id": "rhispzm1096",
+      "displayName": "Assign OPV complete",
+      "description": "Assign OPV complete - Assign OPV complete",
+      "priority": 2,
+      "externalAccess": false,
+      "condition": "#{opv4current} || (#{opv3current} && #{opv0prev})",
+      "program": {
+        "id": "SSLpOM0r1U7"
+      },
+      "userGroupAccesses": [],
+      "attributeValues": [],
+      "programRuleActions": [
+        {
+          "created": "2016-03-03T16:36:34.607+0000",
+          "lastUpdated": "2016-03-04T18:32:49.091+0000",
+          "id": "ahispzm1096",
+          "programRuleActionType": "ASSIGN",
+          "data": "true",
+          "content": "#{opvComplete}",
+          "externalAccess": false,
+          "dataElement": {
+            "id": "iKhCRO2G3aY"
+          },
+          "programRule": {
+            "id": "rhispzm1096"
+          },
+          "userGroupAccesses": [],
+          "attributeValues": []
+        }
+      ]
+    },
+    {
+      "created": "2015-12-07T08:11:50.389+0000",
+      "lastUpdated": "2015-12-08T11:47:33.060+0000",
+      "name": "Assign OPV due",
+      "id": "rhispzm1070",
+      "displayName": "Assign OPV due",
+      "description": "Assign OPV due - Assign OPV due",
+      "priority": 3,
+      "externalAccess": false,
+      "condition": "(!#{opv0NotDue} || !#{opv1NotDue} || !#{opv2NotDue} || !#{opv3NotDue} || !#{opv4NotDue})",
+      "program": {
+        "id": "SSLpOM0r1U7"
+      },
+      "userGroupAccesses": [],
+      "attributeValues": [],
+      "programRuleActions": [
+        {
+          "created": "2015-12-07T08:13:32.664+0000",
+          "lastUpdated": "2015-12-08T11:48:56.165+0000",
+          "id": "ahispzm1070",
+          "programRuleActionType": "ASSIGN",
+          "data": "true",
+          "content": "#{opvDue}",
+          "externalAccess": false,
+          "programRule": {
+            "id": "rhispzm1070"
+          },
+          "userGroupAccesses": [],
+          "attributeValues": []
+        }
+      ]
+    },
+    {
+      "created": "2015-11-25T16:35:06.843+0000",
+      "lastUpdated": "2015-12-08T11:47:46.743+0000",
+      "name": "Assign OPVNeeded",
+      "id": "rhispzm1022",
+      "displayName": "Assign OPVNeeded",
+      "description": "Assign OPVNeeded - Assign OPVNeeded",
+      "priority": 3,
+      "externalAccess": false,
+      "condition": "(!#{opv0NotShown} || !#{opv1NotShown} || !#{opv2NotShown} || !#{opv3NotShown} || !#{opv4NotShown})",
+      "program": {
+        "id": "SSLpOM0r1U7"
+      },
+      "userGroupAccesses": [],
+      "attributeValues": [],
+      "programRuleActions": [
+        {
+          "created": "2015-11-25T16:35:29.258+0000",
+          "lastUpdated": "2015-12-08T11:49:15.340+0000",
+          "id": "ahispzm1022",
+          "programRuleActionType": "ASSIGN",
+          "data": "true",
+          "content": "#{opvNeeded}",
+          "externalAccess": false,
+          "programRule": {
+            "id": "rhispzm1022"
+          },
+          "userGroupAccesses": [],
+          "attributeValues": []
+        }
+      ]
+    },
+    {
+      "created": "2015-12-08T11:46:50.922+0000",
+      "lastUpdated": "2015-12-08T11:47:40.400+0000",
+      "name": "Assign PCV1 not due",
+      "id": "rhispzm1075",
+      "displayName": "Assign PCV1 not due",
+      "description": "Assign PCV1 not due - Assign PCV1 not due",
+      "priority": 2,
+      "externalAccess": false,
+      "condition": "d2:hasValue('pcv1prev') || #{ageWeeksDueDate} < 6",
+      "program": {
+        "id": "SSLpOM0r1U7"
+      },
+      "userGroupAccesses": [],
+      "attributeValues": [],
+      "programRuleActions": [
+        {
+          "created": "2015-12-08T11:48:08.883+0000",
+          "lastUpdated": "2015-12-08T11:48:58.588+0000",
+          "id": "ahispzm1075",
+          "programRuleActionType": "ASSIGN",
+          "data": "true",
+          "content": "#{pcv1NotDue}",
+          "externalAccess": false,
+          "programRule": {
+            "id": "rhispzm1075"
+          },
+          "userGroupAccesses": [],
+          "attributeValues": []
+        }
+      ]
+    },
+    {
+      "created": "2015-12-08T11:46:51.570+0000",
+      "lastUpdated": "2015-12-08T11:47:39.431+0000",
+      "name": "Assign PCV2 not due",
+      "id": "rhispzm1076",
+      "displayName": "Assign PCV2 not due",
+      "description": "Assign PCV2 not due - Assign PCV2 not due",
+      "priority": 2,
+      "externalAccess": false,
+      "condition": "d2:hasValue('pcv2prev') || !d2:hasValue('pcv1prev') || d2:weeksBetween(d2:lastEventDate('pcv1prev'),V{due_date}) < 4",
+      "program": {
+        "id": "SSLpOM0r1U7"
+      },
+      "userGroupAccesses": [],
+      "attributeValues": [],
+      "programRuleActions": [
+        {
+          "created": "2015-12-08T11:48:09.521+0000",
+          "lastUpdated": "2015-12-08T11:48:58.932+0000",
+          "id": "ahispzm1076",
+          "programRuleActionType": "ASSIGN",
+          "data": "true",
+          "content": "#{pcv2NotDue}",
+          "externalAccess": false,
+          "programRule": {
+            "id": "rhispzm1076"
+          },
+          "userGroupAccesses": [],
+          "attributeValues": []
+        }
+      ]
+    },
+    {
+      "created": "2015-12-08T11:46:50.614+0000",
+      "lastUpdated": "2015-12-08T11:47:40.075+0000",
+      "name": "Assign PCV3 not due",
+      "id": "rhispzm1077",
+      "displayName": "Assign PCV3 not due",
+      "description": "Assign PCV3 not due - Assign PCV3 not due",
+      "priority": 2,
+      "externalAccess": false,
+      "condition": "d2:hasValue('pcv3prev') || !d2:hasValue('pcv2prev') || d2:weeksBetween(d2:lastEventDate('pcv2prev'),V{due_date}) < 4",
+      "program": {
+        "id": "SSLpOM0r1U7"
+      },
+      "userGroupAccesses": [],
+      "attributeValues": [],
+      "programRuleActions": [
+        {
+          "created": "2015-12-08T11:48:10.167+0000",
+          "lastUpdated": "2015-12-08T11:48:59.274+0000",
+          "id": "ahispzm1077",
+          "programRuleActionType": "ASSIGN",
+          "data": "true",
+          "content": "#{pcv3NotDue}",
+          "externalAccess": false,
+          "programRule": {
+            "id": "rhispzm1077"
+          },
+          "userGroupAccesses": [],
+          "attributeValues": []
+        }
+      ]
+    },
+    {
+      "created": "2015-12-08T11:46:51.238+0000",
+      "lastUpdated": "2015-12-08T11:47:39.765+0000",
+      "name": "Assign PCV due",
+      "id": "rhispzm1078",
+      "displayName": "Assign PCV due",
+      "description": "Assign PCV due - Assign PCV due",
+      "priority": 3,
+      "externalAccess": false,
+      "condition": "!#{pcv1NotDue} || !#{pcv2NotDue} || !#{pcv3NotDue}",
+      "program": {
+        "id": "SSLpOM0r1U7"
+      },
+      "userGroupAccesses": [],
+      "attributeValues": [],
+      "programRuleActions": [
+        {
+          "created": "2015-12-08T11:48:10.801+0000",
+          "lastUpdated": "2015-12-08T11:48:59.641+0000",
+          "id": "ahispzm1078",
+          "programRuleActionType": "ASSIGN",
+          "data": "true",
+          "content": "#{pcvDue}",
+          "externalAccess": false,
+          "programRule": {
+            "id": "rhispzm1078"
+          },
+          "userGroupAccesses": [],
+          "attributeValues": []
+        }
+      ]
+    },
+    {
+      "created": "2015-11-26T10:18:18.192+0000",
+      "lastUpdated": "2015-12-08T11:47:43.646+0000",
+      "name": "Assign PCVNeeded",
+      "id": "rhispzm1038",
+      "displayName": "Assign PCVNeeded",
+      "description": "Assign PCVNeeded - Assign PCVNeeded",
+      "priority": 3,
+      "externalAccess": false,
+      "condition": "(!#{pcv1NotShown} || !#{pcv2NotShown} || !#{pcv3NotShown})",
+      "program": {
+        "id": "SSLpOM0r1U7"
+      },
+      "userGroupAccesses": [],
+      "attributeValues": [],
+      "programRuleActions": [
+        {
+          "created": "2015-11-26T10:33:19.940+0000",
+          "lastUpdated": "2015-12-08T11:49:08.074+0000",
+          "id": "ahispzm1038",
+          "programRuleActionType": "ASSIGN",
+          "data": "true",
+          "content": "#{pcvNeeded}",
+          "externalAccess": false,
+          "programRule": {
+            "id": "rhispzm1038"
+          },
+          "userGroupAccesses": [],
+          "attributeValues": []
+        }
+      ]
+    },
+    {
+      "created": "2015-12-08T11:46:50.306+0000",
+      "lastUpdated": "2015-12-08T11:47:39.115+0000",
+      "name": "Assign RV1 not due",
+      "id": "rhispzm1079",
+      "displayName": "Assign RV1 not due",
+      "description": "Assign RV1 not due - Assign RV1 not due",
+      "priority": 2,
+      "externalAccess": false,
+      "condition": "d2:hasValue('rv1prev') || #{ageWeeksDueDate} < 6",
+      "program": {
+        "id": "SSLpOM0r1U7"
+      },
+      "userGroupAccesses": [],
+      "attributeValues": [],
+      "programRuleActions": [
+        {
+          "created": "2015-12-08T11:48:11.442+0000",
+          "lastUpdated": "2015-12-08T11:49:00.007+0000",
+          "id": "ahispzm1079",
+          "programRuleActionType": "ASSIGN",
+          "data": "true",
+          "content": "#{rv1NotDue}",
+          "externalAccess": false,
+          "programRule": {
+            "id": "rhispzm1079"
+          },
+          "userGroupAccesses": [],
+          "attributeValues": []
+        }
+      ]
+    },
+    {
+      "created": "2015-12-08T11:46:49.953+0000",
+      "lastUpdated": "2015-12-08T11:47:38.777+0000",
+      "name": "Assign RV2 not due",
+      "id": "rhispzm1080",
+      "displayName": "Assign RV2 not due",
+      "description": "Assign RV2 not due - Assign RV2 not due",
+      "priority": 2,
+      "externalAccess": false,
+      "condition": "d2:hasValue('rv2prev') || !d2:hasValue('rv1prev') || d2:weeksBetween(d2:lastEventDate('rv1prev'),V{due_date}) < 4",
+      "program": {
+        "id": "SSLpOM0r1U7"
+      },
+      "userGroupAccesses": [],
+      "attributeValues": [],
+      "programRuleActions": [
+        {
+          "created": "2015-12-08T11:48:12.082+0000",
+          "lastUpdated": "2015-12-08T11:49:00.365+0000",
+          "id": "ahispzm1080",
+          "programRuleActionType": "ASSIGN",
+          "data": "true",
+          "content": "#{rv2NotDue}",
+          "externalAccess": false,
+          "programRule": {
+            "id": "rhispzm1080"
+          },
+          "userGroupAccesses": [],
+          "attributeValues": []
+        }
+      ]
+    },
+    {
+      "created": "2015-12-08T11:46:49.646+0000",
+      "lastUpdated": "2015-12-08T11:47:38.421+0000",
+      "name": "Assign RV due",
+      "id": "rhispzm1081",
+      "displayName": "Assign RV due",
+      "description": "Assign RV due - Assign RV due",
+      "priority": 3,
+      "externalAccess": false,
+      "condition": "!#{rv1NotDue} || !#{rv2NotDue}",
+      "program": {
+        "id": "SSLpOM0r1U7"
+      },
+      "userGroupAccesses": [],
+      "attributeValues": [],
+      "programRuleActions": [
+        {
+          "created": "2015-12-08T11:48:12.721+0000",
+          "lastUpdated": "2015-12-08T11:49:00.709+0000",
+          "id": "ahispzm1081",
+          "programRuleActionType": "ASSIGN",
+          "data": "true",
+          "content": "#{rvDue}",
+          "externalAccess": false,
+          "programRule": {
+            "id": "rhispzm1081"
+          },
+          "userGroupAccesses": [],
+          "attributeValues": []
+        }
+      ]
+    },
+    {
+      "created": "2015-11-26T10:57:39.545+0000",
+      "lastUpdated": "2015-12-08T11:47:31.091+0000",
+      "name": "Assign RVNeeded",
+      "id": "rhispzm1044",
+      "displayName": "Assign RVNeeded",
+      "description": "Assign RVNeeded - Assign RVNeeded",
+      "priority": 3,
+      "externalAccess": false,
+      "condition": "(!#{rv1NotShown} || !#{rv2NotShown})",
+      "program": {
+        "id": "SSLpOM0r1U7"
+      },
+      "userGroupAccesses": [],
+      "attributeValues": [],
+      "programRuleActions": [
+        {
+          "created": "2015-11-26T11:04:44.583+0000",
+          "lastUpdated": "2015-12-08T11:49:04.239+0000",
+          "id": "ahispzm1044",
+          "programRuleActionType": "ASSIGN",
+          "data": "true",
+          "content": "#{rvNeeded}",
+          "externalAccess": false,
+          "programRule": {
+            "id": "rhispzm1044"
+          },
+          "userGroupAccesses": [],
+          "attributeValues": []
+        }
+      ]
+    },
+    {
+      "created": "2015-11-26T15:39:18.210+0000",
+      "lastUpdated": "2015-12-08T11:47:31.747+0000",
+      "name": "Hide BCG",
+      "id": "rhispzm1056",
+      "displayName": "Hide BCG",
+      "description": "Hide BCG if previously given - Hide BCG",
+      "priority": 2,
+      "externalAccess": false,
+      "condition": "#{bcgGiven}",
+      "program": {
+        "id": "SSLpOM0r1U7"
+      },
+      "userGroupAccesses": [],
+      "attributeValues": [],
+      "programRuleActions": [
+        {
+          "created": "2015-11-26T15:40:33.332+0000",
+          "lastUpdated": "2015-12-08T11:49:12.222+0000",
+          "id": "ahispzm1057",
+          "programRuleActionType": "ASSIGN",
+          "data": "true",
+          "content": "#{bcgNotShown}",
+          "externalAccess": false,
+          "programRule": {
+            "id": "rhispzm1056"
+          },
+          "userGroupAccesses": [],
+          "attributeValues": []
+        },
+        {
+          "created": "2015-11-26T15:40:32.539+0000",
+          "lastUpdated": "2015-12-08T11:49:10.858+0000",
+          "id": "ahispzm1056",
+          "programRuleActionType": "HIDEFIELD",
+          "externalAccess": false,
+          "dataElement": {
+            "id": "bpBUOvqy1Jn"
+          },
+          "programRule": {
+            "id": "rhispzm1056"
+          },
+          "userGroupAccesses": [],
+          "attributeValues": []
+        }
+      ]
+    },
+    {
+      "created": "2015-11-26T12:25:58.837+0000",
+      "lastUpdated": "2015-12-08T11:47:31.424+0000",
+      "name": "Hide BCG repeat",
+      "id": "rhispzm1052",
+      "displayName": "Hide BCG repeat",
+      "description": "Hide BCG repeat - Hide BCG repeat",
+      "priority": 2,
+      "externalAccess": false,
+      "condition": "!#{bcgGiven} || #{bcgRepeat} || #{bcgScar} || #{bcgscarcurrent} || #{ageWeeks} < 12",
+      "program": {
+        "id": "SSLpOM0r1U7"
+      },
+      "userGroupAccesses": [],
+      "attributeValues": [],
+      "programRuleActions": [
+        {
+          "created": "2015-11-26T15:40:31.153+0000",
+          "lastUpdated": "2015-12-08T11:49:09.453+0000",
+          "id": "ahispzm1053",
+          "programRuleActionType": "ASSIGN",
+          "data": "true",
+          "content": "#{bcgRepeatNotShown}",
+          "externalAccess": false,
+          "programRule": {
+            "id": "rhispzm1052"
+          },
+          "userGroupAccesses": [],
+          "attributeValues": []
+        },
+        {
+          "created": "2015-11-26T13:01:08.012+0000",
+          "lastUpdated": "2015-12-08T11:49:09.089+0000",
+          "id": "ahispzm1052",
+          "programRuleActionType": "HIDEFIELD",
+          "externalAccess": false,
+          "dataElement": {
+            "id": "KRF40x6EILp"
+          },
+          "programRule": {
+            "id": "rhispzm1052"
+          },
+          "userGroupAccesses": [],
+          "attributeValues": []
+        }
+      ]
+    },
+    {
+      "created": "2015-11-26T12:25:50.179+0000",
+      "lastUpdated": "2015-12-08T11:47:34.006+0000",
+      "name": "Hide BCG scar",
+      "id": "rhispzm1051",
+      "displayName": "Hide BCG scar",
+      "description": "Hide BCG scar - Hide BCG scar",
+      "externalAccess": false,
+      "condition": "!#{bcgGiven} || d2:hasValue('bcgScar')",
+      "program": {
+        "id": "SSLpOM0r1U7"
+      },
+      "userGroupAccesses": [],
+      "attributeValues": [],
+      "programRuleActions": [
+        {
+          "created": "2015-11-26T13:01:07.175+0000",
+          "lastUpdated": "2015-12-08T11:49:08.420+0000",
+          "id": "ahispzm1051",
+          "programRuleActionType": "HIDEFIELD",
+          "externalAccess": false,
+          "dataElement": {
+            "id": "EMcT5j5zR81"
+          },
+          "programRule": {
+            "id": "rhispzm1051"
+          },
+          "userGroupAccesses": [],
+          "attributeValues": []
+        }
+      ]
+    },
+    {
+      "created": "2015-11-26T15:39:18.588+0000",
+      "lastUpdated": "2015-12-08T11:47:35.320+0000",
+      "name": "Hide BCG stockout",
+      "id": "rhispzm1054",
+      "displayName": "Hide BCG stockout",
+      "description": "Hide BCG stockout in case all the BCG dataelements is hidden, OR if BCG was administered in THIS visit. - Hide BCG stockout",
+      "externalAccess": false,
+      "condition": "!#{bcgNeeded} || (#{bcgcurrent} || #{bcgRepeatcurrent})",
+      "program": {
+        "id": "SSLpOM0r1U7"
+      },
+      "userGroupAccesses": [],
+      "attributeValues": [],
+      "programRuleActions": [
+        {
+          "created": "2015-11-26T15:40:31.508+0000",
+          "lastUpdated": "2015-12-08T11:49:10.485+0000",
+          "id": "ahispzm1054",
+          "programRuleActionType": "HIDEFIELD",
+          "externalAccess": false,
+          "dataElement": {
+            "id": "LTdvha8zapG"
+          },
+          "programRule": {
+            "id": "rhispzm1054"
+          },
+          "userGroupAccesses": [],
+          "attributeValues": []
+        }
+      ]
+    },
+    {
+      "created": "2015-11-26T16:28:31.724+0000",
+      "lastUpdated": "2015-12-08T11:47:32.387+0000",
+      "name": "Hide breastfeeding",
+      "id": "rhispzm1059",
+      "displayName": "Hide breastfeeding",
+      "description": "Hide breastfeeding - Hide breastfeeding",
+      "externalAccess": false,
+      "condition": "#{ageYears} > 2",
+      "program": {
+        "id": "SSLpOM0r1U7"
+      },
+      "userGroupAccesses": [],
+      "attributeValues": [],
+      "programRuleActions": [
+        {
+          "created": "2015-11-26T16:30:12.529+0000",
+          "lastUpdated": "2015-12-08T11:48:53.726+0000",
+          "id": "ahispzm1059",
+          "programRuleActionType": "HIDEFIELD",
+          "externalAccess": false,
+          "dataElement": {
+            "id": "nblG1lFCRsO"
+          },
+          "programRule": {
+            "id": "rhispzm1059"
+          },
+          "userGroupAccesses": [],
+          "attributeValues": []
+        }
+      ]
+    },
+    {
+      "created": "2015-11-26T10:07:36.446+0000",
+      "lastUpdated": "2015-12-08T11:47:47.051+0000",
+      "name": "Hide DPT1",
+      "id": "rhispzm1023",
+      "displayName": "Hide DPT1",
+      "description": "Hide DPT1 if ever given, or age is less than 6 weeks - Hide DPT1",
+      "priority": 2,
+      "externalAccess": false,
+      "condition": "d2:hasValue('dpt1prev') || #{ageWeeks} < 6",
+      "program": {
+        "id": "SSLpOM0r1U7"
+      },
+      "userGroupAccesses": [],
+      "attributeValues": [],
+      "programRuleActions": [
+        {
+          "created": "2015-11-26T10:08:05.110+0000",
+          "lastUpdated": "2015-12-08T11:49:17.372+0000",
+          "id": "ahispzm1023",
+          "programRuleActionType": "HIDEFIELD",
+          "externalAccess": false,
+          "dataElement": {
+            "id": "K3TcJM1ySQA"
+          },
+          "programRule": {
+            "id": "rhispzm1023"
+          },
+          "userGroupAccesses": [],
+          "attributeValues": []
+        },
+        {
+          "created": "2015-11-26T10:08:05.973+0000",
+          "lastUpdated": "2015-12-08T11:49:17.028+0000",
+          "id": "ahispzm1024",
+          "programRuleActionType": "ASSIGN",
+          "data": "true",
+          "content": "#{dpt1NotShown}",
+          "externalAccess": false,
+          "programRule": {
+            "id": "rhispzm1023"
+          },
+          "userGroupAccesses": [],
+          "attributeValues": []
+        }
+      ]
+    },
+    {
+      "created": "2015-11-26T10:07:35.780+0000",
+      "lastUpdated": "2015-12-08T11:47:46.398+0000",
+      "name": "Hide DPT2",
+      "id": "rhispzm1025",
+      "displayName": "Hide DPT2",
+      "description": "Hide DPT2 if ever given, or if there is not more than 4 weeks since you got DPT1 - Hide DPT2",
+      "priority": 2,
+      "externalAccess": false,
+      "condition": "d2:hasValue('dpt2prev') || !d2:hasValue('dpt1prev') || d2:weeksBetween(d2:lastEventDate('dpt1prev'),V{event_date}) < 4",
+      "program": {
+        "id": "SSLpOM0r1U7"
+      },
+      "userGroupAccesses": [],
+      "attributeValues": [],
+      "programRuleActions": [
+        {
+          "created": "2015-11-26T10:08:06.368+0000",
+          "lastUpdated": "2015-12-08T11:49:13.939+0000",
+          "id": "ahispzm1025",
+          "programRuleActionType": "HIDEFIELD",
+          "externalAccess": false,
+          "dataElement": {
+            "id": "GPOoPDqle3V"
+          },
+          "programRule": {
+            "id": "rhispzm1025"
+          },
+          "userGroupAccesses": [],
+          "attributeValues": []
+        },
+        {
+          "created": "2015-11-26T10:08:06.785+0000",
+          "lastUpdated": "2015-12-08T11:49:14.273+0000",
+          "id": "ahispzm1026",
+          "programRuleActionType": "ASSIGN",
+          "data": "true",
+          "content": "#{dpt2NotShown}",
+          "externalAccess": false,
+          "programRule": {
+            "id": "rhispzm1025"
+          },
+          "userGroupAccesses": [],
+          "attributeValues": []
+        }
+      ]
+    },
+    {
+      "created": "2015-11-26T10:07:35.180+0000",
+      "lastUpdated": "2015-12-08T11:47:46.053+0000",
+      "name": "Hide DPT3",
+      "id": "rhispzm1027",
+      "displayName": "Hide DPT3",
+      "description": "Hide DPT3 if ever given, or if there is not more than 4 weeks since you got DPT2 - Hide DPT3",
+      "priority": 2,
+      "externalAccess": false,
+      "condition": "d2:hasValue('dpt3prev') || !d2:hasValue('dpt2prev') || d2:weeksBetween(d2:lastEventDate('dpt2prev'),V{event_date}) < 4",
+      "program": {
+        "id": "SSLpOM0r1U7"
+      },
+      "userGroupAccesses": [],
+      "attributeValues": [],
+      "programRuleActions": [
+        {
+          "created": "2015-11-26T10:08:07.192+0000",
+          "lastUpdated": "2015-12-08T11:49:14.631+0000",
+          "id": "ahispzm1027",
+          "programRuleActionType": "HIDEFIELD",
+          "externalAccess": false,
+          "dataElement": {
+            "id": "pxCZNoqDVJC"
+          },
+          "programRule": {
+            "id": "rhispzm1027"
+          },
+          "userGroupAccesses": [],
+          "attributeValues": []
+        },
+        {
+          "created": "2015-11-26T10:08:07.556+0000",
+          "lastUpdated": "2015-12-08T11:49:14.981+0000",
+          "id": "ahispzm1028",
+          "programRuleActionType": "ASSIGN",
+          "data": "true",
+          "content": "#{dpt3NotShown}",
+          "externalAccess": false,
+          "programRule": {
+            "id": "rhispzm1027"
+          },
+          "userGroupAccesses": [],
+          "attributeValues": []
+        }
+      ]
+    },
+    {
+      "created": "2015-11-26T10:07:34.777+0000",
+      "lastUpdated": "2015-12-08T11:47:45.711+0000",
+      "name": "Hide DPT stockout",
+      "id": "rhispzm1029",
+      "displayName": "Hide DPT stockout",
+      "description": "Hide DPT stockout in case all the DPT dataelements is hidden, OR if DPT was administered in THIS visit. - Hide DPT stockout",
+      "externalAccess": false,
+      "condition": "!#{dptNeeded} || (#{dpt1current} || #{dpt2current} || #{dpt3current})",
+      "program": {
+        "id": "SSLpOM0r1U7"
+      },
+      "userGroupAccesses": [],
+      "attributeValues": [],
+      "programRuleActions": [
+        {
+          "created": "2015-11-26T10:08:07.934+0000",
+          "lastUpdated": "2015-12-08T11:49:13.609+0000",
+          "id": "ahispzm1029",
+          "programRuleActionType": "HIDEFIELD",
+          "externalAccess": false,
+          "dataElement": {
+            "id": "LQVqn0ghg99"
+          },
+          "programRule": {
+            "id": "rhispzm1029"
+          },
+          "userGroupAccesses": [],
+          "attributeValues": []
+        }
+      ]
+    },
+    {
+      "created": "2015-11-26T11:27:42.289+0000",
+      "lastUpdated": "2015-12-08T11:47:30.437+0000",
+      "name": "Hide measles1",
+      "id": "rhispzm1045",
+      "displayName": "Hide measles1",
+      "description": "Hide measles1 if ever given, or age is less than 9 months - Hide measles1",
+      "priority": 2,
+      "externalAccess": false,
+      "condition": "d2:hasValue('measles1prev') || #{ageMonths} < 9",
+      "program": {
+        "id": "SSLpOM0r1U7"
+      },
+      "userGroupAccesses": [],
+      "attributeValues": [],
+      "programRuleActions": [
+        {
+          "created": "2015-11-26T11:28:13.826+0000",
+          "lastUpdated": "2015-12-08T11:49:04.938+0000",
+          "id": "ahispzm1046",
+          "programRuleActionType": "ASSIGN",
+          "data": "true",
+          "content": "#{measles1NotShown}",
+          "externalAccess": false,
+          "programRule": {
+            "id": "rhispzm1045"
+          },
+          "userGroupAccesses": [],
+          "attributeValues": []
+        },
+        {
+          "created": "2015-11-26T11:28:13.406+0000",
+          "lastUpdated": "2015-12-08T11:49:04.595+0000",
+          "id": "ahispzm1045",
+          "programRuleActionType": "HIDEFIELD",
+          "externalAccess": false,
+          "dataElement": {
+            "id": "g8dMiUOTFla"
+          },
+          "programRule": {
+            "id": "rhispzm1045"
+          },
+          "userGroupAccesses": [],
+          "attributeValues": []
+        }
+      ]
+    },
+    {
+      "created": "2015-11-26T11:27:42.510+0000",
+      "lastUpdated": "2015-12-08T11:47:33.683+0000",
+      "name": "Hide measles2",
+      "id": "rhispzm1047",
+      "displayName": "Hide measles2",
+      "description": "Hide measles2 if ever given, or age is less than 18 months or measles 1 not given - Hide measles2",
+      "priority": 2,
+      "externalAccess": false,
+      "condition": "d2:hasValue('measles2prev') || !d2:hasValue('measles1prev') || #{ageMonths} < 18",
+      "program": {
+        "id": "SSLpOM0r1U7"
+      },
+      "userGroupAccesses": [],
+      "attributeValues": [],
+      "programRuleActions": [
+        {
+          "created": "2015-11-26T11:28:15.116+0000",
+          "lastUpdated": "2015-12-08T11:49:06.676+0000",
+          "id": "ahispzm1048",
+          "programRuleActionType": "ASSIGN",
+          "data": "true",
+          "content": "#{measles2NotShown}",
+          "externalAccess": false,
+          "programRule": {
+            "id": "rhispzm1047"
+          },
+          "userGroupAccesses": [],
+          "attributeValues": []
+        },
+        {
+          "created": "2015-11-26T11:28:14.696+0000",
+          "lastUpdated": "2015-12-08T11:49:05.988+0000",
+          "id": "ahispzm1047",
+          "programRuleActionType": "HIDEFIELD",
+          "externalAccess": false,
+          "dataElement": {
+            "id": "Bxh1xgIY9nA"
+          },
+          "programRule": {
+            "id": "rhispzm1047"
+          },
+          "userGroupAccesses": [],
+          "attributeValues": []
+        }
+      ]
+    },
+    {
+      "created": "2015-11-26T11:27:41.677+0000",
+      "lastUpdated": "2015-12-08T11:47:30.754+0000",
+      "name": "Hide Measles stockout",
+      "id": "rhispzm1049",
+      "displayName": "Hide Measles stockout",
+      "description": "Hide measles stockout in case all the measles dataelements is hidden, OR if measles was administered in THIS visit. - Hide Measles stockout",
+      "externalAccess": false,
+      "condition": "!#{measlesNeeded} || (#{measles1current} || #{measles2current})",
+      "program": {
+        "id": "SSLpOM0r1U7"
+      },
+      "userGroupAccesses": [],
+      "attributeValues": [],
+      "programRuleActions": [
+        {
+          "created": "2015-11-26T11:28:15.961+0000",
+          "lastUpdated": "2015-12-08T11:49:07.391+0000",
+          "id": "ahispzm1049",
+          "programRuleActionType": "HIDEFIELD",
+          "externalAccess": false,
+          "dataElement": {
+            "id": "n4qKY8vxc7V"
+          },
+          "programRule": {
+            "id": "rhispzm1049"
+          },
+          "userGroupAccesses": [],
+          "attributeValues": []
+        }
+      ]
+    },
+    {
+      "created": "2015-11-25T16:35:06.632+0000",
+      "lastUpdated": "2015-12-08T11:47:48.096+0000",
+      "name": "Hide OPV0",
+      "id": "rhispzm1010",
+      "displayName": "Hide OPV0",
+      "description": "Hide OPV0 if ever given, or baby is older than 13 days at the visit - Hide OPV0",
+      "priority": 2,
+      "externalAccess": false,
+      "condition": "d2:hasValue('opv0prev') || #{ageDays} > 13",
+      "program": {
+        "id": "SSLpOM0r1U7"
+      },
+      "userGroupAccesses": [],
+      "attributeValues": [],
+      "programRuleActions": [
+        {
+          "created": "2015-11-25T16:35:31.608+0000",
+          "lastUpdated": "2015-12-08T11:49:19.153+0000",
+          "id": "ahispzm1011",
+          "programRuleActionType": "ASSIGN",
+          "data": "true",
+          "content": "#{opv0NotShown}",
+          "externalAccess": false,
+          "programRule": {
+            "id": "rhispzm1010"
+          },
+          "userGroupAccesses": [],
+          "attributeValues": []
+        },
+        {
+          "created": "2015-11-25T16:35:30.205+0000",
+          "lastUpdated": "2015-12-08T11:49:16.321+0000",
+          "id": "ahispzm1010",
+          "programRuleActionType": "HIDEFIELD",
+          "externalAccess": false,
+          "dataElement": {
+            "id": "no7SkAxepi7"
+          },
+          "programRule": {
+            "id": "rhispzm1010"
+          },
+          "userGroupAccesses": [],
+          "attributeValues": []
+        }
+      ]
+    },
+    {
+      "created": "2015-11-25T16:35:07.287+0000",
+      "lastUpdated": "2015-12-08T11:47:48.782+0000",
+      "name": "Hide OPV1",
+      "id": "rhispzm1012",
+      "displayName": "Hide OPV1",
+      "description": "Hide OPV1 if ever given, or age is less than 6 weeks - Hide OPV1",
+      "priority": 2,
+      "externalAccess": false,
+      "condition": "d2:hasValue('opv1prev') || #{ageWeeks} < 6",
+      "program": {
+        "id": "SSLpOM0r1U7"
+      },
+      "userGroupAccesses": [],
+      "attributeValues": [],
+      "programRuleActions": [
+        {
+          "created": "2015-11-25T16:20:18.015+0000",
+          "lastUpdated": "2015-12-08T11:49:18.052+0000",
+          "id": "ahispzm1013",
+          "programRuleActionType": "ASSIGN",
+          "data": "true",
+          "content": "#{opv1NotShown}",
+          "externalAccess": false,
+          "programRule": {
+            "id": "rhispzm1012"
+          },
+          "userGroupAccesses": [],
+          "attributeValues": []
+        },
+        {
+          "created": "2015-11-25T16:20:14.254+0000",
+          "lastUpdated": "2015-12-08T11:49:16.687+0000",
+          "id": "ahispzm1012",
+          "programRuleActionType": "HIDEFIELD",
+          "externalAccess": false,
+          "dataElement": {
+            "id": "CfPM8lsEMzH"
+          },
+          "programRule": {
+            "id": "rhispzm1012"
+          },
+          "userGroupAccesses": [],
+          "attributeValues": []
+        }
+      ]
+    },
+    {
+      "created": "2015-11-25T16:35:06.413+0000",
+      "lastUpdated": "2015-12-08T11:47:48.433+0000",
+      "name": "Hide OPV2",
+      "id": "rhispzm1014",
+      "displayName": "Hide OPV2",
+      "description": "Hide OPV2 if ever given, or if there is not more than 4 weeks since you got OPV1 - Hide OPV2",
+      "priority": 2,
+      "externalAccess": false,
+      "condition": "d2:hasValue('opv2prev') || !d2:hasValue('opv1prev') || d2:weeksBetween(d2:lastEventDate('opv1prev'),V{event_date}) < 4",
+      "program": {
+        "id": "SSLpOM0r1U7"
+      },
+      "userGroupAccesses": [],
+      "attributeValues": [],
+      "programRuleActions": [
+        {
+          "created": "2015-11-25T16:35:31.356+0000",
+          "lastUpdated": "2015-12-08T11:49:19.503+0000",
+          "id": "ahispzm1015",
+          "programRuleActionType": "ASSIGN",
+          "data": "true",
+          "content": "#{opv2NotShown}",
+          "externalAccess": false,
+          "programRule": {
+            "id": "rhispzm1014"
+          },
+          "userGroupAccesses": [],
+          "attributeValues": []
+        },
+        {
+          "created": "2015-11-25T16:35:29.984+0000",
+          "lastUpdated": "2015-12-08T11:49:17.717+0000",
+          "id": "ahispzm1014",
+          "programRuleActionType": "HIDEFIELD",
+          "externalAccess": false,
+          "dataElement": {
+            "id": "sDORmAKh32v"
+          },
+          "programRule": {
+            "id": "rhispzm1014"
+          },
+          "userGroupAccesses": [],
+          "attributeValues": []
+        }
+      ]
+    },
+    {
+      "created": "2015-11-25T16:35:07.074+0000",
+      "lastUpdated": "2015-12-08T11:47:47.749+0000",
+      "name": "Hide OPV3",
+      "id": "rhispzm1016",
+      "displayName": "Hide OPV3",
+      "description": "Hide OPV3 if ever given, or if there is not more than 4 weeks since you got OPV2 - Hide OPV3",
+      "priority": 2,
+      "externalAccess": false,
+      "condition": "d2:hasValue('opv3prev') || !d2:hasValue('opv2prev') || d2:weeksBetween(d2:lastEventDate('opv2prev'),V{event_date}) < 4",
+      "program": {
+        "id": "SSLpOM0r1U7"
+      },
+      "userGroupAccesses": [],
+      "attributeValues": [],
+      "programRuleActions": [
+        {
+          "created": "2015-11-25T16:35:31.060+0000",
+          "lastUpdated": "2015-12-08T11:49:20.552+0000",
+          "id": "ahispzm1017",
+          "programRuleActionType": "ASSIGN",
+          "data": "true",
+          "content": "#{opv3NotShown}",
+          "externalAccess": false,
+          "programRule": {
+            "id": "rhispzm1016"
+          },
+          "userGroupAccesses": [],
+          "attributeValues": []
+        },
+        {
+          "created": "2015-11-25T16:35:29.721+0000",
+          "lastUpdated": "2015-12-08T11:49:18.771+0000",
+          "id": "ahispzm1016",
+          "programRuleActionType": "HIDEFIELD",
+          "externalAccess": false,
+          "dataElement": {
+            "id": "nQeUfqPjK5o"
+          },
+          "programRule": {
+            "id": "rhispzm1016"
+          },
+          "userGroupAccesses": [],
+          "attributeValues": []
+        }
+      ]
+    },
+    {
+      "created": "2015-11-25T16:35:06.183+0000",
+      "lastUpdated": "2015-12-08T11:47:49.128+0000",
+      "name": "Hide OPV4",
+      "id": "rhispzm1018",
+      "displayName": "Hide OPV4",
+      "description": "Hide OPV4 if ever given, or the age is less than 9 months, or if opv3 is not given, or if opv0 IS given. - Hide OPV4",
+      "priority": 2,
+      "externalAccess": false,
+      "condition": "d2:hasValue('opv4prev') || #{ageMonths} < 9 || !d2:hasValue('opv3prev') || d2:hasValue('opv0prev')",
+      "program": {
+        "id": "SSLpOM0r1U7"
+      },
+      "userGroupAccesses": [],
+      "attributeValues": [],
+      "programRuleActions": [
+        {
+          "created": "2015-11-25T16:35:32.569+0000",
+          "lastUpdated": "2015-12-08T11:49:21.304+0000",
+          "id": "ahispzm1019",
+          "programRuleActionType": "ASSIGN",
+          "data": "true",
+          "content": "#{opv4NotShown}",
+          "externalAccess": false,
+          "programRule": {
+            "id": "rhispzm1018"
+          },
+          "userGroupAccesses": [],
+          "attributeValues": []
+        },
+        {
+          "created": "2015-11-25T16:35:29.488+0000",
+          "lastUpdated": "2015-12-08T11:49:19.841+0000",
+          "id": "ahispzm1018",
+          "programRuleActionType": "HIDEFIELD",
+          "externalAccess": false,
+          "dataElement": {
+            "id": "cNA9EmFaiAa"
+          },
+          "programRule": {
+            "id": "rhispzm1018"
+          },
+          "userGroupAccesses": [],
+          "attributeValues": []
+        }
+      ]
+    },
+    {
+      "created": "2015-11-25T16:35:05.980+0000",
+      "lastUpdated": "2015-12-08T11:47:47.397+0000",
+      "name": "Hide OPV stockout",
+      "id": "rhispzm1021",
+      "displayName": "Hide OPV stockout",
+      "description": "Hide OPV stockout in case all the OPV dataelements is hidden, OR if OPV was administered in THIS visit. - Hide OPV stockout",
+      "externalAccess": false,
+      "condition": "!#{opvNeeded} || (#{opv0current} || #{opv1current} || #{opv2current} || #{opv3current} || #{opv4current})",
+      "program": {
+        "id": "SSLpOM0r1U7"
+      },
+      "userGroupAccesses": [],
+      "attributeValues": [],
+      "programRuleActions": [
+        {
+          "created": "2015-11-25T16:35:30.820+0000",
+          "lastUpdated": "2015-12-08T11:49:22.042+0000",
+          "id": "ahispzm1021",
+          "programRuleActionType": "HIDEFIELD",
+          "externalAccess": false,
+          "dataElement": {
+            "id": "EYQp1U4tU9z"
+          },
+          "programRule": {
+            "id": "rhispzm1021"
+          },
+          "userGroupAccesses": [],
+          "attributeValues": []
+        }
+      ]
+    },
+    {
+      "created": "2015-11-26T10:18:17.760+0000",
+      "lastUpdated": "2015-12-08T11:47:45.367+0000",
+      "name": "Hide PCV1",
+      "id": "rhispzm1031",
+      "displayName": "Hide PCV1",
+      "description": "Hide PCV1 if ever given, or age is less than 6 weeks - Hide PCV1",
+      "priority": 2,
+      "externalAccess": false,
+      "condition": "d2:hasValue('pcv1prev') || #{ageWeeks} < 6",
+      "program": {
+        "id": "SSLpOM0r1U7"
+      },
+      "userGroupAccesses": [],
+      "attributeValues": [],
+      "programRuleActions": [
+        {
+          "created": "2015-11-26T10:33:17.059+0000",
+          "lastUpdated": "2015-12-08T11:49:12.578+0000",
+          "id": "ahispzm1031",
+          "programRuleActionType": "HIDEFIELD",
+          "externalAccess": false,
+          "dataElement": {
+            "id": "fmXCCPENnwR"
+          },
+          "programRule": {
+            "id": "rhispzm1031"
+          },
+          "userGroupAccesses": [],
+          "attributeValues": []
+        },
+        {
+          "created": "2015-11-26T10:33:17.478+0000",
+          "lastUpdated": "2015-12-08T11:49:13.254+0000",
+          "id": "ahispzm1032",
+          "programRuleActionType": "ASSIGN",
+          "data": "true",
+          "content": "#{pcv1NotShown}",
+          "externalAccess": false,
+          "programRule": {
+            "id": "rhispzm1031"
+          },
+          "userGroupAccesses": [],
+          "attributeValues": []
+        }
+      ]
+    },
+    {
+      "created": "2015-11-26T10:18:19.311+0000",
+      "lastUpdated": "2015-12-08T11:47:44.688+0000",
+      "name": "Hide PCV2",
+      "id": "rhispzm1033",
+      "displayName": "Hide PCV2",
+      "description": "Hide PCV2 if ever given, or if there is not more than 4 weeks since you got PCV1 - Hide PCV2",
+      "priority": 2,
+      "externalAccess": false,
+      "condition": "d2:hasValue('pcv2prev') || !d2:hasValue('pcv1prev') || d2:weeksBetween(d2:lastEventDate('pcv1prev'),V{event_date}) < 4",
+      "program": {
+        "id": "SSLpOM0r1U7"
+      },
+      "userGroupAccesses": [],
+      "attributeValues": [],
+      "programRuleActions": [
+        {
+          "created": "2015-11-26T10:33:17.884+0000",
+          "lastUpdated": "2015-12-08T11:49:11.223+0000",
+          "id": "ahispzm1033",
+          "programRuleActionType": "HIDEFIELD",
+          "externalAccess": false,
+          "dataElement": {
+            "id": "PvHUllrtPiy"
+          },
+          "programRule": {
+            "id": "rhispzm1033"
+          },
+          "userGroupAccesses": [],
+          "attributeValues": []
+        },
+        {
+          "created": "2015-11-26T10:33:18.281+0000",
+          "lastUpdated": "2015-12-08T11:49:11.911+0000",
+          "id": "ahispzm1034",
+          "programRuleActionType": "ASSIGN",
+          "data": "true",
+          "content": "#{pcv2NotShown}",
+          "externalAccess": false,
+          "programRule": {
+            "id": "rhispzm1033"
+          },
+          "userGroupAccesses": [],
+          "attributeValues": []
+        }
+      ]
+    },
+    {
+      "created": "2015-11-26T10:18:17.979+0000",
+      "lastUpdated": "2015-12-08T11:47:44.342+0000",
+      "name": "Hide PCV3",
+      "id": "rhispzm1035",
+      "displayName": "Hide PCV3",
+      "description": "Hide PCV3 if ever given, or if there is not more than 4 weeks since you got PCV2 - Hide PCV3",
+      "priority": 2,
+      "externalAccess": false,
+      "condition": "d2:hasValue('pcv3prev') || !d2:hasValue('pcv2prev') || d2:weeksBetween(d2:lastEventDate('pcv2prev'),V{event_date}) < 4",
+      "program": {
+        "id": "SSLpOM0r1U7"
+      },
+      "userGroupAccesses": [],
+      "attributeValues": [],
+      "programRuleActions": [
+        {
+          "created": "2015-11-26T10:33:19.136+0000",
+          "lastUpdated": "2015-12-08T11:49:10.132+0000",
+          "id": "ahispzm1036",
+          "programRuleActionType": "ASSIGN",
+          "data": "true",
+          "content": "#{pcv3NotShown}",
+          "externalAccess": false,
+          "programRule": {
+            "id": "rhispzm1035"
+          },
+          "userGroupAccesses": [],
+          "attributeValues": []
+        },
+        {
+          "created": "2015-11-26T10:33:18.694+0000",
+          "lastUpdated": "2015-12-08T11:49:09.793+0000",
+          "id": "ahispzm1035",
+          "programRuleActionType": "HIDEFIELD",
+          "externalAccess": false,
+          "dataElement": {
+            "id": "B4eJCy6LFLZ"
+          },
+          "programRule": {
+            "id": "rhispzm1035"
+          },
+          "userGroupAccesses": [],
+          "attributeValues": []
+        }
+      ]
+    },
+    {
+      "created": "2015-11-26T10:18:19.515+0000",
+      "lastUpdated": "2015-12-08T11:47:43.992+0000",
+      "name": "Hide PCV stockout",
+      "id": "rhispzm1037",
+      "displayName": "Hide PCV stockout",
+      "description": "Hide PCV stockout in case all the PCV dataelements is hidden, OR if PCV was administered in THIS visit. - Hide PCV stockout",
+      "externalAccess": false,
+      "condition": "!#{pcvNeeded} || (#{pcv1current} || #{pcv2current} || #{pcv3current})",
+      "program": {
+        "id": "SSLpOM0r1U7"
+      },
+      "userGroupAccesses": [],
+      "attributeValues": [],
+      "programRuleActions": [
+        {
+          "created": "2015-11-26T10:33:19.553+0000",
+          "lastUpdated": "2015-12-08T11:49:08.765+0000",
+          "id": "ahispzm1037",
+          "programRuleActionType": "HIDEFIELD",
+          "externalAccess": false,
+          "dataElement": {
+            "id": "fyvXreKLZNn"
+          },
+          "programRule": {
+            "id": "rhispzm1037"
+          },
+          "userGroupAccesses": [],
+          "attributeValues": []
+        }
+      ]
+    },
+    {
+      "created": "2015-11-26T10:57:40.505+0000",
+      "lastUpdated": "2015-12-08T11:47:43.289+0000",
+      "name": "Hide RV1",
+      "id": "rhispzm1039",
+      "displayName": "Hide RV1",
+      "description": "Hide RV1 if ever given, or age is less than 6 weeks - Hide RV1",
+      "priority": 2,
+      "externalAccess": false,
+      "condition": "d2:hasValue('rv1prev') || #{ageWeeks} < 6",
+      "program": {
+        "id": "SSLpOM0r1U7"
+      },
+      "userGroupAccesses": [],
+      "attributeValues": [],
+      "programRuleActions": [
+        {
+          "created": "2015-11-26T11:04:46.112+0000",
+          "lastUpdated": "2015-12-08T11:49:07.044+0000",
+          "id": "ahispzm1040",
+          "programRuleActionType": "ASSIGN",
+          "data": "true",
+          "content": "#{rv1NotShown}",
+          "externalAccess": false,
+          "programRule": {
+            "id": "rhispzm1039"
+          },
+          "userGroupAccesses": [],
+          "attributeValues": []
+        },
+        {
+          "created": "2015-11-26T11:04:46.733+0000",
+          "lastUpdated": "2015-12-08T11:49:06.337+0000",
+          "id": "ahispzm1039",
+          "programRuleActionType": "HIDEFIELD",
+          "externalAccess": false,
+          "dataElement": {
+            "id": "nIqQYeSwU9E"
+          },
+          "programRule": {
+            "id": "rhispzm1039"
+          },
+          "userGroupAccesses": [],
+          "attributeValues": []
+        }
+      ]
+    },
+    {
+      "created": "2015-11-26T10:57:40.133+0000",
+      "lastUpdated": "2015-12-08T11:47:42.949+0000",
+      "name": "Hide RV2",
+      "id": "rhispzm1041",
+      "displayName": "Hide RV2",
+      "description": "Hide RV2 if ever given, or if there is not more than 4 weeks since you got RV1 - Hide RV2",
+      "priority": 2,
+      "externalAccess": false,
+      "condition": "d2:hasValue('rv2prev') || !d2:hasValue('rv1prev') || d2:weeksBetween(d2:lastEventDate('rv1prev'),V{event_date}) < 4",
+      "program": {
+        "id": "SSLpOM0r1U7"
+      },
+      "userGroupAccesses": [],
+      "attributeValues": [],
+      "programRuleActions": [
+        {
+          "created": "2015-11-26T11:04:45.551+0000",
+          "lastUpdated": "2015-12-08T11:49:05.621+0000",
+          "id": "ahispzm1042",
+          "programRuleActionType": "ASSIGN",
+          "data": "true",
+          "content": "#{rv2NotShown}",
+          "externalAccess": false,
+          "programRule": {
+            "id": "rhispzm1041"
+          },
+          "userGroupAccesses": [],
+          "attributeValues": []
+        },
+        {
+          "created": "2015-11-26T11:04:45.924+0000",
+          "lastUpdated": "2015-12-08T11:49:05.283+0000",
+          "id": "ahispzm1041",
+          "programRuleActionType": "HIDEFIELD",
+          "externalAccess": false,
+          "dataElement": {
+            "id": "wYg2gOWSyJG"
+          },
+          "programRule": {
+            "id": "rhispzm1041"
+          },
+          "userGroupAccesses": [],
+          "attributeValues": []
+        }
+      ]
+    },
+    {
+      "created": "2015-11-26T10:57:39.739+0000",
+      "lastUpdated": "2015-12-08T11:47:33.369+0000",
+      "name": "Hide RV stockout",
+      "id": "rhispzm1043",
+      "displayName": "Hide RV stockout",
+      "description": "Hide RV stockout in case all the RV dataelements is hidden, OR if RV was administered in THIS visit. - Hide RV stockout",
+      "externalAccess": false,
+      "condition": "!#{rvNeeded} || (#{rv1current} || #{rv2current})",
+      "program": {
+        "id": "SSLpOM0r1U7"
+      },
+      "userGroupAccesses": [],
+      "attributeValues": [],
+      "programRuleActions": [
+        {
+          "created": "2015-11-26T11:04:45.156+0000",
+          "lastUpdated": "2015-12-08T11:49:03.899+0000",
+          "id": "ahispzm1043",
+          "programRuleActionType": "HIDEFIELD",
+          "externalAccess": false,
+          "dataElement": {
+            "id": "irQPcNG21Uf"
+          },
+          "programRule": {
+            "id": "rhispzm1043"
+          },
+          "userGroupAccesses": [],
+          "attributeValues": []
+        }
+      ]
+    },
+    {
+      "created": "2015-11-27T10:06:04.466+0000",
+      "lastUpdated": "2015-11-27T10:06:04.467+0000",
+      "name": "Hide twin alive/dead",
+      "id": "lChPHD80maV",
+      "displayName": "Hide twin alive/dead",
+      "description": "Hide twin alive/dead when no twin child",
+      "externalAccess": false,
+      "condition": "A{twinbirth} == false",
+      "program": {
+        "id": "SSLpOM0r1U7"
+      },
+      "userGroupAccesses": [],
+      "attributeValues": [],
+      "programRuleActions": [
+        {
+          "created": "2015-11-27T10:06:05.520+0000",
+          "lastUpdated": "2015-11-27T10:06:05.521+0000",
+          "id": "QucRfpRijxN",
+          "programRuleActionType": "HIDEFIELD",
+          "content": "",
+          "externalAccess": false,
+          "trackedEntityAttribute": {
+            "id": "otJ0mnb3xnj"
+          },
+          "programRule": {
+            "id": "lChPHD80maV"
+          },
+          "userGroupAccesses": [],
+          "attributeValues": []
+        }
+      ]
+    },
+    {
+      "created": "2016-01-19T07:57:37.747+0000",
+      "lastUpdated": "2016-01-19T07:57:42.578+0000",
+      "name": "Populate ages",
+      "id": "rhispzm1006",
+      "displayName": "Populate ages",
+      "description": "Populate ages - Populate ages",
+      "priority": 1,
+      "externalAccess": false,
+      "condition": "A{dob} != '' || V{event_date} != ''",
+      "program": {
+        "id": "SSLpOM0r1U7"
+      },
+      "userGroupAccesses": [],
+      "attributeValues": [],
+      "programRuleActions": [
+        {
+          "created": "2016-01-19T07:58:02.619+0000",
+          "lastUpdated": "2016-01-19T07:58:10.425+0000",
+          "id": "ahispzm1009",
+          "programRuleActionType": "ASSIGN",
+          "data": "d2:yearsBetween(A{dob},V{event_date})",
+          "content": "#{ageYears}",
+          "externalAccess": false,
+          "programRule": {
+            "id": "rhispzm1006"
+          },
+          "userGroupAccesses": [],
+          "attributeValues": []
+        },
+        {
+          "created": "2016-01-19T07:57:59.416+0000",
+          "lastUpdated": "2016-01-19T07:58:08.736+0000",
+          "id": "ahispzm1008",
+          "programRuleActionType": "ASSIGN",
+          "data": "d2:monthsBetween(A{dob},V{event_date})",
+          "content": "#{ageMonths}",
+          "externalAccess": false,
+          "programRule": {
+            "id": "rhispzm1006"
+          },
+          "userGroupAccesses": [],
+          "attributeValues": []
+        },
+        {
+          "created": "2016-01-19T07:57:57.058+0000",
+          "lastUpdated": "2016-01-19T07:58:06.430+0000",
+          "id": "ahispzm1007",
+          "programRuleActionType": "ASSIGN",
+          "data": "d2:weeksBetween(A{dob},V{event_date})",
+          "content": "#{ageWeeks}",
+          "externalAccess": false,
+          "programRule": {
+            "id": "rhispzm1006"
+          },
+          "userGroupAccesses": [],
+          "attributeValues": []
+        },
+        {
+          "created": "2016-01-19T07:57:52.985+0000",
+          "lastUpdated": "2016-01-19T07:58:04.299+0000",
+          "id": "ahispzm1006",
+          "programRuleActionType": "ASSIGN",
+          "data": "d2:daysBetween(A{dob},V{event_date})",
+          "content": "#{ageDays}",
+          "externalAccess": false,
+          "programRule": {
+            "id": "rhispzm1006"
+          },
+          "userGroupAccesses": [],
+          "attributeValues": []
+        }
+      ]
+    },
+    {
+      "created": "2015-12-07T07:46:17.340+0000",
+      "lastUpdated": "2015-12-08T11:47:32.074+0000",
+      "name": "Populate ages based on due date",
+      "id": "rhispzm1061",
+      "displayName": "Populate ages based on due date",
+      "description": "Populate ages based on due date - Populate ages based on due date",
+      "priority": 1,
+      "externalAccess": false,
+      "condition": "V{incident_date} != '' || V{due_date} != ''",
+      "program": {
+        "id": "SSLpOM0r1U7"
+      },
+      "userGroupAccesses": [],
+      "attributeValues": [],
+      "programRuleActions": [
+        {
+          "created": "2015-12-07T07:47:15.336+0000",
+          "lastUpdated": "2015-12-08T11:48:56.509+0000",
+          "id": "ahispzm1063",
+          "programRuleActionType": "ASSIGN",
+          "data": "d2:monthsBetween(V{incident_date},V{due_date})",
+          "content": "#{ageMonthsDueDate}",
+          "externalAccess": false,
+          "programRule": {
+            "id": "rhispzm1061"
+          },
+          "userGroupAccesses": [],
+          "attributeValues": []
+        },
+        {
+          "created": "2015-12-07T07:47:12.706+0000",
+          "lastUpdated": "2015-12-08T11:48:57.592+0000",
+          "id": "ahispzm1064",
+          "programRuleActionType": "ASSIGN",
+          "data": "d2:yearsBetween(V{incident_date},V{due_date})",
+          "content": "#{ageYearsDueDate}",
+          "externalAccess": false,
+          "programRule": {
+            "id": "rhispzm1061"
+          },
+          "userGroupAccesses": [],
+          "attributeValues": []
+        },
+        {
+          "created": "2015-12-07T07:47:09.942+0000",
+          "lastUpdated": "2015-12-08T11:48:54.446+0000",
+          "id": "ahispzm1061",
+          "programRuleActionType": "ASSIGN",
+          "data": "d2:daysBetween(V{incident_date},V{due_date})",
+          "content": "#{ageDaysDueDate}",
+          "externalAccess": false,
+          "programRule": {
+            "id": "rhispzm1061"
+          },
+          "userGroupAccesses": [],
+          "attributeValues": []
+        },
+        {
+          "created": "2015-12-07T07:47:15.937+0000",
+          "lastUpdated": "2015-12-08T11:48:54.090+0000",
+          "id": "ahispzm1062",
+          "programRuleActionType": "ASSIGN",
+          "data": "d2:weeksBetween(V{incident_date},V{due_date})",
+          "content": "#{ageWeeksDueDate}",
+          "externalAccess": false,
+          "programRule": {
+            "id": "rhispzm1061"
+          },
+          "userGroupAccesses": [],
+          "attributeValues": []
+        }
+      ]
+    },
+    {
+      "created": "2016-01-05T06:21:52.509+0000",
+      "lastUpdated": "2016-01-05T06:21:57.462+0000",
+      "name": "Populate current age",
+      "id": "rhispzm1088",
+      "displayName": "Populate current age",
+      "description": "Populate current age - Populate current age",
+      "priority": 1,
+      "externalAccess": false,
+      "condition": "A{dob} != '' || V{current_date} != ''",
+      "program": {
+        "id": "SSLpOM0r1U7"
+      },
+      "userGroupAccesses": [],
+      "attributeValues": [],
+      "programRuleActions": [
+        {
+          "created": "2016-01-05T06:22:12.107+0000",
+          "lastUpdated": "2016-01-05T06:35:23.465+0000",
+          "id": "ahispzm1090",
+          "programRuleActionType": "ASSIGN",
+          "data": "d2:monthsBetween(A{dob},V{current_date})",
+          "content": "#{currentAgeMonths}",
+          "externalAccess": false,
+          "programRule": {
+            "id": "rhispzm1088"
+          },
+          "userGroupAccesses": [],
+          "attributeValues": []
+        },
+        {
+          "created": "2016-01-05T06:22:11.466+0000",
+          "lastUpdated": "2016-01-05T06:35:21.644+0000",
+          "id": "ahispzm1089",
+          "programRuleActionType": "ASSIGN",
+          "data": "d2:weeksBetween(A{dob},V{current_date})",
+          "content": "#{currentAgeWeeks}",
+          "externalAccess": false,
+          "programRule": {
+            "id": "rhispzm1088"
+          },
+          "userGroupAccesses": [],
+          "attributeValues": []
+        },
+        {
+          "created": "2016-01-05T06:22:05.184+0000",
+          "lastUpdated": "2016-01-05T06:35:18.190+0000",
+          "id": "ahispzm1088",
+          "programRuleActionType": "ASSIGN",
+          "data": "d2:daysBetween(A{dob},V{current_date})",
+          "content": "#{currentAgeDays}",
+          "externalAccess": false,
+          "programRule": {
+            "id": "rhispzm1088"
+          },
+          "userGroupAccesses": [],
+          "attributeValues": []
+        }
+      ]
+    },
+    {
+      "created": "2016-02-04T13:12:15.593+0000",
+      "lastUpdated": "2016-02-04T13:12:15.595+0000",
+      "name": "Show age String",
+      "id": "rhispzm1094",
+      "displayName": "Show age String",
+      "description": "Show formatted age String as key-value-pair - Show age String",
+      "externalAccess": false,
+      "condition": "d2:hasValue('ageString')",
+      "program": {
+        "id": "SSLpOM0r1U7"
+      },
+      "userGroupAccesses": [],
+      "attributeValues": [],
+      "programRuleActions": [
+        {
+          "created": "2016-02-04T13:12:40.370+0000",
+          "lastUpdated": "2016-02-04T13:12:40.372+0000",
+          "id": "ahispzm1094",
+          "programRuleActionType": "DISPLAYKEYVALUEPAIR",
+          "data": "#{ageString}",
+          "content": "Age",
+          "externalAccess": false,
+          "location": "indicators",
+          "programRule": {
+            "id": "rhispzm1094"
+          },
+          "userGroupAccesses": [],
+          "attributeValues": []
+        }
+      ]
+    },
+    {
+      "created": "2015-12-07T07:35:31.733+0000",
+      "lastUpdated": "2015-12-08T11:47:42.631+0000",
+      "name": "Show warning when birth weight more than 9kgs",
+      "id": "rhispzm1060",
+      "displayName": "Show warning when birth weight more than 9kgs",
+      "description": "Show warning when birth weight more than 9kgs - Show warning when birth weight more than 9kgs",
+      "externalAccess": false,
+      "condition": "A{birthWt} > 9",
+      "program": {
+        "id": "SSLpOM0r1U7"
+      },
+      "userGroupAccesses": [],
+      "attributeValues": [],
+      "programRuleActions": [
+        {
+          "created": "2015-12-07T07:35:44.783+0000",
+          "lastUpdated": "2016-01-28T12:01:23.440+0000",
+          "id": "ahispzm1060",
+          "programRuleActionType": "SHOWWARNING",
+          "data": "A{birthWt}",
+          "content": "Check Birth Weight ",
+          "externalAccess": false,
+          "trackedEntityAttribute": {
+            "id": "QwATZkGIPed"
+          },
+          "programRule": {
+            "id": "rhispzm1060"
+          },
+          "programStageSection": {
+            "id": "qUEWFkK2MOU"
+          },
+          "userGroupAccesses": [],
+          "attributeValues": []
+        }
+      ]
+    },
+    {
+      "created": "2016-02-18T12:51:48.059+0000",
+      "lastUpdated": "2016-02-18T13:04:18.841+0000",
+      "name": "Validate NRC",
+      "id": "rhispzm1095",
+      "displayName": "Validate NRC",
+      "description": "Validate NRC - Validate NRC",
+      "externalAccess": false,
+      "condition": "d2:hasValue('nrc') && !d2:validatePattern(A{nrc},'\\\\d{6}\\/\\\\d{2}\\/\\\\d')",
+      "program": {
+        "id": "SSLpOM0r1U7"
+      },
+      "userGroupAccesses": [],
+      "attributeValues": [],
+      "programRuleActions": [
+        {
+          "created": "2016-02-18T12:52:06.430+0000",
+          "lastUpdated": "2016-02-18T13:04:24.082+0000",
+          "id": "ahispzm1095",
+          "programRuleActionType": "SHOWWARNING",
+          "content": "Invalid. Format is XXXXXX/XX/X ",
+          "externalAccess": false,
+          "trackedEntityAttribute": {
+            "id": "osmTHnpncav"
+          },
+          "programRule": {
+            "id": "rhispzm1095"
+          },
+          "userGroupAccesses": [],
+          "attributeValues": []
+        }
+      ]
+    }
+  ]
+}

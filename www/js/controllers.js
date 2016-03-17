@@ -1,25 +1,50 @@
 angular.module('app.controllers', [])
 
-.controller('bidReportAppCtrl', function($scope) {
+  .controller('cBidReportAppCtrl', function ($scope, mInitdata, sInitDataService) {
+    if (!mInitdata.initial) {
+      sInitDataService.initCommonDB();
+      mInitdata.initial = true;
+      sInitDataService.mockupDB();
 
-})
+    }
+  })
 
-.controller('scheduleVaccineTodayCtrl', function($scope) {
+  .controller('cScheduleVaccineTodayCtrl', function ($scope, sRuleHelper) {
+    var rulesEffect = sRuleHelper.excuteRules();
+    console.log("rulesEffect");
+    console.log(rulesEffect);
+    var programStageDataElementsMap = sRuleHelper.programStageDataElementsMap();
 
-})
+    // processRuleEffects
+    for (var key in rulesEffect) {
+      var effect = rulesEffect[key];
+      if (effect.dataElement && effect.action == "HIDEFIELD" && effect.ineffect) {
+        programStageDataElementsMap[rulesEffect[key].dataElement.id] = "hidden";
+      }
+    }
 
-.controller('stockInHandCtrl', function($scope) {
+    for(var key in programStageDataElementsMap){
+      var programStageDataElement=programStageDataElementsMap[key];
+      if(programStageDataElement!="hidden"){
+        console.log("key = " + key);
+        console.log(programStageDataElement.dataElement.name);
+      }
+    }
 
-})
+  })
 
-.controller('stockInHandVsDemandCtrl', function($scope) {
+  .controller('cStockInHandCtrl', function ($scope) {
 
-})
+  })
 
-.controller('vaccineHistoryReportCtrl', function($scope) {
+  .controller('cStockInHandVsDemandCtrl', function ($scope) {
 
-})
+  })
 
-.controller('loginCtrl', function($scope) {
+  .controller('cVaccineHistoryReportCtrl', function ($scope) {
 
-})
+  })
+
+  .controller('cLoginCtrl', function ($scope) {
+
+  })

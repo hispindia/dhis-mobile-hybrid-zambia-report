@@ -1,0 +1,10 @@
+Code convention: https://medium.com/@nhancv/code-conventions-for-the-java-programming-language-c74ec308187#.2b4chviae
+Rules for naming: [prefix][name].js
+[prefix]
+c: for controller
+m: for model
+s: for service
+
+
+
+
