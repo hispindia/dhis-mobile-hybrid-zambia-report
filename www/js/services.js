@@ -109,6 +109,7 @@ angular.module('app.services', [])
     };
 
     this.validateExecutingEventObject = function (eventObj) {
+
       if (eventObj.dataValues) {
         for (var i = 0; i < eventObj.dataValues.length; i++) {
           eventObj[eventObj.dataValues[i].dataElement] = eventObj.dataValues[i].value;
@@ -128,13 +129,14 @@ angular.module('app.services', [])
     this.excuteRules = function () {
       var rulesEffectResponse = TrackerRulesExecutionService.executeRulesBID(
         this.programRulesObject("SSLpOM0r1U7"),
-        this.validateExecutingEventObject(mDataCommon.events[0]),
+        this.validateExecutingEventObject(mDataCommon.events[1]),
         this.eventsByStageEVSObject(),
         this.programStageDataElementsMap(),
         this.trackedEntityInstancesMap(),
         this.enrollmentsMap(),
         this.flagObject());
-      return rulesEffectResponse.ruleeffects[rulesEffectResponse.event];
+      console.log(rulesEffectResponse);
+      return rulesEffectResponse.ruleeffects;
     };
 
     var computeProgramIndicators = function (mDataCommon, programUid) {

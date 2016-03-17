@@ -24,66 +24,6 @@
       "programStage": "s53RFfXA75f",
       "storedBy": "nhancv",
       "orgUnit": "DQjaNvP9ulw",
-      "dueDate": "2016-02-03T11:04:46.330+0000",
-      "program": "SSLpOM0r1U7",
-      "trackedEntityInstance": "LXLRASvLI7b",
-      "enrollment": "WxknxugCDGJ",
-      "enrollmentStatus": "ACTIVE",
-      "href": "https://bid.dhis2.org/epireg/api/events/z0v8dVYopaB",
-      "event": "z0v8dVYopaB",
-      "status": "SCHEDULE",
-      "orgUnitName": "Linda Clinic",
-      "created": "2016-01-26T10:15:51.347+0000",
-      "lastUpdated": "2016-02-12T18:11:15.085+0000",
-      "followup": false,
-      "dataValues": [
-        {
-          "lastUpdated": "2016-02-12T18:11:15.096+0000",
-          "storedBy": "jacob_linda",
-          "created": "2016-01-26T15:05:15.354+0000",
-          "dataElement": "EYQp1U4tU9z",
-          "value": "true",
-          "providedElsewhere": false
-        },
-        {
-          "lastUpdated": "2016-02-12T18:11:15.106+0000",
-          "storedBy": "jacob_linda",
-          "created": "2016-01-26T15:05:15.356+0000",
-          "dataElement": "bpBUOvqy1Jn",
-          "value": "true",
-          "providedElsewhere": false
-        },
-        {
-          "lastUpdated": "2016-02-12T18:11:15.109+0000",
-          "storedBy": "jacob_linda",
-          "created": "2016-01-26T15:05:15.357+0000",
-          "dataElement": "e89hG7SQsau",
-          "value": "23",
-          "providedElsewhere": false
-        },
-        {
-          "lastUpdated": "2016-02-12T18:11:15.111+0000",
-          "storedBy": "jacob_linda",
-          "created": "2016-01-26T15:05:15.367+0000",
-          "dataElement": "nblG1lFCRsO",
-          "value": "true",
-          "providedElsewhere": false
-        },
-        {
-          "lastUpdated": "2016-02-12T18:11:15.103+0000",
-          "storedBy": "jacob_linda",
-          "created": "2016-01-26T15:05:15.355+0000",
-          "dataElement": "HdzfEcDLnhX",
-          "value": "01",
-          "providedElsewhere": false
-        }
-      ],
-      "notes": []
-    },
-    {
-      "programStage": "s53RFfXA75f",
-      "storedBy": "nhancv",
-      "orgUnit": "DQjaNvP9ulw",
       "dueDate": "2016-01-13T00:00:00.000+0000",
       "program": "SSLpOM0r1U7",
       "trackedEntityInstance": "x4KZ0FtrMi2",
@@ -135,6 +75,22 @@
       "followup": false,
       "dataValues": [
         {
+          "lastUpdated": "2016-01-26T13:21:32.740+0000",
+          "storedBy": "simon_linda",
+          "created": "2016-01-26T13:11:31.206+0000",
+          "dataElement": "no7SkAxepi7",
+          "value": "true",
+          "providedElsewhere": false
+        },
+        {
+          "lastUpdated": "2016-01-26T13:21:32.732+0000",
+          "storedBy": "simon_linda",
+          "created": "2016-01-26T13:06:32.675+0000",
+          "dataElement": "e89hG7SQsau",
+          "value": "4",
+          "providedElsewhere": false
+        },
+        {
           "lastUpdated": "2016-01-26T13:21:32.739+0000",
           "storedBy": "simon_linda",
           "created": "2016-01-26T13:08:42.004+0000",
@@ -153,24 +109,8 @@
         {
           "lastUpdated": "2016-01-26T13:21:32.732+0000",
           "storedBy": "simon_linda",
-          "created": "2016-01-26T13:06:32.675+0000",
-          "dataElement": "e89hG7SQsau",
-          "value": "4",
-          "providedElsewhere": false
-        },
-        {
-          "lastUpdated": "2016-01-26T13:21:32.732+0000",
-          "storedBy": "simon_linda",
           "created": "2016-01-26T13:08:42.003+0000",
           "dataElement": "bpBUOvqy1Jn",
-          "value": "true",
-          "providedElsewhere": false
-        },
-        {
-          "lastUpdated": "2016-01-26T13:21:32.740+0000",
-          "storedBy": "simon_linda",
-          "created": "2016-01-26T13:11:31.206+0000",
-          "dataElement": "no7SkAxepi7",
           "value": "true",
           "providedElsewhere": false
         }
@@ -276,18 +216,18 @@
           "providedElsewhere": false
         },
         {
-          "lastUpdated": "2016-02-08T09:00:11.065+0000",
-          "storedBy": "paul_linda",
-          "created": "2016-02-08T09:00:11.065+0000",
-          "dataElement": "nblG1lFCRsO",
-          "value": "true",
-          "providedElsewhere": false
-        },
-        {
           "lastUpdated": "2016-02-08T09:00:11.068+0000",
           "storedBy": "paul_linda",
           "created": "2016-02-08T09:00:11.067+0000",
           "dataElement": "no7SkAxepi7",
+          "value": "true",
+          "providedElsewhere": false
+        },
+        {
+          "lastUpdated": "2016-02-08T09:00:11.065+0000",
+          "storedBy": "paul_linda",
+          "created": "2016-02-08T09:00:11.065+0000",
+          "dataElement": "nblG1lFCRsO",
           "value": "true",
           "providedElsewhere": false
         }
@@ -617,19 +557,11 @@
       "followup": false,
       "dataValues": [
         {
-          "lastUpdated": "2016-01-12T12:00:03.604+0000",
+          "lastUpdated": "2016-01-12T12:00:03.610+0000",
           "storedBy": "simen",
-          "created": "2016-01-12T12:00:03.604+0000",
-          "dataElement": "bpBUOvqy1Jn",
+          "created": "2016-01-12T12:00:03.610+0000",
+          "dataElement": "no7SkAxepi7",
           "value": "true",
-          "providedElsewhere": false
-        },
-        {
-          "lastUpdated": "2016-01-12T12:00:03.603+0000",
-          "storedBy": "simen",
-          "created": "2016-01-12T12:00:03.603+0000",
-          "dataElement": "HdzfEcDLnhX",
-          "value": "05",
           "providedElsewhere": false
         },
         {
@@ -649,11 +581,19 @@
           "providedElsewhere": false
         },
         {
-          "lastUpdated": "2016-01-12T12:00:03.610+0000",
+          "lastUpdated": "2016-01-12T12:00:03.604+0000",
           "storedBy": "simen",
-          "created": "2016-01-12T12:00:03.610+0000",
-          "dataElement": "no7SkAxepi7",
+          "created": "2016-01-12T12:00:03.604+0000",
+          "dataElement": "bpBUOvqy1Jn",
           "value": "true",
+          "providedElsewhere": false
+        },
+        {
+          "lastUpdated": "2016-01-12T12:00:03.603+0000",
+          "storedBy": "simen",
+          "created": "2016-01-12T12:00:03.603+0000",
+          "dataElement": "HdzfEcDLnhX",
+          "value": "05",
           "providedElsewhere": false
         }
       ],
@@ -789,18 +729,18 @@
       "followup": false,
       "dataValues": [
         {
-          "lastUpdated": "2016-01-27T11:18:06.556+0000",
-          "storedBy": "paulnindi",
-          "created": "2016-01-27T11:18:06.556+0000",
-          "dataElement": "bpBUOvqy1Jn",
-          "value": "true",
-          "providedElsewhere": false
-        },
-        {
           "lastUpdated": "2016-01-27T11:18:07.034+0000",
           "storedBy": "paulnindi",
           "created": "2016-01-27T11:18:07.034+0000",
           "dataElement": "no7SkAxepi7",
+          "value": "true",
+          "providedElsewhere": false
+        },
+        {
+          "lastUpdated": "2016-01-27T11:18:06.556+0000",
+          "storedBy": "paulnindi",
+          "created": "2016-01-27T11:18:06.556+0000",
+          "dataElement": "bpBUOvqy1Jn",
           "value": "true",
           "providedElsewhere": false
         },
@@ -850,19 +790,19 @@
       "followup": false,
       "dataValues": [
         {
-          "lastUpdated": "2016-03-09T10:15:04.028+0000",
-          "storedBy": "paul_linda",
-          "created": "2016-03-09T10:15:04.027+0000",
-          "dataElement": "bpBUOvqy1Jn",
-          "value": "true",
-          "providedElsewhere": false
-        },
-        {
           "lastUpdated": "2016-03-09T10:15:04.023+0000",
           "storedBy": "paul_linda",
           "created": "2016-03-09T10:15:04.023+0000",
           "dataElement": "HdzfEcDLnhX",
           "value": "01",
+          "providedElsewhere": false
+        },
+        {
+          "lastUpdated": "2016-03-09T10:15:04.028+0000",
+          "storedBy": "paul_linda",
+          "created": "2016-03-09T10:15:04.027+0000",
+          "dataElement": "bpBUOvqy1Jn",
+          "value": "true",
           "providedElsewhere": false
         },
         {
@@ -874,18 +814,18 @@
           "providedElsewhere": false
         },
         {
-          "lastUpdated": "2016-03-09T10:15:04.036+0000",
-          "storedBy": "paul_linda",
-          "created": "2016-03-09T10:15:04.036+0000",
-          "dataElement": "nblG1lFCRsO",
-          "value": "true",
-          "providedElsewhere": false
-        },
-        {
           "lastUpdated": "2016-03-09T10:15:04.041+0000",
           "storedBy": "paul_linda",
           "created": "2016-03-09T10:15:04.041+0000",
           "dataElement": "no7SkAxepi7",
+          "value": "true",
+          "providedElsewhere": false
+        },
+        {
+          "lastUpdated": "2016-03-09T10:15:04.036+0000",
+          "storedBy": "paul_linda",
+          "created": "2016-03-09T10:15:04.036+0000",
+          "dataElement": "nblG1lFCRsO",
           "value": "true",
           "providedElsewhere": false
         }
@@ -985,22 +925,6 @@
       "followup": false,
       "dataValues": [
         {
-          "lastUpdated": "2016-02-09T07:49:02.354+0000",
-          "storedBy": "paulnindi",
-          "created": "2016-02-09T07:49:02.354+0000",
-          "dataElement": "bpBUOvqy1Jn",
-          "value": "true",
-          "providedElsewhere": false
-        },
-        {
-          "lastUpdated": "2016-02-09T07:49:22.688+0000",
-          "storedBy": "paulnindi",
-          "created": "2016-02-09T07:49:22.687+0000",
-          "dataElement": "e89hG7SQsau",
-          "value": "6.5",
-          "providedElsewhere": false
-        },
-        {
           "lastUpdated": "2016-02-09T07:49:03.980+0000",
           "storedBy": "paulnindi",
           "created": "2016-02-09T07:49:03.980+0000",
@@ -1013,6 +937,22 @@
           "storedBy": "paulnindi",
           "created": "2016-02-09T07:48:54.273+0000",
           "dataElement": "nblG1lFCRsO",
+          "value": "true",
+          "providedElsewhere": false
+        },
+        {
+          "lastUpdated": "2016-02-09T07:49:22.688+0000",
+          "storedBy": "paulnindi",
+          "created": "2016-02-09T07:49:22.687+0000",
+          "dataElement": "e89hG7SQsau",
+          "value": "6.5",
+          "providedElsewhere": false
+        },
+        {
+          "lastUpdated": "2016-02-09T07:49:02.354+0000",
+          "storedBy": "paulnindi",
+          "created": "2016-02-09T07:49:02.354+0000",
+          "dataElement": "bpBUOvqy1Jn",
           "value": "true",
           "providedElsewhere": false
         }
@@ -1294,14 +1234,6 @@
       "followup": false,
       "dataValues": [
         {
-          "lastUpdated": "2016-01-08T13:17:36.525+0000",
-          "storedBy": "simen",
-          "created": "2016-01-08T13:17:36.525+0000",
-          "dataElement": "e89hG7SQsau",
-          "value": "3",
-          "providedElsewhere": false
-        },
-        {
           "lastUpdated": "2016-01-08T13:17:36.521+0000",
           "storedBy": "simen",
           "created": "2016-01-08T13:17:36.521+0000",
@@ -1310,11 +1242,11 @@
           "providedElsewhere": false
         },
         {
-          "lastUpdated": "2016-01-08T13:17:36.527+0000",
+          "lastUpdated": "2016-01-08T13:17:36.525+0000",
           "storedBy": "simen",
-          "created": "2016-01-08T13:17:36.527+0000",
-          "dataElement": "no7SkAxepi7",
-          "value": "true",
+          "created": "2016-01-08T13:17:36.525+0000",
+          "dataElement": "e89hG7SQsau",
+          "value": "3",
           "providedElsewhere": false
         },
         {
@@ -1322,6 +1254,14 @@
           "storedBy": "simen",
           "created": "2016-01-08T13:17:36.523+0000",
           "dataElement": "bpBUOvqy1Jn",
+          "value": "true",
+          "providedElsewhere": false
+        },
+        {
+          "lastUpdated": "2016-01-08T13:17:36.527+0000",
+          "storedBy": "simen",
+          "created": "2016-01-08T13:17:36.527+0000",
+          "dataElement": "no7SkAxepi7",
           "value": "true",
           "providedElsewhere": false
         }
@@ -1519,14 +1459,6 @@
       "followup": false,
       "dataValues": [
         {
-          "lastUpdated": "2016-01-15T11:15:01.245+0000",
-          "storedBy": "simen",
-          "created": "2016-01-15T11:15:01.245+0000",
-          "dataElement": "nQeUfqPjK5o",
-          "value": "true",
-          "providedElsewhere": false
-        },
-        {
           "lastUpdated": "2016-01-15T11:15:01.242+0000",
           "storedBy": "simen",
           "created": "2016-01-15T11:15:01.242+0000",
@@ -1539,6 +1471,14 @@
           "storedBy": "simen",
           "created": "2016-01-15T11:15:01.247+0000",
           "dataElement": "pxCZNoqDVJC",
+          "value": "true",
+          "providedElsewhere": false
+        },
+        {
+          "lastUpdated": "2016-01-15T11:15:01.245+0000",
+          "storedBy": "simen",
+          "created": "2016-01-15T11:15:01.245+0000",
+          "dataElement": "nQeUfqPjK5o",
           "value": "true",
           "providedElsewhere": false
         },
@@ -1571,19 +1511,27 @@
       "followup": false,
       "dataValues": [
         {
-          "lastUpdated": "2016-01-25T08:13:14.099+0000",
-          "storedBy": "simon_linda",
-          "created": "2016-01-25T08:11:29.538+0000",
-          "dataElement": "HdzfEcDLnhX",
-          "value": "01",
-          "providedElsewhere": false
-        },
-        {
           "lastUpdated": "2016-01-25T08:13:14.100+0000",
           "storedBy": "simon_linda",
           "created": "2016-01-25T08:12:25.634+0000",
           "dataElement": "nblG1lFCRsO",
           "value": "true",
+          "providedElsewhere": false
+        },
+        {
+          "lastUpdated": "2016-01-25T08:13:14.099+0000",
+          "storedBy": "simon_linda",
+          "created": "2016-01-25T08:12:25.620+0000",
+          "dataElement": "EYQp1U4tU9z",
+          "value": "true",
+          "providedElsewhere": false
+        },
+        {
+          "lastUpdated": "2016-01-25T08:13:14.099+0000",
+          "storedBy": "simon_linda",
+          "created": "2016-01-25T08:11:29.538+0000",
+          "dataElement": "HdzfEcDLnhX",
+          "value": "01",
           "providedElsewhere": false
         },
         {
@@ -1599,14 +1547,6 @@
           "storedBy": "simon_linda",
           "created": "2016-01-25T08:12:25.626+0000",
           "dataElement": "bpBUOvqy1Jn",
-          "value": "true",
-          "providedElsewhere": false
-        },
-        {
-          "lastUpdated": "2016-01-25T08:13:14.099+0000",
-          "storedBy": "simon_linda",
-          "created": "2016-01-25T08:12:25.620+0000",
-          "dataElement": "EYQp1U4tU9z",
           "value": "true",
           "providedElsewhere": false
         }

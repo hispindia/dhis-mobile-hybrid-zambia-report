@@ -2118,7 +2118,7 @@ var d2Services = angular.module('d2Services', ['ngResource'])
             //}
           }
 
-          return { event: ruleEffectKey, ruleeffects:$rootScope.ruleeffects };
+          return { event: executingEvent, ruleeffects:$rootScope.ruleeffects[ruleEffectKey] };
         }
       }
     };
