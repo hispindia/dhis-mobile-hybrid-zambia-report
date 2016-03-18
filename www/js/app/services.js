@@ -255,9 +255,9 @@ angular.module('app.services', [])
      */
     var generateEventSortingDate = function (event, evtDateUpdate) {
       if (!event.eventDate) {
-        event["sortingDate"] = DateUtils.formatFromApiToUser(DateUtils.getToday());
+        event["sortingDate"] = DateUtils.getToday();
       } else {
-        event["sortingDate"] = DateUtils.formatFromApiToUser(event.eventDate);
+        event["sortingDate"] = DateUtils.formatYYYMMDD(event.eventDate);
       }
       if (evtDateUpdate) {
         event["eventDate"] = event["sortingDate"];
