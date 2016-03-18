@@ -6,40 +6,40 @@ angular.module('app.services', [])
 
   .service('sInitDataService', function ($http, mDataCommon) {
     this.initCommonDB = function () {
-      $http.get('../bid/model/constants.json').success(function (data) {
+      $http.get('../../model/constants.json').success(function (data) {
         mDataCommon.constants = data.constants;
       });
-      $http.get('../bid/model/programIndicators.json').success(function (data) {
+      $http.get('../../model/programIndicators.json').success(function (data) {
         mDataCommon.programIndicators = data.programIndicators;
       });
-      $http.get('../bid/model/programValidations.json').success(function (data) {
+      $http.get('../../model/programValidations.json').success(function (data) {
         mDataCommon.programValidations = data.programValidations;
       });
-      $http.get('../bid/model/programRuleVariables.json').success(function (data) {
+      $http.get('../../model/programRuleVariables.json').success(function (data) {
         mDataCommon.programRuleVariables = data.programRuleVariables;
       });
-      $http.get('../bid/model/programRules.json').success(function (data) {
+      $http.get('../../model/programRules.json').success(function (data) {
         mDataCommon.programRules = data.programRules;
       });
-      $http.get('../bid/model/programStageDataElements.json').success(function (data) {
+      $http.get('../../model/programStageDataElements.json').success(function (data) {
         mDataCommon.programStageDataElements = data.programStageDataElements;
       });
-      $http.get('../bid/model/programTrackedEntityAttributes.json').success(function (data) {
+      $http.get('../../model/programTrackedEntityAttributes.json').success(function (data) {
         mDataCommon.programTrackedEntityAttributes = data.programTrackedEntityAttributes;
       });
-      $http.get('../bid/model/events.json').success(function (data) {
+      $http.get('../../model/events.json').success(function (data) {
         mDataCommon.events = data.events;
       });
     };
     this.mockupDB = function () {
       //  Get mockup date first event
-      $http.get('../bid/model/trackedEntityInstances.json').success(function (data) {
+      $http.get('../../model/trackedEntityInstances.json').success(function (data) {
         mDataCommon.trackedEntityInstances = data;
       });
-      $http.get('../bid/model/enrollments.json').success(function (data) {
+      $http.get('../../model/enrollments.json').success(function (data) {
         mDataCommon.enrollments = data;
       });
-      $http.get('../bid/model/eventsTEI.json').success(function (data) {
+      $http.get('../../model/eventsTEI.json').success(function (data) {
         mDataCommon.eventsTEI = data.events;
       });
     }
