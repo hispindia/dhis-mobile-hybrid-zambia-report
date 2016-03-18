@@ -64,26 +64,11 @@ angular.module('app.services', [])
       return programStageDataElementsMap;
     };
 
-    this.trackedEntityInstancesMap = function () {
-      var trackedEntityInstancesMap = [];
-      angular.forEach(mDataCommon.trackedEntityInstances, function (item) {
-        trackedEntityInstancesMap[item.trackedEntityInstance] = item;
-      });
-      return trackedEntityInstancesMap;
-    }
-
-    this.enrollmentsMap = function () {
-      var enrollmentsMap = [];
-      angular.forEach(mDataCommon.enrollments, function (item) {
-        enrollmentsMap[item.enrollment] = item;
-      });
-      return enrollmentsMap;
-    }
-
     this.eventsByStageEVSObject = function () {
       var eventAllStage = mDataCommon.eventsTEI;
       var eventByStage = [];
       angular.forEach(eventAllStage, function (item) {
+        generateEventSortingDate(item);
         if (!eventByStage.hasOwnProperty(item.programStage)) {
           eventByStage[item.programStage] = [];
         }
@@ -105,37 +90,28 @@ angular.module('app.services', [])
     };
 
     this.flagObject = function () {
-      return {debug: true, verbose: true};
+      return {debug: true, verbose: false};
     };
 
     this.validateExecutingEventObject = function (eventObj) {
-
       if (eventObj.dataValues) {
         for (var i = 0; i < eventObj.dataValues.length; i++) {
           eventObj[eventObj.dataValues[i].dataElement] = eventObj.dataValues[i].value;
         }
       }
-
-      if (!eventObj.hasOwnProperty("eventDate")) {
-        eventObj.eventDate = DateUtils.getToday();
-        eventObj["sortingDate"] = eventObj.dueDate;
-      } else {
-        eventObj.eventDate = DateUtils.formatFromApiToUser(eventObj.eventDate);
-        eventObj["sortingDate"] = eventObj.eventDate;
-      }
+      generateEventSortingDate(eventObj, true);
       return eventObj;
     };
 
     this.excuteRules = function () {
       var rulesEffectResponse = TrackerRulesExecutionService.executeRulesBID(
         this.programRulesObject("SSLpOM0r1U7"),
-        this.validateExecutingEventObject(mDataCommon.events[1]),
+        this.validateExecutingEventObject(mDataCommon.events[6]),
         this.eventsByStageEVSObject(),
         this.programStageDataElementsMap(),
-        this.trackedEntityInstancesMap(),
-        this.enrollmentsMap(),
+        mDataCommon.trackedEntityInstances,
+        mDataCommon.enrollments,
         this.flagObject());
-      console.log(rulesEffectResponse);
       return rulesEffectResponse.ruleeffects;
     };
 
@@ -271,6 +247,22 @@ angular.module('app.services', [])
       return programRules;
     }
 
+    /**
+     * Addition of property sortingDate with format YYYY-MM-DD
+     * evtDateUpdate = true: Update event date if not eventDate not exist
+     * @param event
+     * @param evtDateUpdate
+     */
+    var generateEventSortingDate = function (event, evtDateUpdate) {
+      if (!event.eventDate) {
+        event["sortingDate"] = DateUtils.formatFromApiToUser(DateUtils.getToday());
+      } else {
+        event["sortingDate"] = DateUtils.formatFromApiToUser(event.eventDate);
+      }
+      if (evtDateUpdate) {
+        event["eventDate"] = event["sortingDate"];
+      }
+    }
   })
 
   .service('sBlankService', [function () {

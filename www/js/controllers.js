@@ -11,8 +11,6 @@ angular.module('app.controllers', [])
 
   .controller('cScheduleVaccineTodayCtrl', function ($scope, sRuleHelper, mDataCommon) {
     var rulesEffect = sRuleHelper.excuteRules();
-    console.log("rulesEffect");
-    console.log(rulesEffect);
     var programStageDataElementsMap = sRuleHelper.programStageDataElementsMap();
 
     //populate completed data values.
@@ -26,8 +24,8 @@ angular.module('app.controllers', [])
     // processRuleEffects
     for (var key in rulesEffect) {
       var effect = rulesEffect[key];
-      if (effect.dataElement) {
-        if (effect.action == "HIDEFIELD" && effect.ineffect) {
+      if (effect.dataElement && effect.ineffect) {
+        if (effect.action == "HIDEFIELD") {
           programStageDataElementsMap[rulesEffect[key].dataElement.id] = "hidden";
         } else if (effect.data) {
           programStageDataElementsMap[rulesEffect[key].dataElement.id].dataElement.value = effect.data;
