@@ -44,7 +44,6 @@ angular.module('app.controllers', [])
             programStageDataElement.dataElement.value : (dataValues[key] ? dataValues[key].value : undefined)));
       }
     }
-
   })
 
   .controller('cStockInHandCtrl', function ($scope) {

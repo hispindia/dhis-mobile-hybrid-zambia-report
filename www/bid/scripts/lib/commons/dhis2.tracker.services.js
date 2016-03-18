@@ -6,16 +6,16 @@
 
 angular.module('d2TrackerServices', ['ngResource'])
 
-.factory('TCStorageService', function(){
-    var store = new dhis2.storage.Store({
-        name: "dhis2tc",
-        adapters: [dhis2.storage.IndexedDBAdapter, dhis2.storage.DomSessionStorageAdapter, dhis2.storage.InMemoryAdapter],
-        objectStores: ['programs', 'programStages', 'trackedEntities', 'attributes', 'relationshipTypes', 'optionSets', 'programValidations', 'ouLevels', 'programRuleVariables', 'programRules', 'programIndicators', 'constants']
-    });
-    return{
-        currentStore: store
-    };
-})
+//.factory('TCStorageService', function(){
+//    var store = new dhis2.storage.Store({
+//        name: "dhis2tc",
+//        adapters: [dhis2.storage.IndexedDBAdapter, dhis2.storage.DomSessionStorageAdapter, dhis2.storage.InMemoryAdapter],
+//        objectStores: ['programs', 'programStages', 'trackedEntities', 'attributes', 'relationshipTypes', 'optionSets', 'programValidations', 'ouLevels', 'programRuleVariables', 'programRules', 'programIndicators', 'constants']
+//    });
+//    return{
+//        currentStore: store
+//    };
+//})
 
 /* Service to fetch/store dasboard widgets */
 .service('DashboardLayoutService', function($http) {
@@ -558,7 +558,7 @@ angular.module('d2TrackerServices', ['ngResource'])
 })
 
 /* Service to deal with enrollment */
-.service('EnrollmentService', function($http, DateUtils, DialogService, $translate) {
+.service('EnrollmentService', function($http, DateUtils, $translate) {
 
     var convertFromApiToUser = function(enrollment){
         if(enrollment.enrollments){
@@ -602,7 +602,6 @@ angular.module('d2TrackerServices', ['ngResource'])
                         headerText: response.data.status,
                         bodyText: response.data.message ? response.data.message : $translate.instant('unable_to_fetch_data_from_server')
                     };
-                    DialogService.showDialog({}, dialogOptions);
                 }
             });
             return promise;
@@ -680,7 +679,7 @@ angular.module('d2TrackerServices', ['ngResource'])
 })
 
 /* Service for getting tracked entity instances */
-.factory('TEIService', function($http, $q, AttributesFactory, DialogService ) {
+.factory('TEIService', function($http, $q, AttributesFactory ) {
 
     return {
         get: function(entityUid, optionSets, attributesById){
@@ -706,7 +705,6 @@ angular.module('d2TrackerServices', ['ngResource'])
                         dialogOptions.bodyText = error.data.message;
                     }
 
-                    DialogService.showDialog({}, dialogOptions);
                 }
             });
 
@@ -745,7 +743,6 @@ angular.module('d2TrackerServices', ['ngResource'])
                         headerText: 'error',
                         bodyText: 'access_denied'
                     };
-                    DialogService.showDialog({}, dialogOptions);
                 }
             });
             return promise;
@@ -997,7 +994,7 @@ angular.module('d2TrackerServices', ['ngResource'])
 })
 
 /* factory for handling events */
-.factory('DHIS2EventFactory', function($http, DialogService, $translate) {
+.factory('DHIS2EventFactory', function($http, $translate) {
 
     return {
 
@@ -1044,7 +1041,6 @@ angular.module('d2TrackerServices', ['ngResource'])
                         headerText: response.data.status,
                         bodyText: response.data.message ? response.data.message : $translate.instant('unable_to_fetch_data_from_server')
                     };
-                    DialogService.showDialog({}, dialogOptions);
                 }
             });
             return promise;
@@ -1095,7 +1091,7 @@ angular.module('d2TrackerServices', ['ngResource'])
 })
 
 /* factory for handling event reports */
-.factory('EventReportService', function($http, DialogService, $translate) {
+.factory('EventReportService', function($http, $translate) {
 
     return {
         getEventReport: function(orgUnit, ouMode, program, startDate, endDate, programStatus, eventStatus, pager){
@@ -1130,7 +1126,6 @@ angular.module('d2TrackerServices', ['ngResource'])
                         headerText: response.data.status,
                         bodyText: response.data.message ? response.data.message : $translate.instant('unable_to_fetch_data_from_server')
                     };
-                    DialogService.showDialog({}, dialogOptions);
                 }
             });
             return promise;
