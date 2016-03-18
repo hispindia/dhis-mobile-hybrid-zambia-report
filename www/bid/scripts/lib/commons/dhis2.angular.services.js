@@ -1944,20 +1944,6 @@ var d2Services = angular.module('d2Services', ['ngResource'])
       },
 
       executeRulesBID: function(allProgramRules, executingEvent, evs, allDataElements, selectedEntity, selectedEnrollment, flag ) {
-        console.log("allProgramRules");
-        console.log(allProgramRules);
-        console.log("executingEvent");
-        console.log(executingEvent);
-        console.log("evs");
-        console.log(evs);
-        console.log("allDataElements");
-        console.log(allDataElements);
-        console.log("selectedEntity");
-        console.log(selectedEntity);
-        console.log("selectedEnrollment");
-        console.log(selectedEnrollment);
-        console.log("flag");
-        console.log(flag);
         if(allProgramRules) {
           var variablesHash = {};
 

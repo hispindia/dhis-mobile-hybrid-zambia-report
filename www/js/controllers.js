@@ -1,7 +1,8 @@
 angular.module('app.controllers', [])
 
-  .controller('cBidReportAppCtrl', function ($scope, mInitdata, sInitDataService) {
-    if (!mInitdata.initial) {
+  .controller('cBidReportAppCtrl', function ($scope, mInitdata, sInitDataService, sConfigVariableApp) {
+    if (angular.isUndefined(mInitdata.initial)) {
+      sConfigVariableApp.initDev();
       sInitDataService.initCommonDB();
       mInitdata.initial = true;
       sInitDataService.mockupDB();

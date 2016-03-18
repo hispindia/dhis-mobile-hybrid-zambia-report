@@ -2,21 +2,28 @@
  * Created by nhancao on 3/16/16.
  */
 angular.module('app.models', [])
-  .constant("mInitdata",{
-    initial:false
+  .constant("mCODE", {
+    EVN: {
+      DEV: 0,
+      PRODUCTION: 1
+    }
   })
-  .constant("mDataCommon",{
-    constants:"",
-    programIndicators:"",
-    programValidations:"",
-    programRuleVariables:"",
-    programRules:"",
-    programStageDataElements:"",
-    programTrackedEntityAttributes:"",
-    events:""
+  .constant("mInitdata", {
+    environment: undefined,
+    initial: undefined
   })
-  .constant("mEventData",{
-    trackedEntityInstances:"",
-    enrollments:"",
-    eventsTEI:""
+  .constant("mDataCommon", {
+    constants: undefined,
+    programIndicators: undefined,
+    programValidations: undefined,
+    programRuleVariables: undefined,
+    programRules: undefined,
+    programStageDataElements: undefined,
+    programTrackedEntityAttributes: undefined,
+    events: undefined
+  })
+  .constant("mEventData", {
+    trackedEntityInstances: undefined,
+    enrollments: undefined,
+    eventsTEI: undefined
   });
