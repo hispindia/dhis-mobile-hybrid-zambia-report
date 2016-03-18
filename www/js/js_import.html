@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <script>
+    if (navigator.userAgent.toLowerCase().indexOf('android') > -1)
+      document.getElementById('metaViewport').setAttribute('content', 'width=' + screen.width + ', initial-scale=1.0, maximum-scale=1.0, user-scalable=no');
+  </script>
+  <link href="../lib/ionic/css/ionic.css" rel="stylesheet">
+  <script src="../lib/ionic/js/ionic.bundle.js"></script>
+
+  <!-- cordova script (this will be a 404 during development) -->
+  <script src="../cordova.js"></script>
+  <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
+  <link href="css/ionic.app.css" rel="stylesheet">
+  -->
+
+  <!--Import jQuery-->
+  <script src="lib/jquery-1.12.1.min.js"></script>
+  <script src="lib/jquery.calendars.min.js"></script>
+  <script src="lib/moment-with-langs.min.js"></script>
+
+  <!--Import javascript-->
+  <!--<script type="text/javascript" src="lib/angular/angular.js"></script>-->
+  <!--<script type="text/javascript" src="lib/angular/angular-resource.js"></script>-->
+  <!--<script type="text/javascript" src="lib/angular/angular-route.js"></script>-->
+  <!--<script type="text/javascript" src="lib/angular/angular-cookies.js"></script>-->
+  <!--<script type="text/javascript" src="lib/angular/angular-animate.js"></script>-->
+  <!--<script type="text/javascript" src="lib/angular/angular-messages.js"></script>-->
+  <!--<script type="text/javascript" src="lib/angular/angular-sanitize.js"></script>-->
+  <script type="text/javascript" src="lib/angular/plugins/angular-translate.min.js"></script>
+  <script type="text/javascript" src="lib/angular/plugins/angular-local-storage.min.js"></script>
+  <script type="text/javascript" src="lib/angular/plugins/angular-indexed-db.js"></script>
+
+
+  <script src="lib/dhis2/dhis2.angular.compress.js"></script>
+  <script src="lib/dhis2/dhis2.util.js"></script>
+  <script src="lib/dhis2/dhis2.translate.js"></script>
+  <script src="lib/dhis2/dhis2.validation.js"></script>
+
+  <script src="app/app.js"></script>
+  <script src="app/app-configs.js"></script>
+  <script src="app/models.js"></script>
+  <script src="app/controllers.js"></script>
+  <script src="app/routes.js"></script>
+  <script src="app/services.js"></script>
+  <script src="app/directives.js"></script>
+
+  <!-- Only required for Tab projects w/ pages in multiple tabs
+  <script src="lib/ionicuirouter/ionicUIRouter.js"></script>
+  -->
+
+
+</head>
+<body>
+</body>
+</html>
