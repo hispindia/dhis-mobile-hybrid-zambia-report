@@ -3,9 +3,18 @@
  */
 angular.module('app.configs', [])
   .service('sConfigVariableApp', function (mInitdata, mCODE) {
-    this.initDev=function(){
-      mInitdata.environment = mCODE.EVN.DEV;
+    this.initApp=function(evironment){
+      mInitdata.environment = evironment;
       mInitdata.initial = false;
+    };
+    this.isDEV = function(){
+      return (mInitdata.environment == mCODE.EVN.DEV);
+    };
+    this.isSTAGING = function(){
+      return (mInitdata.environment == mCODE.EVN.STAGING);
+    };
+    this.isPRODUCTION = function(){
+      return (mInitdata.environment == mCODE.EVN.PRODUCTION);
     }
   })
   .service('sLog', function ($log, mInitdata, mCODE) {

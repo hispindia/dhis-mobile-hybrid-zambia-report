@@ -4,42 +4,50 @@ angular.module('app.services', [])
 
   }])
 
-  .service('sInitDataService', function ($http, mDataCommon) {
+  .service('sInitDataService', function ($http, mDataCommon, sConfigVariableApp) {
     this.initCommonDB = function () {
-      $http.get('../../model/constants.json').success(function (data) {
+      var url="../../model/";
+      if(sConfigVariableApp.isSTAGING()){
+        url="file:///android_asset/www/model/"
+      }
+      $http.get(url + 'constants.json').success(function (data) {
         mDataCommon.constants = data.constants;
       });
-      $http.get('../../model/programIndicators.json').success(function (data) {
+      $http.get(url + 'programIndicators.json').success(function (data) {
         mDataCommon.programIndicators = data.programIndicators;
       });
-      $http.get('../../model/programValidations.json').success(function (data) {
+      $http.get(url + 'programValidations.json').success(function (data) {
         mDataCommon.programValidations = data.programValidations;
       });
-      $http.get('../../model/programRuleVariables.json').success(function (data) {
+      $http.get(url + 'programRuleVariables.json').success(function (data) {
         mDataCommon.programRuleVariables = data.programRuleVariables;
       });
-      $http.get('../../model/programRules.json').success(function (data) {
+      $http.get(url + 'programRules.json').success(function (data) {
         mDataCommon.programRules = data.programRules;
       });
-      $http.get('../../model/programStageDataElements.json').success(function (data) {
+      $http.get(url + 'programStageDataElements.json').success(function (data) {
         mDataCommon.programStageDataElements = data.programStageDataElements;
       });
-      $http.get('../../model/programTrackedEntityAttributes.json').success(function (data) {
+      $http.get(url + 'programTrackedEntityAttributes.json').success(function (data) {
         mDataCommon.programTrackedEntityAttributes = data.programTrackedEntityAttributes;
       });
-      $http.get('../../model/events.json').success(function (data) {
+      $http.get(url + 'events.json').success(function (data) {
         mDataCommon.events = data.events;
       });
     };
     this.mockupDB = function () {
+      var url="../../model/";
+      if(sConfigVariableApp.isSTAGING()){
+        url="file:///android_asset/www/model/"
+      }
       //  Get mockup date first event
-      $http.get('../../model/trackedEntityInstances.json').success(function (data) {
+      $http.get(url + 'trackedEntityInstances.json').success(function (data) {
         mDataCommon.trackedEntityInstances = data;
       });
-      $http.get('../../model/enrollments.json').success(function (data) {
+      $http.get(url + 'enrollments.json').success(function (data) {
         mDataCommon.enrollments = data;
       });
-      $http.get('../../model/eventsTEI.json').success(function (data) {
+      $http.get(url + 'eventsTEI.json').success(function (data) {
         mDataCommon.eventsTEI = data.events;
       });
     }

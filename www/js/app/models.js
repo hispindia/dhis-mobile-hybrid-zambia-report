@@ -5,7 +5,8 @@ angular.module('app.models', [])
   .constant("mCODE", {
     EVN: {
       DEV: 0,
-      PRODUCTION: 1
+      STAGING: 1,
+      PRODUCTION: 2
     }
   })
   .constant("mInitdata", {
