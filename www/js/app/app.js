@@ -15,7 +15,9 @@ angular.module('app', ['ionic',
     'dhis2.compress',
     'pascalprecht.translate'
   ])
-
+  .run(function (sInitApp) {
+    sInitApp.populateData();
+  })
   .run(function ($ionicPlatform) {
     $ionicPlatform.ready(function () {
       // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard

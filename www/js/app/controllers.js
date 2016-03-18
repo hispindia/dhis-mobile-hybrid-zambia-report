@@ -1,15 +1,11 @@
 angular.module('app.controllers', [])
 
   .controller('cBidReportAppCtrl', function ($scope, mInitdata, mCODE, sInitDataService, sConfigVariableApp) {
-    if (angular.isUndefined(mInitdata.initial)) {
-      sConfigVariableApp.initApp(mCODE.EVN.DEV);
-      sInitDataService.initCommonDB();
-      mInitdata.initial = true;
-      sInitDataService.mockupDB();
-    }
+
   })
 
   .controller('cScheduleVaccineTodayCtrl', function ($scope, sRuleHelper, mDataCommon) {
+
     var rulesEffect = sRuleHelper.excuteRules();
     var programStageDataElementsMap = sRuleHelper.programStageDataElementsMap();
 
@@ -34,14 +30,17 @@ angular.module('app.controllers', [])
       }
     }
 
+    $scope.outputArr=[];
     for (var key in programStageDataElementsMap) {
       var programStageDataElement = programStageDataElementsMap[key];
       if (dataValues[key] && programStageDataElement.dataElement.value == undefined) {
         programStageDataElement.dataElement.value = dataValues[key].value;
       }
       if (programStageDataElement.dataElement.value != undefined || programStageDataElement["action"] != "hidden") {
-        console.log("key = " + key + " - name: " + programStageDataElement.dataElement.name + " - value: " + (programStageDataElement.dataElement.value ?
-            programStageDataElement.dataElement.value : (dataValues[key] ? dataValues[key].value : undefined)));
+        var log = "Name: " + programStageDataElement.dataElement.name + " - value: " + (programStageDataElement.dataElement.value ?
+            programStageDataElement.dataElement.value : (dataValues[key] ? dataValues[key].value : undefined)) + " - key: " + key;
+        console.log(log);
+        $scope.outputArr.push(log);
       }
     }
   })
@@ -182,7 +181,70 @@ angular.module('app.controllers', [])
   })
 
   .controller('cVaccineHistoryReportCtrl', function ($scope) {
-    
+    $(function () {
+      $('#container').highcharts({
+        title: {
+          text: 'Combination chart'
+        },
+        xAxis: {
+          categories: ['Apples', 'Oranges', 'Pears', 'Bananas', 'Plums']
+        },
+        labels: {
+          items: [{
+            html: 'Total fruit consumption',
+            style: {
+              left: '50px',
+              top: '18px',
+              color: (Highcharts.theme && Highcharts.theme.textColor) || 'black'
+            }
+          }]
+        },
+        series: [{
+          type: 'column',
+          name: 'Jane',
+          data: [3, 2, 1, 3, 4]
+        }, {
+          type: 'column',
+          name: 'John',
+          data: [2, 3, 5, 7, 6]
+        }, {
+          type: 'column',
+          name: 'Joe',
+          data: [4, 3, 3, 9, 0]
+        }, {
+          type: 'spline',
+          name: 'Average',
+          data: [3, 2.67, 3, 6.33, 3.33],
+          marker: {
+            lineWidth: 2,
+            lineColor: Highcharts.getOptions().colors[3],
+            fillColor: 'white'
+          }
+        }, {
+          type: 'pie',
+          name: 'Total consumption',
+          data: [{
+            name: 'Jane',
+            y: 13,
+            color: Highcharts.getOptions().colors[0] // Jane's color
+          }, {
+            name: 'John',
+            y: 23,
+            color: Highcharts.getOptions().colors[1] // John's color
+          }, {
+            name: 'Joe',
+            y: 19,
+            color: Highcharts.getOptions().colors[2] // Joe's color
+          }],
+          center: [100, 80],
+          size: 100,
+          showInLegend: false,
+          dataLabels: {
+            enabled: false
+          }
+        }]
+      });
+    });
   })
 
   .controller('cLoginCtrl', function ($scope) {

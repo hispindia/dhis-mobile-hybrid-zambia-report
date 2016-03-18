@@ -2,6 +2,16 @@
  * Created by nhancao on 3/18/16.
  */
 angular.module('app.configs', [])
+  .service('sInitApp', function(mInitdata, mCODE, sInitDataService, sConfigVariableApp){
+    this.populateData = function(){
+      if (angular.isUndefined(mInitdata.initial)) {
+        sConfigVariableApp.initApp(mCODE.EVN.STAGING);
+        sInitDataService.initCommonDB();
+        mInitdata.initial = true;
+        sInitDataService.mockupDB();
+      }
+    }
+  })
   .service('sConfigVariableApp', function (mInitdata, mCODE) {
     this.initApp=function(evironment){
       mInitdata.environment = evironment;
