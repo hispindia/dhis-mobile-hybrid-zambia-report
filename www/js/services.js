@@ -106,7 +106,7 @@ angular.module('app.services', [])
     this.excuteRules = function () {
       var rulesEffectResponse = TrackerRulesExecutionService.executeRulesBID(
         this.programRulesObject("SSLpOM0r1U7"),
-        this.validateExecutingEventObject(mDataCommon.events[6]),
+        this.validateExecutingEventObject(mDataCommon.events[5]),
         this.eventsByStageEVSObject(),
         this.programStageDataElementsMap(),
         mDataCommon.trackedEntityInstances,

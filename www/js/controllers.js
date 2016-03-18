@@ -6,7 +6,6 @@ angular.module('app.controllers', [])
       sInitDataService.initCommonDB();
       mInitdata.initial = true;
       sInitDataService.mockupDB();
-
     }
   })
 
@@ -27,8 +26,9 @@ angular.module('app.controllers', [])
       var effect = rulesEffect[key];
       if (effect.dataElement && effect.ineffect) {
         if (effect.action == "HIDEFIELD") {
-          programStageDataElementsMap[rulesEffect[key].dataElement.id] = "hidden";
-        } else if (effect.data) {
+          programStageDataElementsMap[rulesEffect[key].dataElement.id]["action"] = "hidden";
+        }
+        if (effect.data) {
           programStageDataElementsMap[rulesEffect[key].dataElement.id].dataElement.value = effect.data;
         }
       }
@@ -36,7 +36,10 @@ angular.module('app.controllers', [])
 
     for (var key in programStageDataElementsMap) {
       var programStageDataElement = programStageDataElementsMap[key];
-      if (programStageDataElement != "hidden") {
+      if(dataValues[key] && programStageDataElement.dataElement.value == undefined){
+        programStageDataElement.dataElement.value = dataValues[key].value;
+      }
+      if (programStageDataElement.dataElement.value != undefined || programStageDataElement["action"] != "hidden") {
         console.log("key = " + key + " - name: " + programStageDataElement.dataElement.name + " - value: " + (programStageDataElement.dataElement.value ?
             programStageDataElement.dataElement.value : (dataValues[key] ? dataValues[key].value : undefined)));
       }
