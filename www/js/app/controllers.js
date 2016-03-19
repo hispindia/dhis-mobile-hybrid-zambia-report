@@ -259,11 +259,12 @@ angular.module('app.controllers', [])
       sInitApp.login(login.host, login.username, login.password);
     };
 
-
   })
-  .controller('cConsoleCtrl', function ($scope, mCODE, sInitApp, localStorageService) {
+  .controller('cConsoleCtrl', function ($scope, sApiCall, mCODE, sInitApp, localStorageService) {
 
-
+      sApiCall.getMe().then(function(data){
+        $scope.output = data;
+      })
 
   })
 

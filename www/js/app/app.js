@@ -39,8 +39,8 @@ angular.module('app', ['ionic',
   })
   .run(function ($rootScope, $location, mCODE, sInitApp) {
     $rootScope.$on(mCODE.MSG.ISLOGIN, function () {
-      console.log($location.path());
-      if($location.path() == "side-menu21/page_login"){
+      //console.log($location.path());
+      if($location.path() == "/side-menu21/page_login"){
         $location.path("side-menu21/");
       }
     });

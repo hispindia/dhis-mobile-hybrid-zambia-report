@@ -1,5 +1,5 @@
 angular.module('app.services', [])
-  .service('sApiCall', function ($http, mInitdata) {
+  .service('sApiCall', function ($http, $q, mInitdata) {
 
     this.getMe = function(){
       return httpPromise("GET", mInitdata.host + "/api/me");
@@ -8,9 +8,6 @@ angular.module('app.services', [])
     this.getConstants = function(){
       return httpPromise("GET", mInitdata.host + "/api/constants.json?paging=false");
     };
-
-
-
 
 
     var httpPromise = function (method, url) {
