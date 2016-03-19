@@ -280,7 +280,7 @@ angular.module('app.controllers', ['ionic', 'ngMessages'])
 
     $scope.getMeClick = function () {
       sApiCall.getMe().then(function (data) {
-        $scope.output = data;
+        $scope.output = sApiCall.prettyJsonPrint(data);
       });
     }
 
