@@ -69,7 +69,7 @@ angular.module('app.routes', [])
         url: '/page_login',
         views: {
           'side-menu21': {
-            templateUrl: 'templates/login.html',
+            templateUrl: 'templates/sign-in.html',
             controller: 'cLoginCtrl'
           }
         }

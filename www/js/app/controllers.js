@@ -1,7 +1,8 @@
-angular.module('app.controllers', [])
+angular.module('app.controllers', ['ionic', 'ngMessages'])
 
-  .controller('cBidReportAppCtrl', function (sInitApp) {
+  .controller('cBidReportAppCtrl', function ($state, sInitApp) {
     sInitApp.isLogin(true);
+
   })
 
   .controller('cScheduleVaccineTodayCtrl', function ($scope, sRuleHelper, mDataCommon) {
@@ -247,20 +248,25 @@ angular.module('app.controllers', [])
     });
   })
 
-  .controller('cLoginCtrl', function ($scope, mCODE, sInitApp, localStorageService) {
+  .controller('cLoginCtrl', function ($scope, $state, mCODE, sInitApp, localStorageService) {
 
+    $scope.isFormDisabled = function () {
+      return this.form.$invalid;
+    }
     var login = $scope.login = {
       host: undefined,
       username: undefined,
       password: undefined
     };
 
-    $scope.loginClick = function () {
-      sInitApp.login(login.host, login.username, login.password);
+    $scope.loginClick = function (form) {
+      if (form.$valid) {
+        sInitApp.login(login.host, login.username, login.password);
+      }
     };
 
   })
-  .controller('cConsoleCtrl', function ($scope, sInitApp, sApiCall, mCODE, sInitApp, localStorageService) {
+  .controller('cConsoleCtrl', function ($scope, sInitApp, sApiCall, mCODE, localStorageService) {
     sInitApp.isLogin(true);
 
     $scope.getMeClick = function () {

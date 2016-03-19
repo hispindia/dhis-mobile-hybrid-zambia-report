@@ -33,7 +33,7 @@ angular.module('app', ['ionic',
     //https://github.com/grevory/angular-local-storage
     localStorageServiceProvider
       .setPrefix('hi')
-      .setStorageType('sessionStorage')
+      .setStorageType('localStorage')
       .setStorageCookie(45, '/');
 
   })
