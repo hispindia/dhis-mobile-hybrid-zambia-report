@@ -260,11 +260,14 @@ angular.module('app.controllers', [])
     };
 
   })
-  .controller('cConsoleCtrl', function ($scope, sApiCall, mCODE, sInitApp, localStorageService) {
+  .controller('cConsoleCtrl', function ($scope, sInitApp, sApiCall, mCODE, sInitApp, localStorageService) {
+    sInitApp.isLogin(true);
 
-      sApiCall.getMe().then(function(data){
+    $scope.getMeClick = function () {
+      sApiCall.getMe().then(function (data) {
         $scope.output = data;
-      })
+      });
+    }
 
   })
 
