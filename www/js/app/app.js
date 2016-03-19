@@ -5,7 +5,7 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-angular.module('app', ['ionic', 'angular-loading-bar', 'ngAnimate',
+angular.module('app', ['ionic',
     'app.models',
     'app.controllers',
     'app.routes',
@@ -36,12 +36,6 @@ angular.module('app', ['ionic', 'angular-loading-bar', 'ngAnimate',
       .setStorageType('localStorage')
       .setStorageCookie(45, '/');
 
-  })
-  .config(function (cfpLoadingBarProvider) {
-    cfpLoadingBarProvider.includeBar = true;
-    cfpLoadingBarProvider.includeSpinner = false;
-    //cfpLoadingBarProvider.spinnerTemplate = '<div></div>';
-    //cfpLoadingBarProvider.barTemplate = '<div></div>';
   })
 
   .run(function ($ionicHistory, $state, $rootScope, $location, mCODE, sInitApp) {

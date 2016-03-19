@@ -18,7 +18,6 @@ angular.module('app.services', ['ngProgress'])
       var req = {
         method: method,
         url: url,
-        ignoreLoadingBar: false
       };
       //setTimeout(function () {
       //  defer.notify("calling....");
