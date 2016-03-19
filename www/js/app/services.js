@@ -1,7 +1,7 @@
 angular.module('app.services', ['ngProgress'])
   .service('sApiCall', function ($http, $q, ngProgressFactory, mInitdata) {
     var progressbar = ngProgressFactory.createInstance();
-    progressbar.setParent(document.getElementById('content'));
+    progressbar.setParent(document.getElementsByTagName('ion-content')[0]);
     progressbar.setAbsolute();
 
     this.getMe = function(){
