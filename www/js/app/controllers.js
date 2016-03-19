@@ -1,6 +1,16 @@
 angular.module('app.controllers', ['ionic', 'ngMessages'])
 
+  .controller('cMenuCtrl', function ($scope, $state, mCODE, sInitApp) {
+    $scope.isLogin = function(){
+      return sInitApp.isLogin();
+    };
+    $scope.logout = function(){
+      return sInitApp.logout();
+    }
+  })
+
   .controller('cBidReportAppCtrl', function ($state, sInitApp) {
+    //window.location.reload()
     sInitApp.isLogin(true);
 
   })
@@ -250,9 +260,6 @@ angular.module('app.controllers', ['ionic', 'ngMessages'])
 
   .controller('cLoginCtrl', function ($scope, $state, mCODE, sInitApp, localStorageService) {
 
-    $scope.isFormDisabled = function () {
-      return this.form.$invalid;
-    }
     var login = $scope.login = {
       host: undefined,
       username: undefined,
@@ -266,7 +273,9 @@ angular.module('app.controllers', ['ionic', 'ngMessages'])
     };
 
   })
+
   .controller('cConsoleCtrl', function ($scope, sInitApp, sApiCall, mCODE, localStorageService) {
+
     sInitApp.isLogin(true);
 
     $scope.getMeClick = function () {

@@ -13,15 +13,55 @@
       <div class="title">Menu</div>
     </ion-header-bar>
     <ion-content padding="false" class="side-menu-left has-header">
-      <ion-list>
-        <ion-item ui-sref="menu.login" menu-close="">Login</ion-item>
-        <ion-item ui-sref="menu.console" menu-close="">Console</ion-item>
-        <ion-item ui-sref="menu.bidReportApp" menu-close="">Home</ion-item>
-        <ion-item ui-sref="menu.scheduleVaccineToday" menu-close="">Scheduled Vaccine Today</ion-item>
-        <ion-item ui-sref="menu.stockInHand" menu-close="">Stock In Hand</ion-item>
-        <ion-item ui-sref="menu.stockInHandVsDemand" menu-close="">Stock In Hand vs Demand</ion-item>
-        <ion-item ui-sref="menu.vaccineHistoryReport" menu-close="">Vaccine History Report</ion-item>
-      </ion-list>
+      <div id="menu">
+        <ul class="list">
+          <li class="item" ng-show="!isLogin()">
+            <button class="button button-clear button-positive button-full" ui-sref="menu.login"
+                    menu-close="">Login
+            </button>
+          </li>
+          <li class="item" ng-show="isLogin()">
+            <button class="button button-clear button-positive button-full" ui-sref="menu.login"
+                    menu-close="" ng-click="logout()">Logout
+            </button>
+          </li>
+          <li class="item">
+            <button class="button button-clear button-positive button-full" ui-sref="menu.console" ng-disabled="!isLogin()"
+                    menu-close="">Console
+            </button>
+          </li>
+          <li class="item">
+            <button class="button button-clear button-positive button-full" ui-sref="menu.bidReportApp"
+                    ng-disabled="!isLogin()" menu-close="">Home
+            </button>
+          </li>
+          <li class="item">
+            <button class="button button-clear button-positive button-full" ui-sref="menu.scheduleVaccineToday"
+                    ng-disabled="!isLogin()" menu-close="">Scheduled Vaccine Today
+            </button>
+          </li>
+          <li class="item">
+            <button class="button button-clear button-positive button-full" ui-sref="menu.stockInHand"
+                    ng-disabled="!isLogin()" menu-close="">Stock In Hand
+            </button>
+          </li>
+          <li class="item">
+            <button class="button button-clear button-positive button-full" ui-sref="menu.stockInHandVsDemand"
+                    ng-disabled="!isLogin()" menu-close="">Stock In Hand vs Demand
+            </button>
+          </li>
+          <li class="item">
+            <button class="button button-clear button-positive button-full" ui-sref="menu.vaccineHistoryReport"
+                    ng-disabled="!isLogin()" menu-close="">Vaccine History Report
+            </button>
+          </li>
+          <li class="item">
+            <button class="button button-clear button-positive button-full" ui-sref="menu.about"
+                    menu-close="">About
+            </button>
+          </li>
+        </ul>
+      </div>
     </ion-content>
   </ion-side-menu>
 </ion-side-menus>

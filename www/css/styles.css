@@ -1,3 +1,9 @@
+#menu .button.button-clear.button-positive.button-full {
+  line-height: 25px;
+  margin: 0px auto;
+  min-height: 20px;
+  text-align: left; }
+
 label.item.has-error {
   border-bottom: 2px solid red; }
 

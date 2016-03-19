@@ -5,7 +5,7 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-angular.module('app', ['ionic',
+angular.module('app', ['ionic', 'angular-loading-bar', 'ngAnimate',
     'app.models',
     'app.controllers',
     'app.routes',
@@ -37,15 +37,30 @@ angular.module('app', ['ionic',
       .setStorageCookie(45, '/');
 
   })
-  .run(function ($rootScope, $location, mCODE, sInitApp) {
+  .config(function (cfpLoadingBarProvider) {
+    cfpLoadingBarProvider.includeBar = true;
+    cfpLoadingBarProvider.includeSpinner = false;
+    //cfpLoadingBarProvider.spinnerTemplate = '<div></div>';
+    //cfpLoadingBarProvider.barTemplate = '<div></div>';
+  })
+
+  .run(function ($ionicHistory, $state, $rootScope, $location, mCODE, sInitApp) {
     $rootScope.$on(mCODE.MSG.ISLOGIN, function () {
-      //console.log($location.path());
-      if($location.path() == "/side-menu21/page_login"){
-        $location.path("side-menu21/");
+      if ($location.path() == "/side-menu21/page_login") {
+        $ionicHistory.clearHistory();
+        $ionicHistory.nextViewOptions({
+          disableBack: true
+        });
+        $state.go('menu.bidReportApp');
       }
     });
     $rootScope.$on(mCODE.MSG.ISLOGOUT, function () {
-      $location.path("side-menu21/page_login");
+      $ionicHistory.clearCache();
+      $ionicHistory.clearHistory();
+      $ionicHistory.nextViewOptions({
+        disableBack: true
+      });
+      $state.go('menu.login');
     });
     sInitApp.isLogin(true);
   })

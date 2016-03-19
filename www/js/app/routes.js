@@ -8,6 +8,15 @@ angular.module('app.routes', [])
     // Each state's controller can be found in controllers.js
     $stateProvider
 
+      .state('menu.login', {
+        url: '/page_login',
+        views: {
+          'side-menu21': {
+            templateUrl: 'templates/login.html',
+            controller: 'cLoginCtrl'
+          }
+        }
+      })
 
       .state('menu.bidReportApp', {
         url: '/page_home',
@@ -62,15 +71,15 @@ angular.module('app.routes', [])
       .state('menu', {
         url: '/side-menu21',
         templateUrl: 'templates/menu.html',
+        controller: 'cMenuCtrl',
         abstract: true
       })
 
-      .state('menu.login', {
-        url: '/page_login',
+      .state('menu.about', {
+        url: '/page_about',
         views: {
           'side-menu21': {
-            templateUrl: 'templates/login.html',
-            controller: 'cLoginCtrl'
+            templateUrl: 'templates/about.html',
           }
         }
       })
