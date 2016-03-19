@@ -3,25 +3,57 @@
     <div style="text-align:center;">
       <img src="img/2ZWNXLhSRqGOqBAdvOd1_ic_launcher.png" width="100dp" height="auto">
     </div>
-    <form class="list" name="credentialsForm" >
-      <label class="item item-input item-stacked-label">
+    <form class="list" name="signinForm" ng-submit="loginClick(signinForm)">
+      <label class="item item-input item-stacked-label" ng-class="{ 'has-error' : signinForm.url.$invalid}">
         <span class="input-label">Host</span>
-        <input type="url" ng-init="login.host='https://bid.dhis2.org/epireg'" ng-minlength="15" ng-model="login.host" placeholder="https://bid.dhis2.org/epireg" required>
+        <input type="url" ng-init="login.host='https://bid.dhis2.org/epireg'"
+               placeholder="https://bid.dhis2.org/epireg"
+               name="url"
+               ng-model="login.host"
+               ng-minlength="15"
+               ng-maxlength="60"
+               required>
       </label>
-      <label class="item item-input item-stacked-label">
+      <div class="form-errors" ng-messages="signinForm.url.$error">
+        <div ng-messages-include="templates/form-errors.html"></div>
+      </div>
+
+      <label class="item item-input item-stacked-label" ng-class="{ 'has-error' : signinForm.username.$invalid}">
         <span class="input-label">Username</span>
-        <input type="text" ng-init="login.username='nhancv'" ng-minlength="5" ng-model="login.username" placeholder="admin" required>
+        <input type="text" ng-init="login.username='nhancv'"
+               placeholder="admin"
+               name="username"
+               ng-model="login.username"
+               ng-minlength="5"
+               ng-maxlength="60"
+               required>
       </label>
+      <div class="form-errors" ng-messages="signinForm.username.$error">
+        <div ng-messages-include="templates/form-errors.html"></div>
+      </div>
+
       <ion-list>
-        <label class="item item-input item-stacked-label">
+        <label class="item item-input item-stacked-label"  ng-class="{ 'has-error' : signinForm.password.$invalid}">
           <span class="input-label">Password</span>
-          <input type="password" ng-init="login.password='District1'" ng-minlength="6" ng-model="login.password" placeholder="District1" required>
+          <input type="password" ng-init="login.password='District1'"
+                 placeholder="District1"
+                 name="password"
+                 ng-model="login.password"
+                 ng-minlength="6"
+                 ng-maxlength="60"
+                 required>
         </label>
+        <div class="form-errors"
+             ng-show="signinForm.password.$error && signinForm.$submitted"
+             ng-messages="signinForm.password.$error">
+          <div ng-messages-include="templates/form-errors.html"></div>
+        </div>
       </ion-list>
       <div class="spacer" style="height: 40px;"></div>
-      <button id="login-button1" ng-click="loginClick(credentialsForm)"
+      <button id="login-button1"
               style="font-weight:bold;" class="button button-stable  button-block"
-              ng-disabled="credentialsForm.$invalid">Log in</button>
+              ng-disabled="signinForm.$invalid">Log in
+      </button>
       <a href="#" onclick="window.open('https://play.dhis2.org/', '_blank', 'location=no'); return false;"
          id="login-button2" class="button button-positive  button-block button-clear">Or create an account</a>
     </form>
