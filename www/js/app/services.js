@@ -1,14 +1,49 @@
 angular.module('app.services', [])
+  .service('sApiCall', function ($http, mInitdata) {
 
-  .factory('sBlankFactory', [function () {
+    this.getMe = function(){
+      return httpPromise("GET", mInitdata.host + "/api/me");
+    };
 
-  }])
+    this.getConstants = function(){
+      return httpPromise("GET", mInitdata.host + "/api/constants.json?paging=false");
+    };
+
+
+
+
+
+    var httpPromise = function (method, url) {
+      var defer = $q.defer();
+      var req = {
+        method: method,
+        url: url
+      };
+      setTimeout(function () {
+        defer.notify("calling....");
+      }, 0);
+      $http(req).then(function (response) {
+        if (typeof response.data === 'object') {
+          defer.resolve(response.data);
+        } else {
+          defer.reject(response.data);
+        }
+      }, function (error) {
+        defer.reject(error);
+      });
+      return defer.promise;
+    }
+
+
+
+
+  })
 
   .service('sInitDataService', function ($http, mDataCommon, sConfigVariableApp) {
     this.initCommonDB = function () {
-      var url="../../model/";
-      if(sConfigVariableApp.isSTAGING()){
-        url="file:///android_asset/www/model/"
+      var url = "../../model/";
+      if (sConfigVariableApp.isSTAGING()) {
+        url = "file:///android_asset/www/model/"
       }
       $http.get(url + 'constants.json').success(function (data) {
         mDataCommon.constants = data.constants;
@@ -36,9 +71,9 @@ angular.module('app.services', [])
       });
     };
     this.mockupDB = function () {
-      var url="../../model/";
-      if(sConfigVariableApp.isSTAGING()){
-        url="file:///android_asset/www/model/"
+      var url = "../../model/";
+      if (sConfigVariableApp.isSTAGING()) {
+        url = "file:///android_asset/www/model/"
       }
       //  Get mockup date first event
       $http.get(url + 'trackedEntityInstances.json').success(function (data) {
@@ -273,6 +308,9 @@ angular.module('app.services', [])
     }
   })
 
+  .factory('sBlankFactory', [function () {
+
+  }])
   .service('sBlankService', [function () {
 
   }]);

@@ -1,7 +1,7 @@
 angular.module('app.controllers', [])
 
-  .controller('cBidReportAppCtrl', function ($scope, mInitdata, mCODE, sInitDataService, sConfigVariableApp) {
-
+  .controller('cBidReportAppCtrl', function (sInitApp) {
+    sInitApp.isLogin(true);
   })
 
   .controller('cScheduleVaccineTodayCtrl', function ($scope, sRuleHelper, mDataCommon) {
@@ -30,7 +30,7 @@ angular.module('app.controllers', [])
       }
     }
 
-    $scope.outputArr=[];
+    $scope.outputArr = [];
     for (var key in programStageDataElementsMap) {
       var programStageDataElement = programStageDataElementsMap[key];
       if (dataValues[key] && programStageDataElement.dataElement.value == undefined) {
@@ -247,6 +247,25 @@ angular.module('app.controllers', [])
     });
   })
 
-  .controller('cLoginCtrl', function ($scope) {
+  .controller('cLoginCtrl', function ($scope, mCODE, sInitApp, localStorageService) {
+
+    var login = $scope.login = {
+      host: undefined,
+      username: undefined,
+      password: undefined
+    };
+
+    $scope.loginClick = function () {
+      sInitApp.login(login.host, login.username, login.password);
+    };
+
 
   })
+  .controller('cConsoleCtrl', function ($scope, mCODE, sInitApp, localStorageService) {
+
+
+
+  })
+
+
+;

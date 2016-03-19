@@ -75,7 +75,21 @@ angular.module('app.routes', [])
         }
       })
 
-    $urlRouterProvider.otherwise('/side-menu21/page_home')
+      //Define test console
+      .state('menu.console', {
+        url: '/page_console',
+        views: {
+          'side-menu21': {
+            templateUrl: 'templates/console.html',
+            controller: 'cConsoleCtrl'
+          }
+        }
+      })
+
+
+    ;
+
+    $urlRouterProvider.otherwise('/side-menu21/page_home');
 
 
   });

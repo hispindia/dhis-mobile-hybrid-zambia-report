@@ -13,11 +13,9 @@ angular.module('app', ['ionic',
     'app.directives',
     'app.configs',
     'dhis2.compress',
-    'pascalprecht.translate'
+    'pascalprecht.translate',
+    'LocalStorageModule'
   ])
-  .run(function (sInitApp) {
-    sInitApp.populateData();
-  })
   .run(function ($ionicPlatform) {
     $ionicPlatform.ready(function () {
       // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
@@ -31,3 +29,26 @@ angular.module('app', ['ionic',
       }
     });
   })
+  .config(function (localStorageServiceProvider) {
+    //https://github.com/grevory/angular-local-storage
+    localStorageServiceProvider
+      .setPrefix('hi')
+      .setStorageType('sessionStorage')
+      .setStorageCookie(45, '/');
+
+  })
+  .run(function ($rootScope, $location, mCODE, sInitApp) {
+    $rootScope.$on(mCODE.MSG.ISLOGIN, function () {
+      console.log($location.path());
+      if($location.path() == "side-menu21/page_login"){
+        $location.path("side-menu21/");
+      }
+    });
+    $rootScope.$on(mCODE.MSG.ISLOGOUT, function () {
+      $location.path("side-menu21/page_login");
+    });
+    sInitApp.isLogin(true);
+  })
+
+
+;

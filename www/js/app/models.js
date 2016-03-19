@@ -7,9 +7,18 @@ angular.module('app.models', [])
       DEV: 0,
       STAGING: 1,
       PRODUCTION: 2
+    },
+    STORAGE: {
+      AUTHEN: "authentication",
+      URL: "url"
+    },
+    MSG: {
+      ISLOGIN: "isLogin",
+      ISLOGOUT: "isLogout"
     }
   })
   .constant("mInitdata", {
+    host: undefined,
     environment: undefined,
     initial: undefined
   })
