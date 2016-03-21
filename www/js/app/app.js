@@ -5,7 +5,7 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-angular.module('app', ['ionic','ngSanitize',
+angular.module('app', ['ionic', 'ngSanitize',
     'app.models',
     'app.controllers',
     'app.routes',
@@ -38,7 +38,7 @@ angular.module('app', ['ionic','ngSanitize',
 
   })
 
-  .run(function ($ionicHistory, $state, $rootScope, $location, mCODE, sInitApp) {
+  .run(function ($ionicHistory, $state, $rootScope, $location, mCODE, sAuthentication) {
     $rootScope.$on(mCODE.MSG.ISLOGIN, function () {
       if ($location.path() == "/side-menu21/page_login") {
         $ionicHistory.clearHistory();
@@ -56,7 +56,7 @@ angular.module('app', ['ionic','ngSanitize',
       });
       $state.go('menu.login');
     });
-    sInitApp.isLogin(true);
+    sAuthentication.isLogin(true);
   })
 
 

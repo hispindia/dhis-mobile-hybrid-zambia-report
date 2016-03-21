@@ -1,17 +1,27 @@
 angular.module('app.controllers', ['ionic', 'ngMessages'])
 
-  .controller('cMenuCtrl', function ($scope, $state, mCODE, sInitApp) {
-    $scope.isLogin = function(){
-      return sInitApp.isLogin();
+  .controller('cMenuCtrl', function ($scope, $state, $ionicPopup, $ionicSideMenuDelegate, mCODE, sAuthentication) {
+    $scope.isLogin = function () {
+      return sAuthentication.isLogin();
     };
-    $scope.logout = function(){
-      return sInitApp.logout();
+    $scope.logout = function () {
+      var confirmPopup = $ionicPopup.confirm({
+        title: 'Logout',
+        template: 'Are you sure you want to logout?'
+      });
+
+      confirmPopup.then(function(res) {
+        $ionicSideMenuDelegate.toggleLeft();
+        if(res) {
+          return sAuthentication.logout();
+        } else {
+        }
+      });
     }
   })
 
-  .controller('cBidReportAppCtrl', function ($state, sInitApp) {
-    //window.location.reload()
-    sInitApp.isLogin(true);
+  .controller('cBidReportAppCtrl', function ($state, sAuthentication) {
+    sAuthentication.isLogin(true);
 
   })
 
@@ -257,7 +267,11 @@ angular.module('app.controllers', ['ionic', 'ngMessages'])
     });
   })
 
-  .controller('cLoginCtrl', function ($scope, $state, mCODE, sInitApp, localStorageService) {
+  .controller('cLoginCtrl', function ($http, $rootScope, $scope, $ionicPopup, $state, ngProgressFactory, localStorageService, mCODE, sAuthentication, sUtils, sApiCall) {
+
+    var progressbar = ngProgressFactory.createInstance();
+    progressbar.setParent(document.getElementById("progress"));
+    progressbar.setAbsolute();
 
     var login = $scope.login = {
       host: undefined,
@@ -266,32 +280,179 @@ angular.module('app.controllers', ['ionic', 'ngMessages'])
     };
 
     $scope.loginClick = function (form) {
-      if (form.$valid) {
-        sInitApp.login(login.host, login.username, login.password);
+      if (form.$valid && sUtils.isValue(login.host) && sUtils.isValue(login.username) && sUtils.isValue(login.password)) {
+        if(login.host.length>3 && (login.host[login.host.length-1] =='/' || login.host[login.host.length-1] =='\\')){
+          $scope.login.host = login.host = login.host.substr(0, login.host.length-1);
+        }
+
+        progressbar.start();
+        var host = login.host;
+        var authen = "Basic " + btoa(login.username + ":" + login.password);
+        sApiCall.getMe(host, authen).then(function (data) {
+          localStorageService.set(mCODE.STORAGE.AUTHEN, authen);
+          localStorageService.set(mCODE.STORAGE.URL, host);
+          localStorageService.set(mCODE.STORAGE.ORGUID, data.organisationUnits[0].id);
+          $http.defaults.headers.common.Authorization = authen;
+          $rootScope.$broadcast(mCODE.MSG.ISLOGIN);
+          progressbar.complete();
+        }, function (error) {
+          showAlert(error);
+          progressbar.reset();
+        });
+        //$scope.login.username = "";
+        //$scope.login.password = "";
       }
     };
 
-  })
-
-  .controller('cConsoleCtrl', function ($scope, ngProgressFactory, sInitApp, sApiCall, mCODE, localStorageService) {
-    var progressbar = ngProgressFactory.createInstance();
-    progressbar.setParent(document.getElementById("progress"));
-    progressbar.setAbsolute();
-
-    sInitApp.isLogin(true);
-
-    $scope.getMeClick = function () {
-      progressbar.start();
-      sApiCall.getMe().then(function (data) {
-        $scope.output = sApiCall.prettyJsonPrint(data);
-        progressbar.complete();
-      }, function(err){
-        $scope.output = sApiCall.prettyJsonPrint(err);
-        progressbar.reset();
+    var showAlert = function() {
+      var alertPopup = $ionicPopup.alert({
+        title: 'Login failed!',
+        template: 'Please check your input data again.'
       });
-    }
-
+      alertPopup.then(function(res) {
+        //console.log(res);
+      });
+    };
   })
+
+  .controller('cConsoleCtrl', function ($scope, ngProgressFactory, localStorageService, mCODE, mInitdata, sAuthentication, sInitApp, sApiCall, sUtils) {
+      sAuthentication.isLogin(true);
+
+      var progressbar = ngProgressFactory.createInstance();
+      progressbar.setParent(document.getElementById("progress"));
+      progressbar.setAbsolute();
+
+      var organisationUnitUID = localStorageService.get(mCODE.STORAGE.ORGUID);
+
+      $scope.getTestClick = function () {
+        var e = document.getElementById("slApi");
+        switch (Number(e.options[e.selectedIndex].value)) {
+          case 0:
+            progressbar.start();
+            sApiCall.getMe().then(function (data) {
+              $scope.output = sUtils.prettyJsonPrint(data);
+              progressbar.complete();
+            }, function (error) {
+              $scope.output = sUtils.prettyJsonPrint(error);
+              progressbar.reset();
+            });
+            break;
+          case 1:
+            progressbar.start();
+            sApiCall.getConstants().then(function (data) {
+              $scope.output = sUtils.prettyJsonPrint(data);
+              progressbar.complete();
+            }, function (error) {
+              $scope.output = sUtils.prettyJsonPrint(error);
+              progressbar.reset();
+            });
+            break;
+          case 2:
+            progressbar.start();
+            sApiCall.programTrackedEntityAttributes().then(function (data) {
+              $scope.output = sUtils.prettyJsonPrint(data);
+              progressbar.complete();
+            }, function (error) {
+              $scope.output = sUtils.prettyJsonPrint(error);
+              progressbar.reset();
+            });
+            break;
+          case 3:
+            progressbar.start();
+            sApiCall.programStageDataElements().then(function (data) {
+              $scope.output = sUtils.prettyJsonPrint(data);
+              progressbar.complete();
+            }, function (error) {
+              $scope.output = sUtils.prettyJsonPrint(error);
+              progressbar.reset();
+            });
+            break;
+          case 4:
+            progressbar.start();
+            sApiCall.programIndicators().then(function (data) {
+              $scope.output = sUtils.prettyJsonPrint(data);
+              progressbar.complete();
+            }, function (error) {
+              $scope.output = sUtils.prettyJsonPrint(error);
+              progressbar.reset();
+            });
+            break;
+          case 5:
+            progressbar.start();
+            sApiCall.programValidations().then(function (data) {
+              $scope.output = sUtils.prettyJsonPrint(data);
+              progressbar.complete();
+            }, function (error) {
+              $scope.output = sUtils.prettyJsonPrint(error);
+              progressbar.reset();
+            });
+            break;
+          case 6:
+            progressbar.start();
+            sApiCall.programRuleVariables().then(function (data) {
+              $scope.output = sUtils.prettyJsonPrint(data);
+              progressbar.complete();
+            }, function (error) {
+              $scope.output = sUtils.prettyJsonPrint(error);
+              progressbar.reset();
+            });
+            break;
+          case 7:
+            progressbar.start();
+            sApiCall.programRules().then(function (data) {
+              $scope.output = sUtils.prettyJsonPrint(data);
+              progressbar.complete();
+            }, function (error) {
+              $scope.output = sUtils.prettyJsonPrint(error);
+              progressbar.reset();
+            });
+            break;
+          case 8:
+            progressbar.start();
+            sApiCall.events().then(function (data) {
+              $scope.output = sUtils.prettyJsonPrint(data);
+              progressbar.complete();
+            }, function (error) {
+              $scope.output = sUtils.prettyJsonPrint(error);
+              progressbar.reset();
+            });
+            break;
+          case 9:
+            progressbar.start();
+            sApiCall.trackedEntityInstances("s54asTMkAKf").then(function (data) {
+              $scope.output = sUtils.prettyJsonPrint(data);
+              progressbar.complete();
+            }, function (error) {
+              $scope.output = sUtils.prettyJsonPrint(error);
+              progressbar.reset();
+            });
+            break;
+          case 10:
+            progressbar.start();
+            sApiCall.enrollments("vg1QlYDhoa5").then(function (data) {
+              $scope.output = sUtils.prettyJsonPrint(data);
+              progressbar.complete();
+            }, function (error) {
+              $scope.output = sUtils.prettyJsonPrint(error);
+              progressbar.reset();
+            });
+            break;
+          case 11:
+            progressbar.start();
+            sApiCall.eventTrackedEntityInstances("s54asTMkAKf").then(function (data) {
+              $scope.output = sUtils.prettyJsonPrint(data);
+              progressbar.complete();
+            }, function (error) {
+              $scope.output = sUtils.prettyJsonPrint(error);
+              progressbar.reset();
+            });
+            break;
+        }
+
+
+      }
+    }
+  )
 
 
 ;

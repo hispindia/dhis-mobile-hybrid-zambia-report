@@ -1,9 +1,30 @@
 <ion-view title="Console">
   <ion-content overflow-scroll="true" padding="true" class="has-header">
     <div id="progress"></div>
-      <button class="button button-block button-positive" ng-click="getMeClick()">
-        Get me
-      </button>
+    <div class="list">
+      <label class="item item-input item-select">
+        <div class="input-label">
+          Choose API
+        </div>
+        <select id="slApi">
+          <option value="0" selected>Me</option>
+          <option value="1">constants</option>
+          <option value="2">programTrackedEntityAttributes</option>
+          <option value="3">programStageDataElements</option>
+          <option value="4">programIndicators</option>
+          <option value="5">programValidations</option>
+          <option value="6">programRuleVariables</option>
+          <option value="7">programRules</option>
+          <option value="8">events</option>
+          <option value="9">trackedEntityInstances</option>
+          <option value="10">enrollments</option>
+          <option value="11">eventTEI</option>
+        </select>
+      </label>
+    </div>
+    <button class="button button-block button-positive" ng-click="getTestClick()">
+      TEST
+    </button>
     <pre ng-bind-html="output"></pre>
   </ion-content>
 </ion-view>

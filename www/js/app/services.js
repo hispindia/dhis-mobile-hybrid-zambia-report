@@ -1,27 +1,95 @@
 angular.module('app.services', ['ngProgress'])
-  .service('sApiCall', function ($http, $q, mInitdata) {
+  .service('sApiCall', function ($http, $q, localStorageService, mCODE, sUtils) {
 
-    this.getMe = function () {
-      return httpPromise("GET", mInitdata.host + "/api/me");
+    var host = localStorageService.get(mCODE.STORAGE.URL);
+    var orgUid = localStorageService.get(mCODE.STORAGE.ORGUID);
+
+    this.getMe = function (_host, authen) {
+      var hostT=host;
+      if(sUtils.isValue(_host)){
+        hostT=_host;
+      }
+      if(sUtils.isValue(authen)){
+        $http.defaults.headers.common.Authorization = authen;
+      }
+      return httpPromise("GET", hostT + "/api/me");
     };
 
     this.getConstants = function () {
-      return httpPromise("GET", mInitdata.host + "/api/constants.json?paging=false");
+      return httpPromise("GET", host + "/api/constants.json?paging=false");
     };
 
-    this.prettyJsonPrint = function(obj){
-      return library.json.prettyPrint(obj);
+    this.programTrackedEntityAttributes = function (programUID) {
+      if (!sUtils.isValue(programUID)) {
+        programUID = "SSLpOM0r1U7";
+      }
+      return httpPromise("GET", host + "/api/programs/" + programUID + ".json?paging=false&fields=id,name,programStages[*],programTrackedEntityAttributes[trackedEntityAttribute[id,displayName]]");
+    };
+    this.programStageDataElements = function (programStageUID) {
+      if (!sUtils.isValue(programStageUID)) {
+        programStageUID = "s53RFfXA75f";
+      }
+      return httpPromise("GET", host + "/api/programStages/" + programStageUID + ".json?paging=false&fields=id,name,programStageDataElements[*,dataElement[*]]");
+    };
+    this.programIndicators = function (programUID) {
+      if (!sUtils.isValue(programUID)) {
+        programUID = "SSLpOM0r1U7";
+      }
+      return httpPromise("GET", host + "/api/programIndicators.json?paging=false&fields=*&filter=program.id:eq:" + programUID);
+    };
+    this.programValidations = function (programUID) {
+      if (!sUtils.isValue(programUID)) {
+        programUID = "SSLpOM0r1U7";
+      }
+      return httpPromise("GET", host + "/api/programValidations.json?paging=false&fields=*&filter=program.id:eq:" + programUID);
+    };
+
+    this.programRuleVariables = function (programUID) {
+      if (!sUtils.isValue(programUID)) {
+        programUID = "SSLpOM0r1U7";
+      }
+      return httpPromise("GET", host + "/api/programRuleVariables.json?paging=false&fields=*&filter=program.id:eq:" + programUID);
+    };
+    this.programRules = function (programUID) {
+      if (!sUtils.isValue(programUID)) {
+        programUID = "SSLpOM0r1U7";
+      }
+      return httpPromise("GET", host + "/api/programRules.json?paging=false&fields=*,programRuleActions[*]&filter=program.id:eq:" + programUID);
+    };
+
+    this.events = function (programStageUID, orgUnit, ouMode, status) {
+      if (!sUtils.isValue(programStageUID)) {
+        programStageUID = "s53RFfXA75f";
+      }
+      if (!sUtils.isValue(orgUnit)) {
+        orgUnit = orgUid;
+      }
+      if (!sUtils.isValue(ouMode)) {
+        ouMode = "SELECTED";
+      }
+      if (!sUtils.isValue(status)) {
+        status = "SCHEDULE";
+      }
+      return httpPromise("GET", host + "/api/events.json?paging=false&skipPaging=true&programStage=" + programStageUID + "&orgUnit=" + orgUnit + "&ouMode=" + ouMode + "&status=" + status);
+    };
+
+    this.trackedEntityInstances = function (trackedEntityInstanceUID) {
+      return httpPromise("GET", host + "/api/trackedEntityInstances/" + trackedEntityInstanceUID + ".json?paging=false");
+    };
+    this.enrollments = function (enrollmentUID) {
+      return httpPromise("GET", host + "/api/enrollments/" + enrollmentUID + ".json?paging=false&");
+    };
+    this.eventTrackedEntityInstances = function (trackedEntityInstanceUID) {
+      return httpPromise("GET", host + "/api/events.json?paging=false&trackedEntityInstance=" + trackedEntityInstanceUID);
     };
 
     var httpPromise = function (method, url) {
       var defer = $q.defer();
       var req = {
         method: method,
-        url: url,
+        url: url
       };
-      //setTimeout(function () {
-      //  defer.notify("calling....");
-      //}, 0);
+
       $http(req).then(function (response) {
         if (typeof response.data === 'object') {
           defer.resolve(response.data);
@@ -32,30 +100,6 @@ angular.module('app.services', ['ngProgress'])
         defer.reject(error);
       });
       return defer.promise;
-    };
-
-    if (!library)
-      var library = {};
-
-    library.json = {
-      replacer: function (match, pIndent, pKey, pVal, pEnd) {
-        var key = '<span class=json-key>';
-        var val = '<span class=json-value>';
-        var str = '<span class=json-string>';
-        var r = pIndent || '';
-        if (pKey)
-          r = r + key + pKey.replace(/[": ]/g, '') + '</span>: ';
-        if (pVal)
-          r = r + (pVal[0] == '"' ? str : val) + pVal + '</span>';
-        return r + (pEnd || '');
-      },
-      prettyPrint: function (obj) {
-        var jsonLine = /^( *)("[\w]+": )?("[^"]*"|[\w.+-]*)?([,[{])?$/mg;
-        return JSON.stringify(obj, null, 3)
-          .replace(/&/g, '&amp;').replace(/\\"/g, '&quot;')
-          .replace(/</g, '&lt;').replace(/>/g, '&gt;')
-          .replace(jsonLine, library.json.replacer);
-      }
     };
 
 
@@ -328,6 +372,87 @@ angular.module('app.services', ['ngProgress'])
         event["eventDate"] = event["sortingDate"];
       }
     }
+  })
+
+  .service('sUtils', function () {
+
+    /**
+     * Check obj is String not empty, blank, null or undefine
+     * @param obj
+     * @returns {boolean}
+       */
+    this.isValue = function (obj) {
+      if (!obj || 0 === obj.length || /^\s*$/.test(obj) || !obj.trim()) return false;
+      return true;
+    };
+
+    this.prettyJsonPrint = function (obj) {
+      return json.prettyPrint(obj);
+    };
+
+    var json = {
+      replacer: function (match, pIndent, pKey, pVal, pEnd) {
+        var key = '<span class=json-key>';
+        var val = '<span class=json-value>';
+        var str = '<span class=json-string>';
+        var r = pIndent || '';
+        if (pKey)
+          r = r + key + pKey.replace(/[": ]/g, '') + '</span>: ';
+        if (pVal)
+          r = r + (pVal[0] == '"' ? str : val) + pVal + '</span>';
+        return r + (pEnd || '');
+      },
+      prettyPrint: function (obj) {
+        var jsonLine = /^( *)("[\w]+": )?("[^"]*"|[\w.+-]*)?([,[{])?$/mg;
+        return JSON.stringify(obj, null, 3)
+          .replace(/&/g, '&amp;').replace(/\\"/g, '&quot;')
+          .replace(/</g, '&lt;').replace(/>/g, '&gt;')
+          .replace(jsonLine, json.replacer);
+      }
+    };
+
+
+  })
+
+  .service('sAuthentication', function ($http, $rootScope, localStorageService, mCODE, sUtils, sInitDataService, sConfigVariableApp, sInitApp, sApiCall) {
+    var login = {
+      host: undefined,
+      authen: undefined
+    };
+
+    /**
+     * Check had login or not
+     * @param broadcast Send broadcast message mCODE.MSG.ISLOGIN if had login or mCODE.MSG.ISLOGOUT otherwise
+     * @returns {boolean}
+     */
+    this.isLogin = function (broadcast) {
+      login.host = localStorageService.get(mCODE.STORAGE.URL);
+      login.authen = localStorageService.get(mCODE.STORAGE.AUTHEN);
+      if (sUtils.isValue(login.host) && sUtils.isValue(login.authen)) {
+        if (broadcast) {
+          $http.defaults.headers.common.Authorization = login.authen;
+          sInitApp.populateData();
+          $rootScope.$broadcast(mCODE.MSG.ISLOGIN);
+        }
+        return true;
+      }
+      if (broadcast) {
+        $rootScope.$broadcast(mCODE.MSG.ISLOGOUT);
+      }
+      return false;
+    };
+
+    this.logout = function () {
+      localStorageService.clearAll();
+      $rootScope.$broadcast(mCODE.MSG.ISLOGOUT);
+    };
+
+    this.getLogin = function () {
+      if (this.isLogin()) {
+        return login;
+      }
+      return null;
+    };
   })
 
   .factory('sBlankFactory', [function () {

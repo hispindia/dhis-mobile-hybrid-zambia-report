@@ -10,17 +10,20 @@ angular.module('app.models', [])
     },
     STORAGE: {
       AUTHEN: "authentication",
-      URL: "url"
+      URL: "url",
+      ORGUID:"organisationUnitUID",
     },
     MSG: {
       ISLOGIN: "isLogin",
-      ISLOGOUT: "isLogout"
+      ISLOGOUT: "isLogout",
+      UNAUTHORIZED: "Unauthorized"
     }
   })
   .constant("mInitdata", {
-    host: undefined,
     environment: undefined,
-    initial: undefined
+    initial: undefined,
+    programUID: "SSLpOM0r1U7",
+    programStageUID: "s53RFfXA75f"
   })
   .constant("mDataCommon", {
     constants: undefined,
