@@ -22,17 +22,17 @@ angular.module('app.controllers', ['ionic', 'ngMessages'])
 
   .controller('cBidReportAppCtrl', function ($state, sAuthentication) {
     sAuthentication.isLogin(true);
-
   })
 
   .controller('cScheduleVaccineTodayCtrl', function ($scope, sRuleHelper, mDataCommon) {
+    sAuthentication.isLogin(true);
 
     var rulesEffect = sRuleHelper.excuteRules();
     var programStageDataElementsMap = sRuleHelper.programStageDataElementsMap();
 
     //populate completed data values.
     var dataValues = [];
-    angular.forEach(mDataCommon.eventsTEI, function (event) {
+    angular.forEach(mDataCommon.eventTEI, function (event) {
       angular.forEach(event.dataValues, function (dataValue) {
         dataValues[dataValue.dataElement] = dataValue;
       })
@@ -296,8 +296,8 @@ angular.module('app.controllers', ['ionic', 'ngMessages'])
           $rootScope.$broadcast(mCODE.MSG.ISLOGIN);
           progressbar.complete();
         }, function (error) {
-          showAlert(error);
           progressbar.reset();
+          showAlert(error);
         });
         //$scope.login.username = "";
         //$scope.login.password = "";
@@ -321,8 +321,6 @@ angular.module('app.controllers', ['ionic', 'ngMessages'])
       var progressbar = ngProgressFactory.createInstance();
       progressbar.setParent(document.getElementById("progress"));
       progressbar.setAbsolute();
-
-      var organisationUnitUID = localStorageService.get(mCODE.STORAGE.ORGUID);
 
       $scope.getTestClick = function () {
         var e = document.getElementById("slApi");
@@ -349,7 +347,7 @@ angular.module('app.controllers', ['ionic', 'ngMessages'])
             break;
           case 2:
             progressbar.start();
-            sApiCall.programTrackedEntityAttributes().then(function (data) {
+            sApiCall.getProgramTrackedEntityAttributes().then(function (data) {
               $scope.output = sUtils.prettyJsonPrint(data);
               progressbar.complete();
             }, function (error) {
@@ -359,7 +357,7 @@ angular.module('app.controllers', ['ionic', 'ngMessages'])
             break;
           case 3:
             progressbar.start();
-            sApiCall.programStageDataElements().then(function (data) {
+            sApiCall.getProgramStageDataElements().then(function (data) {
               $scope.output = sUtils.prettyJsonPrint(data);
               progressbar.complete();
             }, function (error) {
@@ -369,7 +367,7 @@ angular.module('app.controllers', ['ionic', 'ngMessages'])
             break;
           case 4:
             progressbar.start();
-            sApiCall.programIndicators().then(function (data) {
+            sApiCall.getProgramIndicators().then(function (data) {
               $scope.output = sUtils.prettyJsonPrint(data);
               progressbar.complete();
             }, function (error) {
@@ -379,7 +377,7 @@ angular.module('app.controllers', ['ionic', 'ngMessages'])
             break;
           case 5:
             progressbar.start();
-            sApiCall.programValidations().then(function (data) {
+            sApiCall.getProgramValidations().then(function (data) {
               $scope.output = sUtils.prettyJsonPrint(data);
               progressbar.complete();
             }, function (error) {
@@ -389,7 +387,7 @@ angular.module('app.controllers', ['ionic', 'ngMessages'])
             break;
           case 6:
             progressbar.start();
-            sApiCall.programRuleVariables().then(function (data) {
+            sApiCall.getProgramRuleVariables().then(function (data) {
               $scope.output = sUtils.prettyJsonPrint(data);
               progressbar.complete();
             }, function (error) {
@@ -399,7 +397,7 @@ angular.module('app.controllers', ['ionic', 'ngMessages'])
             break;
           case 7:
             progressbar.start();
-            sApiCall.programRules().then(function (data) {
+            sApiCall.getProgramRules().then(function (data) {
               $scope.output = sUtils.prettyJsonPrint(data);
               progressbar.complete();
             }, function (error) {
@@ -409,7 +407,7 @@ angular.module('app.controllers', ['ionic', 'ngMessages'])
             break;
           case 8:
             progressbar.start();
-            sApiCall.events().then(function (data) {
+            sApiCall.getEvents().then(function (data) {
               $scope.output = sUtils.prettyJsonPrint(data);
               progressbar.complete();
             }, function (error) {
@@ -419,7 +417,7 @@ angular.module('app.controllers', ['ionic', 'ngMessages'])
             break;
           case 9:
             progressbar.start();
-            sApiCall.trackedEntityInstances("s54asTMkAKf").then(function (data) {
+            sApiCall.getTrackedEntityInstances("s54asTMkAKf").then(function (data) {
               $scope.output = sUtils.prettyJsonPrint(data);
               progressbar.complete();
             }, function (error) {
@@ -429,7 +427,7 @@ angular.module('app.controllers', ['ionic', 'ngMessages'])
             break;
           case 10:
             progressbar.start();
-            sApiCall.enrollments("vg1QlYDhoa5").then(function (data) {
+            sApiCall.getEnrollments("vg1QlYDhoa5").then(function (data) {
               $scope.output = sUtils.prettyJsonPrint(data);
               progressbar.complete();
             }, function (error) {
@@ -439,7 +437,7 @@ angular.module('app.controllers', ['ionic', 'ngMessages'])
             break;
           case 11:
             progressbar.start();
-            sApiCall.eventTrackedEntityInstances("s54asTMkAKf").then(function (data) {
+            sApiCall.getEventTrackedEntityInstances("s54asTMkAKf").then(function (data) {
               $scope.output = sUtils.prettyJsonPrint(data);
               progressbar.complete();
             }, function (error) {

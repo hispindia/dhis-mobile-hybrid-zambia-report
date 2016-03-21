@@ -6,5 +6,9 @@ m: for model
 s: for service
 
 
+Priority parameter:
+[global param], [third lib param], [model, service]
+
+$http, $q, localStorageService, mCODE, sUtils
 
 

@@ -1,85 +1,81 @@
 angular.module('app.services', ['ngProgress'])
-  .service('sApiCall', function ($http, $q, localStorageService, mCODE, sUtils) {
+  .service('sApiCall', function ($http, $q, localStorageService, mCODE, mInitdata, sUtils) {
 
     var host = localStorageService.get(mCODE.STORAGE.URL);
     var orgUid = localStorageService.get(mCODE.STORAGE.ORGUID);
 
     this.getMe = function (_host, authen) {
-      var hostT=host;
-      if(sUtils.isValue(_host)){
-        hostT=_host;
+      var hostT = host;
+      if (sUtils.isValue(_host)) {
+        hostT = _host;
       }
-      if(sUtils.isValue(authen)){
+      if (sUtils.isValue(authen)) {
         $http.defaults.headers.common.Authorization = authen;
       }
       return httpPromise("GET", hostT + "/api/me");
     };
-
     this.getConstants = function () {
       return httpPromise("GET", host + "/api/constants.json?paging=false");
     };
-
-    this.programTrackedEntityAttributes = function (programUID) {
+    this.getProgramTrackedEntityAttributes = function (programUID) {
       if (!sUtils.isValue(programUID)) {
-        programUID = "SSLpOM0r1U7";
+        programUID = mInitdata.programUID;
       }
       return httpPromise("GET", host + "/api/programs/" + programUID + ".json?paging=false&fields=id,name,programStages[*],programTrackedEntityAttributes[trackedEntityAttribute[id,displayName]]");
     };
-    this.programStageDataElements = function (programStageUID) {
+    this.getProgramStageDataElements = function (programStageUID) {
       if (!sUtils.isValue(programStageUID)) {
-        programStageUID = "s53RFfXA75f";
+        programStageUID = mInitdata.programStageUID;
       }
       return httpPromise("GET", host + "/api/programStages/" + programStageUID + ".json?paging=false&fields=id,name,programStageDataElements[*,dataElement[*]]");
     };
-    this.programIndicators = function (programUID) {
+    this.getProgramIndicators = function (programUID) {
       if (!sUtils.isValue(programUID)) {
-        programUID = "SSLpOM0r1U7";
+        programUID = mInitdata.programUID;
       }
       return httpPromise("GET", host + "/api/programIndicators.json?paging=false&fields=*&filter=program.id:eq:" + programUID);
     };
-    this.programValidations = function (programUID) {
+    this.getProgramValidations = function (programUID) {
       if (!sUtils.isValue(programUID)) {
-        programUID = "SSLpOM0r1U7";
+        programUID = mInitdata.programUID;
       }
       return httpPromise("GET", host + "/api/programValidations.json?paging=false&fields=*&filter=program.id:eq:" + programUID);
     };
-
-    this.programRuleVariables = function (programUID) {
+    this.getProgramRuleVariables = function (programUID) {
       if (!sUtils.isValue(programUID)) {
-        programUID = "SSLpOM0r1U7";
+        programUID = mInitdata.programUID;
       }
       return httpPromise("GET", host + "/api/programRuleVariables.json?paging=false&fields=*&filter=program.id:eq:" + programUID);
     };
-    this.programRules = function (programUID) {
+    this.getProgramRules = function (programUID) {
       if (!sUtils.isValue(programUID)) {
-        programUID = "SSLpOM0r1U7";
+        programUID = mInitdata.programUID;
       }
       return httpPromise("GET", host + "/api/programRules.json?paging=false&fields=*,programRuleActions[*]&filter=program.id:eq:" + programUID);
     };
-
-    this.events = function (programStageUID, orgUnit, ouMode, status) {
+    this.getEvents = function (programStageUID, orgUnit, ouMode, status) {
       if (!sUtils.isValue(programStageUID)) {
-        programStageUID = "s53RFfXA75f";
+        programStageUID = mInitdata.programStageUID;
       }
       if (!sUtils.isValue(orgUnit)) {
         orgUnit = orgUid;
       }
       if (!sUtils.isValue(ouMode)) {
-        ouMode = "SELECTED";
+        ouMode = mInitdata.ouMode;
       }
       if (!sUtils.isValue(status)) {
-        status = "SCHEDULE";
+        status = mInitdata.eventStatus;
       }
       return httpPromise("GET", host + "/api/events.json?paging=false&skipPaging=true&programStage=" + programStageUID + "&orgUnit=" + orgUnit + "&ouMode=" + ouMode + "&status=" + status);
     };
 
-    this.trackedEntityInstances = function (trackedEntityInstanceUID) {
+    this.getTrackedEntityInstances = function (trackedEntityInstanceUID) {
       return httpPromise("GET", host + "/api/trackedEntityInstances/" + trackedEntityInstanceUID + ".json?paging=false");
     };
-    this.enrollments = function (enrollmentUID) {
+    this.getEnrollments = function (enrollmentUID) {
       return httpPromise("GET", host + "/api/enrollments/" + enrollmentUID + ".json?paging=false&");
     };
-    this.eventTrackedEntityInstances = function (trackedEntityInstanceUID) {
+    this.getEventTrackedEntityInstances = function (trackedEntityInstanceUID) {
       return httpPromise("GET", host + "/api/events.json?paging=false&trackedEntityInstance=" + trackedEntityInstanceUID);
     };
 
@@ -102,11 +98,98 @@ angular.module('app.services', ['ngProgress'])
       return defer.promise;
     };
 
-
   })
 
-  .service('sInitDataService', function ($http, mDataCommon, sConfigVariableApp) {
+  .service('sInitDataService', function ($rootScope, $http, $q, mCODE, mDataCommon, mInitdata, sRuleHelper, sApiCall, sConfigVariableApp) {
+
     this.initCommonDB = function () {
+      var promiseArr = [];
+      promiseArr.push(
+        sApiCall.getConstants(),
+        sApiCall.getProgramTrackedEntityAttributes(),
+        sApiCall.getProgramStageDataElements(),
+        sApiCall.getProgramIndicators(),
+        sApiCall.getProgramValidations(),
+        sApiCall.getProgramRuleVariables(),
+        sApiCall.getProgramRules(),
+        sApiCall.getEvents()
+      );
+      return $q.all(promiseArr).then(function (values) {
+        mDataCommon.constants = values[0].constants;
+        mDataCommon.programTrackedEntityAttributes = values[1].programTrackedEntityAttributes;
+        mDataCommon.programStageDataElements = values[2].programStageDataElements;
+        mDataCommon.programIndicators = values[3].programIndicators;
+        mDataCommon.programValidations = values[4].programValidations;
+        mDataCommon.programRuleVariables = values[5].programRuleVariables;
+        mDataCommon.programRules = values[6].programRules;
+        mDataCommon.events = values[7].events;
+
+        angular.forEach(mDataCommon.events, function (event) {
+          var excutingEvent = mDataCommon.events[2];
+          $q.all([
+            sApiCall.getTrackedEntityInstances(excutingEvent.trackedEntityInstance),
+            sApiCall.getEnrollments(excutingEvent.enrollment),
+            sApiCall.getEventTrackedEntityInstances(excutingEvent.trackedEntityInstance)
+          ]).then(function (values) {
+
+            var eventDetails = {
+              trackedEntityInstances: values[0],
+              enrollments: values[1],
+              eventTEI: values[2].events
+            };
+            mDataCommon.eventDetails.push(eventDetails);
+            //$rootScope.$broadcast(mCODE.MSG.EVENTDETAILS, eventDetails);
+
+            var rulesEffect = sRuleHelper.excuteRules(mInitdata.programUID, excutingEvent, eventDetails.trackedEntityInstances, eventDetails.enrollments, eventDetails.eventTEI);
+            var programStageDataElementsMap = sRuleHelper.programStageDataElementsMap();
+
+            //populate completed data values.
+            var dataValues = [];
+            angular.forEach(eventDetails.eventTEI, function (event) {
+              angular.forEach(event.dataValues, function (dataValue) {
+                dataValues[dataValue.dataElement] = dataValue;
+              })
+            });
+
+            // processRuleEffects
+            for (var key in rulesEffect) {
+              var effect = rulesEffect[key];
+              if (effect.dataElement && effect.ineffect) {
+                if (effect.action == "HIDEFIELD") {
+                  programStageDataElementsMap[rulesEffect[key].dataElement.id]["action"] = "hidden";
+                }
+                if (effect.data) {
+                  programStageDataElementsMap[rulesEffect[key].dataElement.id].dataElement.value = effect.data;
+                }
+              }
+            }
+
+            for (var key in programStageDataElementsMap) {
+              var programStageDataElement = programStageDataElementsMap[key];
+              if (dataValues[key] && programStageDataElement.dataElement.value == undefined) {
+                programStageDataElement.dataElement.value = dataValues[key].value;
+              }
+              if (programStageDataElement.dataElement.value != undefined || programStageDataElement["action"] != "hidden") {
+                var log = "Name: " + programStageDataElement.dataElement.name + " - value: " + (programStageDataElement.dataElement.value ?
+                    programStageDataElement.dataElement.value : (dataValues[key] ? dataValues[key].value : undefined)) + " - key: " + key;
+                console.log(log);
+              }
+            }
+
+
+          });
+
+
+        });
+      });
+    };
+
+    this.initEventDetails = function () {
+
+
+    };
+
+    this.initMockupCommonDB = function () {
       var url = "../../model/";
       if (sConfigVariableApp.isSTAGING()) {
         url = "file:///android_asset/www/model/"
@@ -136,7 +219,8 @@ angular.module('app.services', ['ngProgress'])
         mDataCommon.events = data.events;
       });
     };
-    this.mockupDB = function () {
+
+    this.mockupEventDB = function () {
       var url = "../../model/";
       if (sConfigVariableApp.isSTAGING()) {
         url = "file:///android_asset/www/model/"
@@ -148,13 +232,14 @@ angular.module('app.services', ['ngProgress'])
       $http.get(url + 'enrollments.json').success(function (data) {
         mDataCommon.enrollments = data;
       });
-      $http.get(url + 'eventsTEI.json').success(function (data) {
-        mDataCommon.eventsTEI = data.events;
+      $http.get(url + 'eventTEI.json').success(function (data) {
+        mDataCommon.eventTEI = data.events;
       });
     }
+    
   })
 
-  .service('sRuleHelper', function ($filter, mDataCommon, DateUtils, TrackerRulesExecutionService) {
+  .service('sRuleHelper', function ($filter, DateUtils, mInitdata, mDataCommon, TrackerRulesExecutionService) {
     this.programRulesObject = function (programUid) {
       return {
         constants: mDataCommon.constants,
@@ -173,8 +258,8 @@ angular.module('app.services', ['ngProgress'])
       return programStageDataElementsMap;
     };
 
-    this.eventsByStageEVSObject = function () {
-      var eventAllStage = mDataCommon.eventsTEI;
+    this.eventsByStageEVSObject = function (eventTEI) {
+      var eventAllStage = eventTEI;
       var eventByStage = [];
       angular.forEach(eventAllStage, function (item) {
         generateEventSortingDate(item);
@@ -212,14 +297,14 @@ angular.module('app.services', ['ngProgress'])
       return eventObj;
     };
 
-    this.excuteRules = function () {
+    this.excuteRules = function (programUID, excutingEvent, trackedEntityInstances, enrollments, eventTEI) {
       var rulesEffectResponse = TrackerRulesExecutionService.executeRulesBID(
-        this.programRulesObject("SSLpOM0r1U7"),
-        this.validateExecutingEventObject(mDataCommon.events[0]),
-        this.eventsByStageEVSObject(),
+        this.programRulesObject(programUID),
+        this.validateExecutingEventObject(excutingEvent),
+        this.eventsByStageEVSObject(eventTEI),
         this.programStageDataElementsMap(),
-        mDataCommon.trackedEntityInstances,
-        mDataCommon.enrollments,
+        trackedEntityInstances,
+        enrollments,
         this.flagObject());
       return rulesEffectResponse.ruleeffects;
     };
@@ -380,7 +465,7 @@ angular.module('app.services', ['ngProgress'])
      * Check obj is String not empty, blank, null or undefine
      * @param obj
      * @returns {boolean}
-       */
+     */
     this.isValue = function (obj) {
       if (!obj || 0 === obj.length || /^\s*$/.test(obj) || !obj.trim()) return false;
       return true;

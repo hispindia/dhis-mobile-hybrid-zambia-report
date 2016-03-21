@@ -11,19 +11,21 @@ angular.module('app.models', [])
     STORAGE: {
       AUTHEN: "authentication",
       URL: "url",
-      ORGUID:"organisationUnitUID",
+      ORGUID:"organisationUnitUID"
     },
     MSG: {
       ISLOGIN: "isLogin",
       ISLOGOUT: "isLogout",
-      UNAUTHORIZED: "Unauthorized"
+      EVENTDETAILS: "eventDetails"
     }
   })
   .constant("mInitdata", {
     environment: undefined,
     initial: undefined,
     programUID: "SSLpOM0r1U7",
-    programStageUID: "s53RFfXA75f"
+    programStageUID: "s53RFfXA75f",
+    ouMode:"SELECTED",
+    eventStatus: "SCHEDULE"
   })
   .constant("mDataCommon", {
     constants: undefined,
@@ -33,10 +35,11 @@ angular.module('app.models', [])
     programRules: undefined,
     programStageDataElements: undefined,
     programTrackedEntityAttributes: undefined,
-    events: undefined
+    events: undefined,
+    eventDetails: []
   })
   .constant("mEventData", {
     trackedEntityInstances: undefined,
     enrollments: undefined,
-    eventsTEI: undefined
+    eventTEI: undefined
   });

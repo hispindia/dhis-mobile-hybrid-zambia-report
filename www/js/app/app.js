@@ -57,6 +57,10 @@ angular.module('app', ['ionic', 'ngSanitize',
       $state.go('menu.login');
     });
     sAuthentication.isLogin(true);
+
+    $rootScope.$on(mCODE.MSG.EVENTDETAILS, function (data) {
+      console.log(data);
+    });
   })
 
 
