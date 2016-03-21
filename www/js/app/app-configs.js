@@ -11,7 +11,7 @@ angular.module('app.configs', [])
 
     this.populateData = function () {
       if (angular.isUndefined(mInitdata.initial)) {
-        sConfigVariableApp.initApp(mCODE.EVN.STAGING);
+        sConfigVariableApp.initApp(mCODE.EVN.DEV);
         sInitDataService.initCommonDB();
         mInitdata.initial = true;
         sInitDataService.mockupDB();

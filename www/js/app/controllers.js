@@ -57,7 +57,6 @@ angular.module('app.controllers', ['ionic', 'ngMessages'])
   })
 
   .controller('cStockInHandCtrl', function ($scope) {
-
     $(function () {
       $('#container').highcharts({
         title: {
@@ -274,13 +273,21 @@ angular.module('app.controllers', ['ionic', 'ngMessages'])
 
   })
 
-  .controller('cConsoleCtrl', function ($scope, sInitApp, sApiCall, mCODE, localStorageService) {
+  .controller('cConsoleCtrl', function ($scope, ngProgressFactory, sInitApp, sApiCall, mCODE, localStorageService) {
+    var progressbar = ngProgressFactory.createInstance();
+    progressbar.setParent(document.getElementById("progress"));
+    progressbar.setAbsolute();
 
     sInitApp.isLogin(true);
 
     $scope.getMeClick = function () {
+      progressbar.start();
       sApiCall.getMe().then(function (data) {
         $scope.output = sApiCall.prettyJsonPrint(data);
+        progressbar.complete();
+      }, function(err){
+        $scope.output = sApiCall.prettyJsonPrint(err);
+        progressbar.reset();
       });
     }
 

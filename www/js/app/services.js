@@ -1,8 +1,5 @@
 angular.module('app.services', ['ngProgress'])
-  .service('sApiCall', function ($http, $q, ngProgressFactory, mInitdata) {
-    var progressbar = ngProgressFactory.createInstance();
-    progressbar.setParent(document.getElementById("progress"));
-    progressbar.setAbsolute();
+  .service('sApiCall', function ($http, $q, mInitdata) {
 
     this.getMe = function () {
       return httpPromise("GET", mInitdata.host + "/api/me");
@@ -25,17 +22,14 @@ angular.module('app.services', ['ngProgress'])
       //setTimeout(function () {
       //  defer.notify("calling....");
       //}, 0);
-      progressbar.start();
       $http(req).then(function (response) {
         if (typeof response.data === 'object') {
           defer.resolve(response.data);
         } else {
           defer.reject(response.data);
         }
-        progressbar.complete();
       }, function (error) {
         defer.reject(error);
-        progressbar.reset();
       });
       return defer.promise;
     };
