@@ -14,7 +14,6 @@ angular.module('app.configs', [])
         //sInitDataService.initMockupCommonDB();
         //sInitDataService.mockupEventDB();
 
-        mInitdata.initial = true;
       }
     };
 

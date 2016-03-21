@@ -5,7 +5,7 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-angular.module('app', ['ionic', 'ngSanitize',
+angular.module('app', ['ionic', 'ngSanitize', 'indexedDB',
     'app.models',
     'app.controllers',
     'app.routes',
@@ -16,6 +16,23 @@ angular.module('app', ['ionic', 'ngSanitize',
     'pascalprecht.translate',
     'LocalStorageModule'
   ])
+  .config(function ($indexedDBProvider) {
+    $indexedDBProvider
+      .connection('hiIndexedDB')
+      .upgradeDatabase(1, function (event, db, tx) {
+        var objStore = db.createObjectStore('event_reports', {keyPath: 'eventId'});
+        //objStore.createIndex('name_idx', 'name', {unique: false});
+        //objStore.createIndex('age_idx', 'age', {unique: false});
+      });
+  })
+  .config(function (localStorageServiceProvider) {
+    //https://github.com/grevory/angular-local-storage
+    localStorageServiceProvider
+      .setPrefix('hi')
+      .setStorageType('localStorage')
+      .setStorageCookie(45, '/');
+
+  })
   .run(function ($ionicPlatform) {
     $ionicPlatform.ready(function () {
       // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
@@ -29,16 +46,7 @@ angular.module('app', ['ionic', 'ngSanitize',
       }
     });
   })
-  .config(function (localStorageServiceProvider) {
-    //https://github.com/grevory/angular-local-storage
-    localStorageServiceProvider
-      .setPrefix('hi')
-      .setStorageType('localStorage')
-      .setStorageCookie(45, '/');
-
-  })
-
-  .run(function ($ionicHistory, $state, $rootScope, $location, mCODE, sAuthentication) {
+  .run(function ($indexedDB, $ionicHistory, $state, $rootScope, $location, mDataCommon, mCODE, sAuthentication) {
     $rootScope.$on(mCODE.MSG.ISLOGIN, function () {
       if ($location.path() == "/side-menu21/page_login") {
         $ionicHistory.clearHistory();
@@ -58,8 +66,44 @@ angular.module('app', ['ionic', 'ngSanitize',
     });
     sAuthentication.isLogin(true);
 
-    $rootScope.$on(mCODE.MSG.EVENTDETAILS, function (data) {
-      console.log(data);
+    $rootScope.$on(mCODE.MSG.EVENTDETAILS, function (event, args) {
+      var eventInfo = args.evenInfo;
+      mDataCommon.eventCacheReports.push(eventInfo);
+      $indexedDB.openStore('event_reports', function (store) {
+        store.upsert({
+          "eventId": eventInfo.eventId,
+          "dueDate": eventInfo.dueDate,
+          "sB1IHYu2xQT": eventInfo.sB1IHYu2xQT,
+          "wbtl3uN0spv": eventInfo.wbtl3uN0spv,
+          "age": eventInfo.age,
+
+          "bpBUOvqy1Jn": eventInfo.bpBUOvqy1Jn,
+          "EMcT5j5zR81": eventInfo.EMcT5j5zR81,
+          "KRF40x6EILp": eventInfo.KRF40x6EILp,
+          "no7SkAxepi7": eventInfo.no7SkAxepi7,
+          "CfPM8lsEMzH": eventInfo.CfPM8lsEMzH,
+          "K3TcJM1ySQA": eventInfo.K3TcJM1ySQA,
+          "fmXCCPENnwR": eventInfo.fmXCCPENnwR,
+          "nIqQYeSwU9E": eventInfo.nIqQYeSwU9E,
+          "sDORmAKh32v": eventInfo.sDORmAKh32v,
+          "PvHUllrtPiy": eventInfo.PvHUllrtPiy,
+          "wYg2gOWSyJG": eventInfo.wYg2gOWSyJG,
+          "nQeUfqPjK5o": eventInfo.nQeUfqPjK5o,
+          "pxCZNoqDVJC": eventInfo.pxCZNoqDVJC,
+          "B4eJCy6LFLZ": eventInfo.B4eJCy6LFLZ,
+          "cNA9EmFaiAa": eventInfo.cNA9EmFaiAa,
+          "g8dMiUOTFla": eventInfo.g8dMiUOTFla,
+          "Bxh1xgIY9nA": eventInfo.Bxh1xgIY9nA
+        });
+        if (mDataCommon.eventCacheReports.length == 1 ||
+          (mDataCommon.eventCacheReports.length >= (mDataCommon.events.length / 2)) ||
+          (mDataCommon.eventCacheReports.length >= (mDataCommon.events.length))) {
+          $rootScope.$broadcast(mCODE.MSG.EVENTRENDER);
+        }
+
+      });
+
+
     });
   })
 

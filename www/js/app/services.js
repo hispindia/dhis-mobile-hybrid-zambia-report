@@ -98,9 +98,15 @@ angular.module('app.services', ['ngProgress'])
       return defer.promise;
     };
 
+    this.makePromise = function (obj) {
+      return $q(function (resolve, reject) {
+        resolve(obj);
+      });
+    }
+
   })
 
-  .service('sInitDataService', function ($rootScope, $http, $q, mCODE, mDataCommon, mInitdata, sRuleHelper, sApiCall, sConfigVariableApp) {
+  .service('sInitDataService', function ($rootScope, $http, $q, mCODE, mEventDetails, mDataCommon, mInitdata, sRuleHelper, sApiCall, sConfigVariableApp) {
 
     this.initCommonDB = function () {
       var promiseArr = [];
@@ -124,69 +130,13 @@ angular.module('app.services', ['ngProgress'])
         mDataCommon.programRules = values[6].programRules;
         mDataCommon.events = values[7].events;
 
-        angular.forEach(mDataCommon.events, function (event) {
-          var excutingEvent = mDataCommon.events[2];
-          $q.all([
-            sApiCall.getTrackedEntityInstances(excutingEvent.trackedEntityInstance),
-            sApiCall.getEnrollments(excutingEvent.enrollment),
-            sApiCall.getEventTrackedEntityInstances(excutingEvent.trackedEntityInstance)
-          ]).then(function (values) {
-
-            var eventDetails = {
-              trackedEntityInstances: values[0],
-              enrollments: values[1],
-              eventTEI: values[2].events
-            };
-            mDataCommon.eventDetails.push(eventDetails);
-            //$rootScope.$broadcast(mCODE.MSG.EVENTDETAILS, eventDetails);
-
-            var rulesEffect = sRuleHelper.excuteRules(mInitdata.programUID, excutingEvent, eventDetails.trackedEntityInstances, eventDetails.enrollments, eventDetails.eventTEI);
-            var programStageDataElementsMap = sRuleHelper.programStageDataElementsMap();
-
-            //populate completed data values.
-            var dataValues = [];
-            angular.forEach(eventDetails.eventTEI, function (event) {
-              angular.forEach(event.dataValues, function (dataValue) {
-                dataValues[dataValue.dataElement] = dataValue;
-              })
-            });
-
-            // processRuleEffects
-            for (var key in rulesEffect) {
-              var effect = rulesEffect[key];
-              if (effect.dataElement && effect.ineffect) {
-                if (effect.action == "HIDEFIELD") {
-                  programStageDataElementsMap[rulesEffect[key].dataElement.id]["action"] = "hidden";
-                }
-                if (effect.data) {
-                  programStageDataElementsMap[rulesEffect[key].dataElement.id].dataElement.value = effect.data;
-                }
-              }
-            }
-
-            for (var key in programStageDataElementsMap) {
-              var programStageDataElement = programStageDataElementsMap[key];
-              if (dataValues[key] && programStageDataElement.dataElement.value == undefined) {
-                programStageDataElement.dataElement.value = dataValues[key].value;
-              }
-              if (programStageDataElement.dataElement.value != undefined || programStageDataElement["action"] != "hidden") {
-                var log = "Name: " + programStageDataElement.dataElement.name + " - value: " + (programStageDataElement.dataElement.value ?
-                    programStageDataElement.dataElement.value : (dataValues[key] ? dataValues[key].value : undefined)) + " - key: " + key;
-                console.log(log);
-              }
-            }
-
-
-          });
-
-
-        });
+        fetchEventDetails();
+        $rootScope.$broadcast(mCODE.MSG.UPDATECOMMONDB);
+        mInitdata.initial = true;
+      }, function(error){
+        console.log("error");
+        $rootScope.$broadcast(mCODE.MSG.APIERROR, error);
       });
-    };
-
-    this.initEventDetails = function () {
-
-
     };
 
     this.initMockupCommonDB = function () {
@@ -236,7 +186,74 @@ angular.module('app.services', ['ngProgress'])
         mDataCommon.eventTEI = data.events;
       });
     }
-    
+
+    function fetchEventDetails() {
+      mDataCommon.eventCacheReports = [];
+      for (var i = 0; i < mDataCommon.events.length; i++) {
+        $q.all([
+          sApiCall.makePromise(mDataCommon.events[i]),
+          sApiCall.getTrackedEntityInstances(mDataCommon.events[i].trackedEntityInstance),
+          sApiCall.getEnrollments(mDataCommon.events[i].enrollment),
+          sApiCall.getEventTrackedEntityInstances(mDataCommon.events[i].trackedEntityInstance)
+        ]).then(function (values) {
+          var excutingEvent = values[0];
+          var eventDetails = {
+            trackedEntityInstances: values[1],
+            enrollments: values[2],
+            eventTEI: values[3].events
+          };
+          mDataCommon.eventDetails.push(eventDetails);
+
+          var rulesEffect = sRuleHelper.excuteRules(mInitdata.programUID, excutingEvent, eventDetails.trackedEntityInstances, eventDetails.enrollments, eventDetails.eventTEI);
+          var programStageDataElementsMap = sRuleHelper.programStageDataElementsMap();
+
+          //populate completed data values.
+          var dataValues = [];
+          angular.forEach(eventDetails.eventTEI, function (event) {
+            angular.forEach(event.dataValues, function (dataValue) {
+              dataValues[dataValue.dataElement] = dataValue;
+            })
+          });
+
+          // processRuleEffects
+          for (var key in rulesEffect) {
+            var effect = rulesEffect[key];
+            if (effect.dataElement && effect.ineffect) {
+              if (effect.action == "HIDEFIELD") {
+                programStageDataElementsMap[rulesEffect[key].dataElement.id]["action"] = "hidden";
+              }
+              if (effect.data) {
+                programStageDataElementsMap[rulesEffect[key].dataElement.id].dataElement.value = effect.data;
+              }
+            }
+          }
+          var eventInfo = angular.copy(mEventDetails);
+          eventInfo.eventId = excutingEvent.event;
+          eventInfo.dueDate = excutingEvent.dueDate;
+          //console.log("DueDate: " + excutingEvent.dueDate);
+          for (var key in programStageDataElementsMap) {
+            var programStageDataElement = programStageDataElementsMap[key];
+            if (dataValues[key] && programStageDataElement.dataElement.value == undefined) {
+              programStageDataElement.dataElement.value = dataValues[key].value;
+            }
+            if (programStageDataElement.dataElement.value != undefined || programStageDataElement["action"] != "hidden") {
+
+              eventInfo[key] = (programStageDataElement.dataElement.value ?
+                programStageDataElement.dataElement.value : (dataValues[key] ? dataValues[key].value : "+"));
+
+              var log = "Name: " + programStageDataElement.dataElement.name + " - value: " + (programStageDataElement.dataElement.value ?
+                  programStageDataElement.dataElement.value : (dataValues[key] ? dataValues[key].value : undefined)) + " - key: " + key;
+              //console.log(log);
+            }
+          }
+          $rootScope.$broadcast(mCODE.MSG.EVENTDETAILS, {evenInfo: eventInfo});
+
+
+        });
+        //if (i == 3) break;
+      }
+    };
+
   })
 
   .service('sRuleHelper', function ($filter, DateUtils, mInitdata, mDataCommon, TrackerRulesExecutionService) {
@@ -274,8 +291,6 @@ angular.module('app.services', ['ngProgress'])
         var dateA = new Date(a["sortingDate"]), dateB = new Date(b["sortingDate"]);
         return dateA - dateB;
       });
-      console.log("sort eventAllStage");
-      console.log(eventAllStage);
 
       return {
         all: eventAllStage,

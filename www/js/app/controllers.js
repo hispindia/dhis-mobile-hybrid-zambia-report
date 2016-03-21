@@ -10,9 +10,9 @@ angular.module('app.controllers', ['ionic', 'ngMessages'])
         template: 'Are you sure you want to logout?'
       });
 
-      confirmPopup.then(function(res) {
+      confirmPopup.then(function (res) {
         $ionicSideMenuDelegate.toggleLeft();
-        if(res) {
+        if (res) {
           return sAuthentication.logout();
         } else {
         }
@@ -24,45 +24,80 @@ angular.module('app.controllers', ['ionic', 'ngMessages'])
     sAuthentication.isLogin(true);
   })
 
-  .controller('cScheduleVaccineTodayCtrl', function ($scope, sRuleHelper, mDataCommon) {
+  .controller('cScheduleVaccineTodayCtrl', function ($scope, $indexedDB, ngProgressFactory, mInitdata, mCODE, mDataCommon, sAuthentication, sRuleHelper) {
     sAuthentication.isLogin(true);
+    var progressbar = ngProgressFactory.createInstance();
+    progressbar.setParent(document.getElementById("progress"));
+    progressbar.setAbsolute();
+    $scope.mEventDetails = [];
+    const de = $scope.dataElements = {
+      "bpBUOvqy1Jn": {groupby: "BCG", name: "BCG"},
+      "EMcT5j5zR81": {groupby: "BCG", name: "BCG scar"},
+      "KRF40x6EILp": {groupby: "BCG", name: "BCG repeat dose"},
+      "no7SkAxepi7": {groupby: "OPV", name: "OPV 0"},
+      "CfPM8lsEMzH": {groupby: "OPV", name: "OPV 1"},
+      "K3TcJM1ySQA": {groupby: "DPT", name: "DPT-HepB-Hib1"},
+      "fmXCCPENnwR": {groupby: "PCV", name: "PCV 1"},
+      "nIqQYeSwU9E": {groupby: "RV", name: "RV 1"},
+      "sDORmAKh32v": {groupby: "OPV", name: "OPV 2"},
+      "PvHUllrtPiy": {groupby: "PCV", name: "PCV 2"},
+      "wYg2gOWSyJG": {groupby: "RV", name: "RV 2"},
+      "nQeUfqPjK5o": {groupby: "OPV", name: "OPV 3"},
+      "pxCZNoqDVJC": {groupby: "DPT", name: "DPT-HepB-Hib3"},
+      "B4eJCy6LFLZ": {groupby: "PCV", name: "PCV 3"},
+      "cNA9EmFaiAa": {groupby: "OPV", name: "OPV 4"},
+      "g8dMiUOTFla": {groupby: "Measles", name: "Measles 1"},
+      "Bxh1xgIY9nA": {groupby: "Measles", name: "Measles 2"}
+    };
 
-    var rulesEffect = sRuleHelper.excuteRules();
-    var programStageDataElementsMap = sRuleHelper.programStageDataElementsMap();
+    const attr = $scope.attributes = {
+      eventId: "Event ID",
+      dueDate: "Due date",
+      sB1IHYu2xQT: "First Name",
+      wbtl3uN0spv: "Child Name",
+      age: "Age"
+    };
+    progressbar.start();
+    //update progress when commondb updated
+    $scope.$on(mCODE.MSG.UPDATECOMMONDB, function () {
+      console.log("UPDATECOMMONDB");
+      progressbar.reset();
+    });
+    $scope.$on(mCODE.MSG.APIERROR, function () {
+      console.log("APIERROR");
 
-    //populate completed data values.
-    var dataValues = [];
-    angular.forEach(mDataCommon.eventTEI, function (event) {
-      angular.forEach(event.dataValues, function (dataValue) {
-        dataValues[dataValue.dataElement] = dataValue;
-      })
+      progressbar.reset();
+    });
+    //update ui from cache
+    $scope.$on(mCODE.MSG.EVENTRENDER, function (event, args) {
+      console.log("EVENTRENDER");
+      $scope.mEventDetails = mDataCommon.eventCacheReports;
+      if (progressbar.status() == 0) {
+        progressbar.start();
+      }
+      progressbar.set(mDataCommon.eventCacheReports.length * 100 / mDataCommon.events.length);
+      if (mDataCommon.eventCacheReports.length == mDataCommon.events.length) {
+        progressbar.complete();
+      }
     });
 
-    // processRuleEffects
-    for (var key in rulesEffect) {
-      var effect = rulesEffect[key];
-      if (effect.dataElement && effect.ineffect) {
-        if (effect.action == "HIDEFIELD") {
-          programStageDataElementsMap[rulesEffect[key].dataElement.id]["action"] = "hidden";
+    //if caching, get full db in local, remember init cache in the first time
+    $indexedDB.openStore('event_reports', function (store) {
+      store.getAll().then(function (data) {
+        if (data.length >= mDataCommon.eventCacheReports.length) {
+          $scope.mEventDetails = data;
+          if (data.length <= mDataCommon.events.length && mDataCommon.events.length <= mDataCommon.eventCacheReports.length) {
+            progressbar.complete();
+          }
+        } else {
+          $scope.mEventDetails = mDataCommon.eventCacheReports;
+          progressbar.complete();
         }
-        if (effect.data) {
-          programStageDataElementsMap[rulesEffect[key].dataElement.id].dataElement.value = effect.data;
-        }
-      }
-    }
+      });
+    });
 
-    $scope.outputArr = [];
-    for (var key in programStageDataElementsMap) {
-      var programStageDataElement = programStageDataElementsMap[key];
-      if (dataValues[key] && programStageDataElement.dataElement.value == undefined) {
-        programStageDataElement.dataElement.value = dataValues[key].value;
-      }
-      if (programStageDataElement.dataElement.value != undefined || programStageDataElement["action"] != "hidden") {
-        var log = "Name: " + programStageDataElement.dataElement.name + " - value: " + (programStageDataElement.dataElement.value ?
-            programStageDataElement.dataElement.value : (dataValues[key] ? dataValues[key].value : undefined)) + " - key: " + key;
-        console.log(log);
-        $scope.outputArr.push(log);
-      }
+    if ($scope.mEventDetails.length <= mDataCommon.events.length && mDataCommon.events.length <= mDataCommon.eventCacheReports.length) {
+      progressbar.complete();
     }
   })
 
@@ -281,8 +316,8 @@ angular.module('app.controllers', ['ionic', 'ngMessages'])
 
     $scope.loginClick = function (form) {
       if (form.$valid && sUtils.isValue(login.host) && sUtils.isValue(login.username) && sUtils.isValue(login.password)) {
-        if(login.host.length>3 && (login.host[login.host.length-1] =='/' || login.host[login.host.length-1] =='\\')){
-          $scope.login.host = login.host = login.host.substr(0, login.host.length-1);
+        if (login.host.length > 3 && (login.host[login.host.length - 1] == '/' || login.host[login.host.length - 1] == '\\')) {
+          $scope.login.host = login.host = login.host.substr(0, login.host.length - 1);
         }
 
         progressbar.start();
@@ -304,12 +339,12 @@ angular.module('app.controllers', ['ionic', 'ngMessages'])
       }
     };
 
-    var showAlert = function() {
+    var showAlert = function () {
       var alertPopup = $ionicPopup.alert({
         title: 'Login failed!',
         template: 'Please check your input data again.'
       });
-      alertPopup.then(function(res) {
+      alertPopup.then(function (res) {
         //console.log(res);
       });
     };

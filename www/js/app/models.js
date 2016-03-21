@@ -16,7 +16,10 @@ angular.module('app.models', [])
     MSG: {
       ISLOGIN: "isLogin",
       ISLOGOUT: "isLogout",
-      EVENTDETAILS: "eventDetails"
+      EVENTDETAILS: "eventDetails",
+      EVENTRENDER: "eventRender",
+      UPDATECOMMONDB: "commonDbComplete",
+      APIERROR: "apiCallError"
     }
   })
   .constant("mInitdata", {
@@ -28,18 +31,49 @@ angular.module('app.models', [])
     eventStatus: "SCHEDULE"
   })
   .constant("mDataCommon", {
-    constants: undefined,
-    programIndicators: undefined,
-    programValidations: undefined,
-    programRuleVariables: undefined,
-    programRules: undefined,
-    programStageDataElements: undefined,
-    programTrackedEntityAttributes: undefined,
-    events: undefined,
-    eventDetails: []
+    constants: [],
+    programIndicators: [],
+    programValidations: [],
+    programRuleVariables: [],
+    programRules: [],
+    programStageDataElements: [],
+    programTrackedEntityAttributes: [],
+    events: [],
+    eventDetails: [],
+    eventCacheReports: []
   })
   .constant("mEventData", {
     trackedEntityInstances: undefined,
     enrollments: undefined,
     eventTEI: undefined
-  });
+  })
+  .constant("mEventDetails", {
+    eventId:"-",
+    dueDate:"-",
+    sB1IHYu2xQT:"-",
+    wbtl3uN0spv:"-",
+    age:"-",
+
+    bpBUOvqy1Jn:"-",
+    EMcT5j5zR81:"-",
+    KRF40x6EILp:"-",
+    no7SkAxepi7:"-",
+    CfPM8lsEMzH:"-",
+    K3TcJM1ySQA:"-",
+    fmXCCPENnwR:"-",
+    nIqQYeSwU9E:"-",
+    sDORmAKh32v:"-",
+    PvHUllrtPiy:"-",
+    wYg2gOWSyJG:"-",
+    nQeUfqPjK5o:"-",
+    pxCZNoqDVJC:"-",
+    B4eJCy6LFLZ:"-",
+    cNA9EmFaiAa:"-",
+    g8dMiUOTFla:"-",
+    Bxh1xgIY9nA:"-"
+  })
+
+
+
+
+;

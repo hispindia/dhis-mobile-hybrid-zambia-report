@@ -1,5 +1,6 @@
 <ion-view title="Schedule Vaccine Today">
   <ion-content overflow-scroll="true" padding="true" class="has-header">
+    <div id="progress"></div>
     <form class="list">
       <label class="item item-input">
         <i class="icon ion-search placeholder-icon"></i>
@@ -7,9 +8,102 @@
       </label>
     </form>
     <div class="list">
-      <a href="#" class="item" ng-repeat="output in outputArr">
-        {{output}}
-      </a>
+      <div ng-repeat="item	in mEventDetails track by $index">
+        <div class="card">
+          <a class="item" ng-hide='item.eventId=="-"'>
+            <i class="icon ion-ios-circle-outline"></i>
+            {{attributes.eventId}}: {{item.eventId}}
+          </a>
+          <a class="item" ng-hide='item.dueDate=="-"'>
+            <i class="icon ion-ios-circle-outline"></i>
+            {{attributes.dueDate}}: {{item.dueDate}}
+          </a>
+          <a class="item" ng-hide='item.sB1IHYu2xQT=="-"'>
+            <i class="icon ion-ios-circle-outline"></i>
+            {{attributes.sB1IHYu2xQT}}: {{item.sB1IHYu2xQT}}
+          </a>
+          <a class="item" ng-hide='item.wbtl3uN0spv=="-"'>
+            <i class="icon ion-ios-circle-outline"></i>
+            {{attributes.wbtl3uN0spv}}: {{item.wbtl3uN0spv}}
+          </a>
+          <a class="item" ng-hide='item.age=="-"'>
+            <i class="icon ion-ios-circle-outline"></i>
+            {{attributes.age}}: {{item.age}}
+          </a>
+
+          <!--data element-->
+          <a class="item" ng-hide='item.bpBUOvqy1Jn=="-"'>
+            <i class="icon ion-ios-circle-outline"></i>
+            {{dataElements.bpBUOvqy1Jn.name}}: {{item.bpBUOvqy1Jn}}
+          </a>
+          <a class="item" ng-hide='item.EMcT5j5zR81=="-"'>
+            <i class="icon ion-ios-circle-outline"></i>
+            {{dataElements.EMcT5j5zR81.name}}: {{item.EMcT5j5zR81}}
+          </a>
+          <a class="item" ng-hide='item.KRF40x6EILp=="-"'>
+            <i class="icon ion-ios-circle-outline"></i>
+            {{dataElements.KRF40x6EILp.name}}: {{item.KRF40x6EILp}}
+          </a>
+          <a class="item" ng-hide='item.no7SkAxepi7=="-"'>
+            <i class="icon ion-ios-circle-outline"></i>
+            {{dataElements.no7SkAxepi7.name}}: {{item.no7SkAxepi7}}
+          </a>
+          <a class="item" ng-hide='item.CfPM8lsEMzH=="-"'>
+            <i class="icon ion-ios-circle-outline"></i>
+            {{dataElements.CfPM8lsEMzH.name}}: {{item.CfPM8lsEMzH}}
+          </a>
+          <a class="item" ng-hide='item.K3TcJM1ySQA=="-"'>
+            <i class="icon ion-ios-circle-outline"></i>
+            {{dataElements.K3TcJM1ySQA.name}}: {{item.K3TcJM1ySQA}}
+          </a>
+          <a class="item" ng-hide='item.fmXCCPENnwR=="-"'>
+            <i class="icon ion-ios-circle-outline"></i>
+            {{dataElements.fmXCCPENnwR.name}}: {{item.fmXCCPENnwR}}
+          </a>
+          <a class="item" ng-hide='item.nIqQYeSwU9E=="-"'>
+            <i class="icon ion-ios-circle-outline"></i>
+            {{dataElements.nIqQYeSwU9E.name}}: {{item.nIqQYeSwU9E}}
+          </a>
+          <a class="item" ng-hide='item.sDORmAKh32v=="-"'>
+            <i class="icon ion-ios-circle-outline"></i>
+            {{dataElements.sDORmAKh32v.name}}: {{item.sDORmAKh32v}}
+          </a>
+          <a class="item" ng-hide='item.PvHUllrtPiy=="-"'>
+            <i class="icon ion-ios-circle-outline"></i>
+            {{dataElements.PvHUllrtPiy.name}}: {{item.PvHUllrtPiy}}
+          </a>
+          <a class="item" ng-hide='item.wYg2gOWSyJG=="-"'>
+            <i class="icon ion-ios-circle-outline"></i>
+            {{dataElements.wYg2gOWSyJG.name}}: {{item.wYg2gOWSyJG}}
+          </a>
+          <a class="item" ng-hide='item.nQeUfqPjK5o=="-"'>
+            <i class="icon ion-ios-circle-outline"></i>
+            {{dataElements.nQeUfqPjK5o.name}}: {{item.nQeUfqPjK5o}}
+          </a>
+          <a class="item" ng-hide='item.pxCZNoqDVJC=="-"'>
+            <i class="icon ion-ios-circle-outline"></i>
+            {{dataElements.pxCZNoqDVJC.name}}: {{item.pxCZNoqDVJC}}
+          </a>
+          <a class="item" ng-hide='item.B4eJCy6LFLZ=="-"'>
+            <i class="icon ion-ios-circle-outline"></i>
+            {{dataElements.B4eJCy6LFLZ.name}}: {{item.B4eJCy6LFLZ}}
+          </a>
+          <a class="item" ng-hide='item.cNA9EmFaiAa=="-"'>
+            <i class="icon ion-ios-circle-outline"></i>
+            {{dataElements.cNA9EmFaiAa.name}}: {{item.cNA9EmFaiAa}}
+          </a>
+          <a class="item" ng-hide='item.g8dMiUOTFla=="-"'>
+            <i class="icon ion-ios-circle-outline"></i>
+            {{dataElements.g8dMiUOTFla.name}}: {{item.g8dMiUOTFla}}
+          </a>
+          <a class="item" ng-hide='item.Bxh1xgIY9nA=="-"'>
+            <i class="icon ion-ios-circle-outline"></i>
+            {{dataElements.Bxh1xgIY9nA.name}}: {{item.Bxh1xgIY9nA}}
+          </a>
+
+
+        </div>
+      </div>
     </div>
 
   </ion-content>
