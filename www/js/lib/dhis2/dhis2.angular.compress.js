@@ -9,7 +9,7 @@ angular.module('dhis2.compress', [])
   })
 
   /* trim away all single and double quotes in the start and end of a string*/
-  .filter('trimquotes', function () {
+  .filter('d2fTrimQuotes', function () {
     return function (input) {
       if (!input || (typeof input !== 'string' && !(input instanceof String))) {
         return input;
@@ -34,7 +34,7 @@ angular.module('dhis2.compress', [])
   })
 
   /* trim away the qualifiers before and after a variable name */
-  .filter('trimvariablequalifiers', function () {
+  .filter('d2fTrimVariableQualifiers', function () {
     return function (input) {
       if (!input || (typeof input !== 'string' && !(input instanceof String))) {
         return input;
@@ -47,7 +47,7 @@ angular.module('dhis2.compress', [])
   })
 
   /* Factory for loading translation strings */
-  .factory('i18nLoader', function ($q, $http, SessionStorageService) {
+  .factory('i18nLoader', function ($q, $http, d2sSessionStorageService) {
 
     var getTranslationStrings = function (locale) {
       var defaultUrl = 'i18n/i18n_app.properties';
@@ -81,7 +81,7 @@ angular.module('dhis2.compress', [])
       var locale = 'en';
 
       var promise = $http.get('../api/me/profile.json').then(function (response) {
-        SessionStorageService.set('USER_PROFILE', response.data);
+        d2sSessionStorageService.set('USER_PROFILE', response.data);
         if (response.data && response.data.settings && response.data.settings.keyUiLocale) {
           locale = response.data.settings.keyUiLocale;
         }
@@ -95,7 +95,7 @@ angular.module('dhis2.compress', [])
 
     return function () {
       var deferred = $q.defer(), translations;
-      var userProfile = SessionStorageService.get('USER_PROFILE');
+      var userProfile = d2sSessionStorageService.get('USER_PROFILE');
       if (userProfile && userProfile.settings && userProfile.settings.keyUiLocale) {
         getTranslationStrings(userProfile.settings.keyUiLocale).then(function (response) {
           translations = response.keys;
@@ -116,7 +116,7 @@ angular.module('dhis2.compress', [])
   })
 
   /* Factory for loading external data */
-  .factory('ExternalDataFactory', function ($http) {
+  .factory('d2sExternalDataFactory', function ($http) {
 
     return {
       get: function (fileName) {
@@ -129,7 +129,7 @@ angular.module('dhis2.compress', [])
   })
 
   /* service for wrapping sessionStorage '*/
-  .service('SessionStorageService', function ($window) {
+  .service('d2sSessionStorageService', function ($window) {
     return {
       get: function (key) {
         return JSON.parse($window.sessionStorage.getItem(key));
@@ -146,7 +146,7 @@ angular.module('dhis2.compress', [])
   })
 
   /* service for dealing with dates */
-  .service('DateUtils', function (d2Const) {
+  .service('d2sDateUtils', function (d2Const) {
 
     return {
       getToday: function () {
@@ -156,7 +156,7 @@ angular.module('dhis2.compress', [])
         if (!dateValue) {
           return;
         }
-        return moment(dateValue, d2Const.momentFormat);
+        return moment(dateValue).format(d2Const.momentFormat);
       },
       addDays2DateYYMMDD: function (dateValue, days) {
         this.formatYYYMMDD(dateValue).add(days, 'days');
@@ -165,7 +165,7 @@ angular.module('dhis2.compress', [])
   })
 
   /* Service for uploading/downloading file */
-  .service('FileService', function ($http) {
+  .service('d2sFileService', function ($http) {
 
     return {
       get: function (uid) {
@@ -199,10 +199,10 @@ angular.module('dhis2.compress', [])
   })
 
   /* service for building variables based on the data in users fields */
-  .service('VariableService', function (DateUtils, $filter, $log) {
+  .service('d2sVariableService', function (d2sDateUtils, $filter, $log) {
     var processSingleValue = function (processedValue, valueType) {
       //First clean away single or double quotation marks at the start and end of the variable name.
-      processedValue = $filter('trimquotes')(processedValue);
+      processedValue = $filter('d2fTrimQuotes')(processedValue);
 
       //Append single quotation marks in case the variable is of text or date type:
       if (valueType === 'LONG_TEXT' || valueType === 'TEXT' || valueType === 'DATE' || valueType === 'OPTION_SET') {
@@ -396,7 +396,7 @@ angular.module('dhis2.compress', [])
 
         //add context variables:
         //last parameter "valuefound" is always true for event date
-        variables = pushVariable(variables, 'current_date', DateUtils.getToday(), null, 'DATE', true, 'V', '');
+        variables = pushVariable(variables, 'current_date', d2sDateUtils.getToday(), null, 'DATE', true, 'V', '');
 
         variables = pushVariable(variables, 'event_date', executingEvent.eventDate, null, 'DATE', true, 'V', '');
         variables = pushVariable(variables, 'due_date', executingEvent.dueDate, null, 'DATE', true, 'V', '');
@@ -421,7 +421,7 @@ angular.module('dhis2.compress', [])
   })
 
   /* service for executing tracker rules and broadcasting results */
-  .service('TrackerRulesExecutionService', function (VariableService, DateUtils, DHIS2EventFactory, $rootScope, $log, $filter, orderByFilter) {
+  .service('d2sTrackerRulesExecutionService', function (d2sVariableService, d2sDateUtils, d2sEventFactory, $rootScope, $log, $filter, orderByFilter) {
 
     var replaceVariables = function (expression, variablesHash) {
       //replaces the variables in an expression with actual variable values.
@@ -571,8 +571,8 @@ angular.module('dhis2.compress', [])
 
               //Special block for d2:weeksBetween(*,*) - add such a block for all other dhis functions.
               if (dhisFunction.name === "d2:daysBetween") {
-                var firstdate = $filter('trimquotes')(parameters[0]);
-                var seconddate = $filter('trimquotes')(parameters[1]);
+                var firstdate = $filter('d2fTrimQuotes')(parameters[0]);
+                var seconddate = $filter('d2fTrimQuotes')(parameters[1]);
                 firstdate = moment(firstdate);
                 seconddate = moment(seconddate);
                 //Replace the end evaluation of the dhis function:
@@ -580,8 +580,8 @@ angular.module('dhis2.compress', [])
                 successfulExecution = true;
               }
               else if (dhisFunction.name === "d2:weeksBetween") {
-                var firstdate = $filter('trimquotes')(parameters[0]);
-                var seconddate = $filter('trimquotes')(parameters[1]);
+                var firstdate = $filter('d2fTrimQuotes')(parameters[0]);
+                var seconddate = $filter('d2fTrimQuotes')(parameters[1]);
                 firstdate = moment(firstdate);
                 seconddate = moment(seconddate);
                 //Replace the end evaluation of the dhis function:
@@ -589,8 +589,8 @@ angular.module('dhis2.compress', [])
                 successfulExecution = true;
               }
               else if (dhisFunction.name === "d2:monthsBetween") {
-                var firstdate = $filter('trimquotes')(parameters[0]);
-                var seconddate = $filter('trimquotes')(parameters[1]);
+                var firstdate = $filter('d2fTrimQuotes')(parameters[0]);
+                var seconddate = $filter('d2fTrimQuotes')(parameters[1]);
                 firstdate = moment(firstdate);
                 seconddate = moment(seconddate);
                 //Replace the end evaluation of the dhis function:
@@ -598,8 +598,8 @@ angular.module('dhis2.compress', [])
                 successfulExecution = true;
               }
               else if (dhisFunction.name === "d2:yearsBetween") {
-                var firstdate = $filter('trimquotes')(parameters[0]);
-                var seconddate = $filter('trimquotes')(parameters[1]);
+                var firstdate = $filter('d2fTrimQuotes')(parameters[0]);
+                var seconddate = $filter('d2fTrimQuotes')(parameters[1]);
                 firstdate = moment(firstdate);
                 seconddate = moment(seconddate);
                 //Replace the end evaluation of the dhis function:
@@ -630,9 +630,9 @@ angular.module('dhis2.compress', [])
                 successfulExecution = true;
               }
               else if (dhisFunction.name === "d2:addDays") {
-                var date = $filter('trimquotes')(parameters[0]);
-                var daystoadd = $filter('trimquotes')(parameters[1]);
-                var newdate = DateUtils.addDays2DateYYMMDD(date, daystoadd);
+                var date = $filter('d2fTrimQuotes')(parameters[0]);
+                var daystoadd = $filter('d2fTrimQuotes')(parameters[1]);
+                var newdate = d2sDateUtils.addDays2DateYYMMDD(date, daystoadd);
                 var newdatestring = "'" + newdate + "'";
                 //Replace the end evaluation of the dhis function:
                 expression = expression.replace(callToThisFunction, newdatestring);
@@ -683,7 +683,7 @@ angular.module('dhis2.compress', [])
                 successfulExecution = true;
               }
               else if (dhisFunction.name === "d2:countIfZeroPos") {
-                var variableName = $filter('trimvariablequalifiers')(parameters[0]);
+                var variableName = $filter('d2fTrimVariableQualifiers')(parameters[0]);
                 var variableObject = variablesHash[variableName];
 
                 var count = 0;
@@ -716,7 +716,7 @@ angular.module('dhis2.compress', [])
                 var variableName = parameters[0];
                 var variableObject = variablesHash[variableName];
 
-                var valueToCompare = VariableService.processValue(parameters[1], variableObject.variableType);
+                var valueToCompare = d2sVariableService.processValue(parameters[1], variableObject.variableType);
 
                 var count = 0;
                 if (variableObject) {
@@ -779,7 +779,7 @@ angular.module('dhis2.compress', [])
                 var valueFound = "''";
                 if (variableObject) {
                   if (variableObject.variableEventDate) {
-                    valueFound = VariableService.processValue(variableObject.variableEventDate, 'DATE');
+                    valueFound = d2sVariableService.processValue(variableObject.variableEventDate, 'DATE');
                   }
                   else {
                     //$log.warn("no last event date found for variable: " + variableName);
@@ -934,8 +934,8 @@ angular.module('dhis2.compress', [])
             }
             var valueType = determineValueType(valVal);
 
-            var processedValue = VariableService.processValue(valVal, valueType);
-            processedValue = $filter('trimquotes')(processedValue);
+            var processedValue = d2sVariableService.processValue(valVal, valueType);
+            processedValue = $filter('d2fTrimQuotes')(processedValue);
             dataValues.push({dataElement: valId, value: processedValue});
             dataValues[valId] = processedValue;
           }
@@ -956,8 +956,8 @@ angular.module('dhis2.compress', [])
         });
 
         if (!valuesAlreadyExists) {
-          var eventDate = DateUtils.getToday();
-          var dueDate = DateUtils.getToday();
+          var eventDate = d2sDateUtils.getToday();
+          var dueDate = d2sDateUtils.getToday();
 
           var newEvent = {
             trackedEntityInstance: selectedEnrollment.trackedEntityInstance,
@@ -973,7 +973,7 @@ angular.module('dhis2.compress', [])
             event: dhis2.util.uid()
           };
 
-          DHIS2EventFactory.create(newEvent).then(function (result) {
+          d2sEventFactory.create(newEvent).then(function (result) {
             $rootScope.$broadcast("eventcreated", {event: newEvent});
           });
           //1 event created
@@ -1010,7 +1010,7 @@ angular.module('dhis2.compress', [])
           //Run rules in priority - lowest number first(priority null is last)
           rules = orderByFilter(rules, 'priority');
 
-          variablesHash = VariableService.getVariables(allProgramRules, executingEvent, evs, allDataElements, selectedEntity, selectedEnrollment);
+          variablesHash = d2sVariableService.getVariables(allProgramRules, executingEvent, evs, allDataElements, selectedEntity, selectedEnrollment);
 
           if (angular.isObject(rules) && angular.isArray(rules)) {
             //The program has rules, and we want to run them.
@@ -1137,7 +1137,7 @@ angular.module('dhis2.compress', [])
                     //Then we assign the new value:
                     var valueType = determineValueType(updatedValue);
 
-                    var processedValue = VariableService.processValue(updatedValue, valueType);
+                    var processedValue = d2sVariableService.processValue(updatedValue, valueType);
 
                     variablesHash[variabletoassign] = {
                       variableValue: processedValue,
@@ -1183,7 +1183,7 @@ angular.module('dhis2.compress', [])
           //Run rules in priority - lowest number first(priority null is last)
           rules = orderByFilter(rules, 'priority');
 
-          variablesHash = VariableService.getVariables(allProgramRules, executingEvent, evs, allDataElements, selectedEntity, selectedEnrollment);
+          variablesHash = d2sVariableService.getVariables(allProgramRules, executingEvent, evs, allDataElements, selectedEntity, selectedEnrollment);
 
           if (angular.isObject(rules) && angular.isArray(rules)) {
             //The program has rules, and we want to run them.
@@ -1311,7 +1311,7 @@ angular.module('dhis2.compress', [])
                     //Then we assign the new value:
                     var valueType = determineValueType(updatedValue);
 
-                    var processedValue = VariableService.processValue(updatedValue, valueType);
+                    var processedValue = d2sVariableService.processValue(updatedValue, valueType);
 
                     variablesHash[variabletoassign] = {
                       variableValue: processedValue,
@@ -1339,7 +1339,7 @@ angular.module('dhis2.compress', [])
   })
 
   /* service for dealing with events */
-  .service('DHIS2EventService', function () {
+  .service('d2sEventService', function () {
     return {
       //for simplicity of grid display, events were changed from
       //event.datavalues = [{dataElement: dataElement, value: value}] to
@@ -1390,7 +1390,7 @@ angular.module('dhis2.compress', [])
   })
 
   /* factory for handling events */
-  .factory('DHIS2EventFactory', function ($http, $translate) {
+  .factory('d2sEventFactory', function ($http, $translate) {
 
     return {
 

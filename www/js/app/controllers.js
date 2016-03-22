@@ -60,17 +60,14 @@ angular.module('app.controllers', ['ionic', 'ngMessages'])
     progressbar.start();
     //update progress when commondb updated
     $scope.$on(mCODE.MSG.UPDATECOMMONDB, function () {
-      console.log("UPDATECOMMONDB");
       progressbar.reset();
     });
     $scope.$on(mCODE.MSG.APIERROR, function () {
-      console.log("APIERROR");
 
       progressbar.reset();
     });
     //update ui from cache
     $scope.$on(mCODE.MSG.EVENTRENDER, function (event, args) {
-      console.log("EVENTRENDER");
       $scope.mEventDetails = mDataCommon.eventCacheReports;
       if (progressbar.status() == 0) {
         progressbar.start();

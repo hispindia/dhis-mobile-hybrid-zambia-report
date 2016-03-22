@@ -12,6 +12,7 @@ angular.module('app', ['ionic', 'ngSanitize', 'indexedDB',
     'app.services',
     'app.directives',
     'app.configs',
+    'app.filters',
     'dhis2.compress',
     'pascalprecht.translate',
     'LocalStorageModule'
@@ -21,8 +22,7 @@ angular.module('app', ['ionic', 'ngSanitize', 'indexedDB',
       .connection('hiIndexedDB')
       .upgradeDatabase(1, function (event, db, tx) {
         var objStore = db.createObjectStore('event_reports', {keyPath: 'eventId'});
-        //objStore.createIndex('name_idx', 'name', {unique: false});
-        //objStore.createIndex('age_idx', 'age', {unique: false});
+        //objStore.createIndex('dueDate_idx', 'dueDate', {unique: false});
       });
   })
   .config(function (localStorageServiceProvider) {
@@ -30,7 +30,6 @@ angular.module('app', ['ionic', 'ngSanitize', 'indexedDB',
     localStorageServiceProvider
       .setPrefix('hi')
       .setStorageType('localStorage')
-      .setStorageCookie(45, '/');
 
   })
   .run(function ($ionicPlatform) {

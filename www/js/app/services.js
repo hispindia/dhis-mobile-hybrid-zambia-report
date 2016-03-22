@@ -106,9 +106,10 @@ angular.module('app.services', ['ngProgress'])
 
   })
 
-  .service('sInitDataService', function ($rootScope, $http, $q, mCODE, mEventDetails, mDataCommon, mInitdata, sRuleHelper, sApiCall, sConfigVariableApp) {
+  .service('sInitDataService', function ($rootScope, $http, $q, d2sDateUtils, mCODE, mEventDetails, mDataCommon, mInitdata, sRuleHelper, sApiCall, sConfigVariableApp) {
 
     this.initCommonDB = function () {
+
       var promiseArr = [];
       promiseArr.push(
         sApiCall.getConstants(),
@@ -133,8 +134,7 @@ angular.module('app.services', ['ngProgress'])
         fetchEventDetails();
         $rootScope.$broadcast(mCODE.MSG.UPDATECOMMONDB);
         mInitdata.initial = true;
-      }, function(error){
-        console.log("error");
+      }, function (error) {
         $rootScope.$broadcast(mCODE.MSG.APIERROR, error);
       });
     };
@@ -188,6 +188,7 @@ angular.module('app.services', ['ngProgress'])
     }
 
     function fetchEventDetails() {
+
       mDataCommon.eventCacheReports = [];
       for (var i = 0; i < mDataCommon.events.length; i++) {
         $q.all([
@@ -196,18 +197,16 @@ angular.module('app.services', ['ngProgress'])
           sApiCall.getEnrollments(mDataCommon.events[i].enrollment),
           sApiCall.getEventTrackedEntityInstances(mDataCommon.events[i].trackedEntityInstance)
         ]).then(function (values) {
-          var excutingEvent = values[0];
+          var executingEvent = values[0];
           var eventDetails = {
             trackedEntityInstances: values[1],
             enrollments: values[2],
             eventTEI: values[3].events
           };
-          mDataCommon.eventDetails.push(eventDetails);
 
-          var rulesEffect = sRuleHelper.excuteRules(mInitdata.programUID, excutingEvent, eventDetails.trackedEntityInstances, eventDetails.enrollments, eventDetails.eventTEI);
+          var rulesEffect = sRuleHelper.executeRules(mInitdata.programUID, executingEvent, eventDetails.trackedEntityInstances, eventDetails.enrollments, eventDetails.eventTEI);
           var programStageDataElementsMap = sRuleHelper.programStageDataElementsMap();
-
-          //populate completed data values.
+          ////populate completed data values.
           var dataValues = [];
           angular.forEach(eventDetails.eventTEI, function (event) {
             angular.forEach(event.dataValues, function (dataValue) {
@@ -227,10 +226,10 @@ angular.module('app.services', ['ngProgress'])
               }
             }
           }
+
           var eventInfo = angular.copy(mEventDetails);
-          eventInfo.eventId = excutingEvent.event;
-          eventInfo.dueDate = excutingEvent.dueDate;
-          //console.log("DueDate: " + excutingEvent.dueDate);
+          eventInfo.eventId = executingEvent.event;
+          eventInfo.dueDate = d2sDateUtils.formatYYYMMDD(executingEvent.dueDate);
           for (var key in programStageDataElementsMap) {
             var programStageDataElement = programStageDataElementsMap[key];
             if (dataValues[key] && programStageDataElement.dataElement.value == undefined) {
@@ -241,8 +240,8 @@ angular.module('app.services', ['ngProgress'])
               eventInfo[key] = (programStageDataElement.dataElement.value ?
                 programStageDataElement.dataElement.value : (dataValues[key] ? dataValues[key].value : "+"));
 
-              var log = "Name: " + programStageDataElement.dataElement.name + " - value: " + (programStageDataElement.dataElement.value ?
-                  programStageDataElement.dataElement.value : (dataValues[key] ? dataValues[key].value : undefined)) + " - key: " + key;
+              //var log = "Name: " + programStageDataElement.dataElement.name + " - value: " + (programStageDataElement.dataElement.value ?
+              //    programStageDataElement.dataElement.value : (dataValues[key] ? dataValues[key].value : undefined)) + " - key: " + key;
               //console.log(log);
             }
           }
@@ -250,13 +249,14 @@ angular.module('app.services', ['ngProgress'])
 
 
         });
-        //if (i == 3) break;
+        if (i == 1) break;
       }
-    };
 
+    }
   })
 
-  .service('sRuleHelper', function ($filter, DateUtils, mInitdata, mDataCommon, TrackerRulesExecutionService) {
+  .service('sRuleHelper', function ($filter, d2sDateUtils, d2sTrackerRulesExecutionService, sUtils, mInitdata, mDataCommon) {
+
     this.programRulesObject = function (programUid) {
       return {
         constants: mDataCommon.constants,
@@ -270,7 +270,7 @@ angular.module('app.services', ['ngProgress'])
     this.programStageDataElementsMap = function () {
       var programStageDataElementsMap = [];
       angular.forEach(mDataCommon.programStageDataElements, function (item) {
-        programStageDataElementsMap[item["dataElement"]["id"]] = item;
+        programStageDataElementsMap[item["dataElement"]["id"]] = angular.copy(item);
       });
       return programStageDataElementsMap;
     };
@@ -312,15 +312,15 @@ angular.module('app.services', ['ngProgress'])
       return eventObj;
     };
 
-    this.excuteRules = function (programUID, excutingEvent, trackedEntityInstances, enrollments, eventTEI) {
-      var rulesEffectResponse = TrackerRulesExecutionService.executeRulesBID(
+    this.executeRules = function (programUID, executingEvent, trackedEntityInstances, enrollments, eventTEI) {
+      var rulesEffectResponse = angular.copy(d2sTrackerRulesExecutionService.executeRulesBID(
         this.programRulesObject(programUID),
-        this.validateExecutingEventObject(excutingEvent),
+        this.validateExecutingEventObject(executingEvent),
         this.eventsByStageEVSObject(eventTEI),
         this.programStageDataElementsMap(),
         trackedEntityInstances,
         enrollments,
-        this.flagObject());
+        this.flagObject()));
       return rulesEffectResponse.ruleeffects;
     };
 
@@ -358,7 +358,7 @@ angular.module('app.services', ['ngProgress'])
           var variableObjectsCurrentExpression = [];
 
           var pushDirectAddressedVariable = function (variableWithCurls) {
-            var variableName = $filter('trimvariablequalifiers')(variableWithCurls);
+            var variableName = $filter('d2fTrimVariableQualifiers')(variableWithCurls);
             var variableNameParts = variableName.split('.');
 
             var newVariableObject;
@@ -464,9 +464,9 @@ angular.module('app.services', ['ngProgress'])
      */
     var generateEventSortingDate = function (event, evtDateUpdate) {
       if (!event.eventDate) {
-        event["sortingDate"] = DateUtils.getToday();
+        event["sortingDate"] = d2sDateUtils.getToday();
       } else {
-        event["sortingDate"] = DateUtils.formatYYYMMDD(event.eventDate);
+        event["sortingDate"] = d2sDateUtils.formatYYYMMDD(event.eventDate);
       }
       if (evtDateUpdate) {
         event["eventDate"] = event["sortingDate"];
@@ -489,6 +489,25 @@ angular.module('app.services', ['ngProgress'])
     this.prettyJsonPrint = function (obj) {
       return json.prettyPrint(obj);
     };
+
+    this.deepCopy = function deepCopy(obj) {
+      if (Object.prototype.toString.call(obj) === '[object Array]') {
+        var out = [], i = 0, len = obj.length;
+        for (; i < len; i++) {
+          out[i] = arguments.callee(obj[i]);
+        }
+        return out;
+      }
+      if (typeof obj === 'object') {
+        var out = {}, i;
+        for (i in obj) {
+          out[i] = arguments.callee(obj[i]);
+        }
+        return out;
+      }
+      return obj;
+    };
+
 
     var json = {
       replacer: function (match, pIndent, pKey, pVal, pEnd) {
