@@ -63,9 +63,6 @@ angular.module('app', ['ionic', 'ngSanitize', 'indexedDB',
       });
       $state.go('menu.login');
     });
-    if (sAuthentication.isLogin(true)) {
-      sInitDataService.populateData();
-    }
     $rootScope.$on(mCODE.MSG.EVENTDETAILS, function (event, args) {
       var eventInfo = args.evenInfo;
       mDataCommon.eventCacheReports.push(eventInfo);
@@ -100,13 +97,18 @@ angular.module('app', ['ionic', 'ngSanitize', 'indexedDB',
           (mDataCommon.eventCacheReports.length >= (mDataCommon.events.length))) {
           $rootScope.$broadcast(mCODE.MSG.EVENTRENDER);
         }
-        if(mDataCommon.eventCacheReports.length >= (mDataCommon.events.length)){
+        if (mDataCommon.eventCacheReports.length >= (mDataCommon.events.length)) {
           sInitDataService.updateDetailExpire();
         }
       });
 
 
     });
+
+    if (sAuthentication.isLogin(true)) {
+      sInitDataService.populateData();
+    }
+
   })
 
 

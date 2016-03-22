@@ -98,7 +98,7 @@ angular.module('app.routes', [])
 
     ;
 
-    $urlRouterProvider.otherwise('/side-menu21/page_home');
+    $urlRouterProvider.otherwise('/side-menu21/page_login');
 
 
   });
