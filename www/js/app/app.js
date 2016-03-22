@@ -17,11 +17,11 @@ angular.module('app', ['ionic', 'ngSanitize', 'indexedDB',
     'pascalprecht.translate',
     'LocalStorageModule'
   ])
-  .config(function ($indexedDBProvider) {
+  .config(function ($indexedDBProvider, mCODE) {
     $indexedDBProvider
       .connection('hiIndexedDB')
       .upgradeDatabase(1, function (event, db, tx) {
-        var objStore = db.createObjectStore('event_reports', {keyPath: 'eventId'});
+        var objStore = db.createObjectStore(mCODE.STORAGE.DBNAME, {keyPath: 'eventId'});
         //objStore.createIndex('dueDate_idx', 'dueDate', {unique: false});
       });
   })
@@ -45,7 +45,7 @@ angular.module('app', ['ionic', 'ngSanitize', 'indexedDB',
       }
     });
   })
-  .run(function ($indexedDB, $ionicHistory, $state, $rootScope, $location, mDataCommon, mCODE, sAuthentication) {
+  .run(function ($ionicHistory, $state, $rootScope, $location, mDataCommon, mCODE, sUtils, sAuthentication) {
     $rootScope.$on(mCODE.MSG.ISLOGIN, function () {
       if ($location.path() == "/side-menu21/page_login") {
         $ionicHistory.clearHistory();
@@ -68,7 +68,7 @@ angular.module('app', ['ionic', 'ngSanitize', 'indexedDB',
     $rootScope.$on(mCODE.MSG.EVENTDETAILS, function (event, args) {
       var eventInfo = args.evenInfo;
       mDataCommon.eventCacheReports.push(eventInfo);
-      $indexedDB.openStore('event_reports', function (store) {
+      sUtils.openStore(function (store) {
         store.upsert({
           "eventId": eventInfo.eventId,
           "dueDate": eventInfo.dueDate,
@@ -99,7 +99,6 @@ angular.module('app', ['ionic', 'ngSanitize', 'indexedDB',
           (mDataCommon.eventCacheReports.length >= (mDataCommon.events.length))) {
           $rootScope.$broadcast(mCODE.MSG.EVENTRENDER);
         }
-
       });
 
 

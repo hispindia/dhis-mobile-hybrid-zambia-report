@@ -444,7 +444,7 @@ angular.module('app.services', ['ngProgress'])
       });
 
       return {rules: programRules, variables: variables};
-    }
+    };
 
     var computeProgramRules = function (mDataCommon) {
       var programRules = [];
@@ -454,7 +454,7 @@ angular.module('app.services', ['ngProgress'])
         programRules.push(rule);
       });
       return programRules;
-    }
+    };
 
     /**
      * Addition of property sortingDate with format YYYY-MM-DD
@@ -474,7 +474,12 @@ angular.module('app.services', ['ngProgress'])
     }
   })
 
-  .service('sUtils', function () {
+  .service('sUtils', function ($indexedDB, mCODE) {
+
+    this.openStore = function(funcStore){
+      $indexedDB.openStore(mCODE.STORAGE.DBNAME, funcStore);
+    };
+
 
     /**
      * Check obj is String not empty, blank, null or undefine
@@ -508,7 +513,6 @@ angular.module('app.services', ['ngProgress'])
       return obj;
     };
 
-
     var json = {
       replacer: function (match, pIndent, pKey, pVal, pEnd) {
         var key = '<span class=json-key>';
@@ -533,7 +537,7 @@ angular.module('app.services', ['ngProgress'])
 
   })
 
-  .service('sAuthentication', function ($http, $rootScope, localStorageService, mCODE, sUtils, sInitDataService, sConfigVariableApp, sInitApp, sApiCall) {
+  .service('sAuthentication', function ($http, $rootScope, localStorageService, mCODE, sUtils, sInitDataService, sConfigVariableApp, sInitApp) {
     var login = {
       host: undefined,
       authen: undefined
@@ -562,6 +566,9 @@ angular.module('app.services', ['ngProgress'])
     };
 
     this.logout = function () {
+      sUtils.openStore(function(store){
+        store.clear();
+      });
       localStorageService.clearAll();
       $rootScope.$broadcast(mCODE.MSG.ISLOGOUT);
     };

@@ -11,7 +11,8 @@ angular.module('app.models', [])
     STORAGE: {
       AUTHEN: "authentication",
       URL: "url",
-      ORGUID:"organisationUnitUID"
+      ORGUID:"organisationUnitUID",
+      DBNAME: "event_reports"
     },
     MSG: {
       ISLOGIN: "isLogin",
@@ -39,7 +40,6 @@ angular.module('app.models', [])
     programStageDataElements: [],
     programTrackedEntityAttributes: [],
     events: [],
-    eventDetails: [],
     eventCacheReports: []
   })
   .constant("mEventData", {

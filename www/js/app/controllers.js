@@ -24,7 +24,7 @@ angular.module('app.controllers', ['ionic', 'ngMessages'])
     sAuthentication.isLogin(true);
   })
 
-  .controller('cScheduleVaccineTodayCtrl', function ($scope, $indexedDB, ngProgressFactory, mInitdata, mCODE, mDataCommon, sAuthentication, sRuleHelper) {
+  .controller('cScheduleVaccineTodayCtrl', function ($scope, ngProgressFactory, mInitdata, mCODE, mDataCommon, sAuthentication, sUtils) {
     sAuthentication.isLogin(true);
     var progressbar = ngProgressFactory.createInstance();
     progressbar.setParent(document.getElementById("progress"));
@@ -79,7 +79,7 @@ angular.module('app.controllers', ['ionic', 'ngMessages'])
     });
 
     //if caching, get full db in local, remember init cache in the first time
-    $indexedDB.openStore('event_reports', function (store) {
+    sUtils.openStore(function (store) {
       store.getAll().then(function (data) {
         if (data.length >= mDataCommon.eventCacheReports.length) {
           $scope.mEventDetails = data;
