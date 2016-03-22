@@ -1,8 +1,12 @@
 angular.module('app.services', ['ngProgress'])
-  .service('sApiCall', function ($http, $q, localStorageService, mCODE, mInitdata, sUtils) {
+  .service('sApiCall', function ($http, $q, mInitdata, sUtils) {
 
-    var host = localStorageService.get(mCODE.STORAGE.URL);
-    var orgUid = localStorageService.get(mCODE.STORAGE.ORGUID);
+    var host, orgUid;
+
+    this.initHost = function (_host, _orgUid) {
+      host = _host;
+      orgUid = _orgUid;
+    };
 
     this.getMe = function (_host, authen) {
       var hostT = host;
@@ -106,7 +110,50 @@ angular.module('app.services', ['ngProgress'])
 
   })
 
-  .service('sInitDataService', function ($rootScope, $http, $q, d2sDateUtils, mCODE, mEventDetails, mDataCommon, mInitdata, sRuleHelper, sApiCall, sConfigVariableApp) {
+  .service('sInitDataService', function ($rootScope, $http, $q, d2sDateUtils, mCODE, mEventDetails, mDataCommon, mInitdata, sUtils, sRuleHelper, sApiCall, sConfigVariableApp) {
+
+    this.loadDataCommonFromLocal = function () {
+
+      var initial = sUtils.getLocal().get(mCODE.STORAGE.INITIAL);
+      if (initial == 1) {
+        var expireTimeout = mInitdata.commonExpire;
+        var expireTime = sUtils.getLocal().get(mCODE.STORAGE.COMMONTIME);
+
+        if (moment().isAfter(moment(expireTime).add(expireTimeout, mInitdata.commonExpireUnit))) {
+          console.log("expired");
+          sUtils.getLocal().set(mCODE.STORAGE.INITIAL, 0);
+        }
+
+        mDataCommon.constants = sUtils.getLocal().get(mCODE.STORAGE.GETCONSTANTS);
+        mDataCommon.programTrackedEntityAttributes = sUtils.getLocal().get(mCODE.STORAGE.GETPROGRAMTRACKEDENTITYATTRIBUTES);
+        mDataCommon.programStageDataElements = sUtils.getLocal().get(mCODE.STORAGE.GETPROGRAMSTAGEDATAELEMENTS);
+        mDataCommon.programIndicators = sUtils.getLocal().get(mCODE.STORAGE.GETPROGRAMINDICATORS);
+        mDataCommon.programValidations = sUtils.getLocal().get(mCODE.STORAGE.GETPROGRAMVALIDATIONS);
+        mDataCommon.programRuleVariables = sUtils.getLocal().get(mCODE.STORAGE.GETPROGRAMRULEVARIABLES);
+        mDataCommon.programRules = sUtils.getLocal().get(mCODE.STORAGE.GETPROGRAMRULES);
+        mDataCommon.events = sUtils.getLocal().get(mCODE.STORAGE.GETEVENTS);
+
+        if (!isDetailExpired()) {
+          fetchEventDetails();
+        }
+        return true;
+      }
+      return false;
+    };
+
+    this.updateDetailExpire = function () {
+      sUtils.getLocal().set(mCODE.STORAGE.INITIALDETAILS, 1);
+      sUtils.getLocal().set(mCODE.STORAGE.DETAILSTIME, moment());
+    };
+
+    this.populateData = function () {
+      if (!this.loadDataCommonFromLocal()) {
+        this.initCommonDB();
+      }
+      //sInitDataService.initMockupCommonDB();
+      //sInitDataService.mockupEventDB();
+
+    };
 
     this.initCommonDB = function () {
 
@@ -131,61 +178,14 @@ angular.module('app.services', ['ngProgress'])
         mDataCommon.programRules = values[6].programRules;
         mDataCommon.events = values[7].events;
 
-        fetchEventDetails();
         $rootScope.$broadcast(mCODE.MSG.UPDATECOMMONDB);
-        mInitdata.initial = true;
+        saveDataCommonToLocal(mDataCommon.constants, mDataCommon.programTrackedEntityAttributes, mDataCommon.programStageDataElements, mDataCommon.programIndicators,
+          mDataCommon.programValidations, mDataCommon.programRuleVariables, mDataCommon.programRules, mDataCommon.events);
+        fetchEventDetails();
       }, function (error) {
         $rootScope.$broadcast(mCODE.MSG.APIERROR, error);
       });
     };
-
-    this.initMockupCommonDB = function () {
-      var url = "../../model/";
-      if (sConfigVariableApp.isSTAGING()) {
-        url = "file:///android_asset/www/model/"
-      }
-      $http.get(url + 'constants.json').success(function (data) {
-        mDataCommon.constants = data.constants;
-      });
-      $http.get(url + 'programIndicators.json').success(function (data) {
-        mDataCommon.programIndicators = data.programIndicators;
-      });
-      $http.get(url + 'programValidations.json').success(function (data) {
-        mDataCommon.programValidations = data.programValidations;
-      });
-      $http.get(url + 'programRuleVariables.json').success(function (data) {
-        mDataCommon.programRuleVariables = data.programRuleVariables;
-      });
-      $http.get(url + 'programRules.json').success(function (data) {
-        mDataCommon.programRules = data.programRules;
-      });
-      $http.get(url + 'programStageDataElements.json').success(function (data) {
-        mDataCommon.programStageDataElements = data.programStageDataElements;
-      });
-      $http.get(url + 'programTrackedEntityAttributes.json').success(function (data) {
-        mDataCommon.programTrackedEntityAttributes = data.programTrackedEntityAttributes;
-      });
-      $http.get(url + 'events.json').success(function (data) {
-        mDataCommon.events = data.events;
-      });
-    };
-
-    this.mockupEventDB = function () {
-      var url = "../../model/";
-      if (sConfigVariableApp.isSTAGING()) {
-        url = "file:///android_asset/www/model/"
-      }
-      //  Get mockup date first event
-      $http.get(url + 'trackedEntityInstances.json').success(function (data) {
-        mDataCommon.trackedEntityInstances = data;
-      });
-      $http.get(url + 'enrollments.json').success(function (data) {
-        mDataCommon.enrollments = data;
-      });
-      $http.get(url + 'eventTEI.json').success(function (data) {
-        mDataCommon.eventTEI = data.events;
-      });
-    }
 
     function fetchEventDetails() {
 
@@ -206,11 +206,19 @@ angular.module('app.services', ['ngProgress'])
 
           var rulesEffect = sRuleHelper.executeRules(mInitdata.programUID, executingEvent, eventDetails.trackedEntityInstances, eventDetails.enrollments, eventDetails.eventTEI);
           var programStageDataElementsMap = sRuleHelper.programStageDataElementsMap();
-          ////populate completed data values.
-          var dataValues = [];
+          var programTrackedEntityAttributesMap = sRuleHelper.programTrackedEntityAttributesMap();
+
+          //populate completed data values of attributes
+          var dataAttributeValues = [];
+          angular.forEach(eventDetails.trackedEntityInstances.attributes, function (item) {
+            dataAttributeValues[item.attribute] = item;
+          });
+
+          //populate completed data values of data element.
+          var dataElementValues = [];
           angular.forEach(eventDetails.eventTEI, function (event) {
             angular.forEach(event.dataValues, function (dataValue) {
-              dataValues[dataValue.dataElement] = dataValue;
+              dataElementValues[dataValue.dataElement] = dataValue;
             })
           });
 
@@ -230,18 +238,37 @@ angular.module('app.services', ['ngProgress'])
           var eventInfo = angular.copy(mEventDetails);
           eventInfo.eventId = executingEvent.event;
           eventInfo.dueDate = d2sDateUtils.formatYYYMMDD(executingEvent.dueDate);
+
+
+          //populate data value for attributes
+          for (var key in programTrackedEntityAttributesMap) {
+            if (dataAttributeValues[key]) {
+              if (key == 'rKtHjgcO2Bn') {
+                eventInfo[key] = sUtils.getAge(dataAttributeValues[key].value);
+              } else {
+                eventInfo[key] = dataAttributeValues[key].value;
+              }
+            }else{
+              if (key == 'rKtHjgcO2Bn') {
+                eventInfo[key] = "N/A";
+              }
+            }
+          }
+
+
+          //populate data value for data element
           for (var key in programStageDataElementsMap) {
             var programStageDataElement = programStageDataElementsMap[key];
-            if (dataValues[key] && programStageDataElement.dataElement.value == undefined) {
-              programStageDataElement.dataElement.value = dataValues[key].value;
+            if (dataElementValues[key] && programStageDataElement.dataElement.value == undefined) {
+              programStageDataElement.dataElement.value = dataElementValues[key].value;
             }
             if (programStageDataElement.dataElement.value != undefined || programStageDataElement["action"] != "hidden") {
 
               eventInfo[key] = (programStageDataElement.dataElement.value ?
-                programStageDataElement.dataElement.value : (dataValues[key] ? dataValues[key].value : "+"));
+                programStageDataElement.dataElement.value : (dataElementValues[key] ? dataElementValues[key].value : "+"));
 
               //var log = "Name: " + programStageDataElement.dataElement.name + " - value: " + (programStageDataElement.dataElement.value ?
-              //    programStageDataElement.dataElement.value : (dataValues[key] ? dataValues[key].value : undefined)) + " - key: " + key;
+              //    programStageDataElement.dataElement.value : (dataElementValues[key] ? dataElementValues[key].value : undefined)) + " - key: " + key;
               //console.log(log);
             }
           }
@@ -249,10 +276,40 @@ angular.module('app.services', ['ngProgress'])
 
 
         });
-        if (i == 1) break;
+        //if (i == 1) break;
       }
+    }
+
+    function isDetailExpired() {
+      var initial = sUtils.getLocal().get(mCODE.STORAGE.INITIALDETAILS);
+      if (initial == 1) {
+        var expireTimeout = mInitdata.detailsExpire;
+        var expireTime = sUtils.getLocal().get(mCODE.STORAGE.DETAILSTIME);
+        if (moment().isAfter(moment(expireTime).add(expireTimeout, mInitdata.detailsExpireUnit))) {
+          console.log("expired details");
+          sUtils.getLocal().set(mCODE.STORAGE.INITIALDETAILS, 0);
+        }
+        return true;
+      }
+      return false;
+    }
+
+    function saveDataCommonToLocal(getConstants, getProgramTrackedEntityAttributes, getProgramStageDataElements, getProgramIndicators,
+                                   getProgramValidations, getProgramRuleVariables, getProgramRules, getEvents) {
+      sUtils.getLocal().set(mCODE.STORAGE.INITIAL, 1);
+      sUtils.getLocal().set(mCODE.STORAGE.COMMONEXPIRE, mInitdata.commonExpire);
+      sUtils.getLocal().set(mCODE.STORAGE.COMMONTIME, moment());
+      sUtils.getLocal().set(mCODE.STORAGE.GETCONSTANTS, getConstants);
+      sUtils.getLocal().set(mCODE.STORAGE.GETPROGRAMTRACKEDENTITYATTRIBUTES, getProgramTrackedEntityAttributes);
+      sUtils.getLocal().set(mCODE.STORAGE.GETPROGRAMSTAGEDATAELEMENTS, getProgramStageDataElements);
+      sUtils.getLocal().set(mCODE.STORAGE.GETPROGRAMINDICATORS, getProgramIndicators);
+      sUtils.getLocal().set(mCODE.STORAGE.GETPROGRAMVALIDATIONS, getProgramValidations);
+      sUtils.getLocal().set(mCODE.STORAGE.GETPROGRAMRULEVARIABLES, getProgramRuleVariables);
+      sUtils.getLocal().set(mCODE.STORAGE.GETPROGRAMRULES, getProgramRules);
+      sUtils.getLocal().set(mCODE.STORAGE.GETEVENTS, getEvents);
 
     }
+
   })
 
   .service('sRuleHelper', function ($filter, d2sDateUtils, d2sTrackerRulesExecutionService, sUtils, mInitdata, mDataCommon) {
@@ -265,6 +322,14 @@ angular.module('app.services', ['ngProgress'])
         programVariables: mDataCommon.programRuleVariables,
         programRules: computeProgramRules(mDataCommon)
       }
+    };
+
+    this.programTrackedEntityAttributesMap = function () {
+      var programTrackedEntityAttributesMap = [];
+      angular.forEach(mDataCommon.programTrackedEntityAttributes, function (item) {
+        programTrackedEntityAttributesMap[item["trackedEntityAttribute"]["id"]] = angular.copy(item);
+      });
+      return programTrackedEntityAttributesMap;
     };
 
     this.programStageDataElementsMap = function () {
@@ -474,9 +539,13 @@ angular.module('app.services', ['ngProgress'])
     }
   })
 
-  .service('sUtils', function ($indexedDB, mCODE) {
+  .service('sUtils', function ($indexedDB, localStorageService, mCODE) {
 
-    this.openStore = function(funcStore){
+    this.getLocal = function () {
+      return localStorageService
+    };
+
+    this.openStore = function (funcStore) {
       $indexedDB.openStore(mCODE.STORAGE.DBNAME, funcStore);
     };
 
@@ -513,6 +582,11 @@ angular.module('app.services', ['ngProgress'])
       return obj;
     };
 
+    this.getAge = function getAge(dateString) {
+      var res = moment(dateString).fromNow().replace("ago", "");
+      return res;
+    };
+
     var json = {
       replacer: function (match, pIndent, pKey, pVal, pEnd) {
         var key = '<span class=json-key>';
@@ -537,24 +611,29 @@ angular.module('app.services', ['ngProgress'])
 
   })
 
-  .service('sAuthentication', function ($http, $rootScope, localStorageService, mCODE, sUtils, sInitDataService, sConfigVariableApp, sInitApp) {
+  .service('sAuthentication', function ($http, $rootScope, mInitdata, mCODE, sApiCall, sUtils, sConfigVariableApp, sInitDataService) {
     var login = {
       host: undefined,
       authen: undefined
     };
 
     /**
-     * Check had login or not
+     * - Check had login or not
+     * - Update host for sApiCall
+     * - Update http default headers
      * @param broadcast Send broadcast message mCODE.MSG.ISLOGIN if had login or mCODE.MSG.ISLOGOUT otherwise
      * @returns {boolean}
      */
     this.isLogin = function (broadcast) {
-      login.host = localStorageService.get(mCODE.STORAGE.URL);
-      login.authen = localStorageService.get(mCODE.STORAGE.AUTHEN);
+      login.host = sUtils.getLocal().get(mCODE.STORAGE.URL);
+      login.authen = sUtils.getLocal().get(mCODE.STORAGE.AUTHEN);
+
       if (sUtils.isValue(login.host) && sUtils.isValue(login.authen)) {
+
+        sApiCall.initHost(login.host, sUtils.getLocal().get(mCODE.STORAGE.ORGUID));
+        sConfigVariableApp.initApp(mInitdata.evn_setup);
+        $http.defaults.headers.common.Authorization = login.authen;
         if (broadcast) {
-          $http.defaults.headers.common.Authorization = login.authen;
-          sInitApp.populateData();
           $rootScope.$broadcast(mCODE.MSG.ISLOGIN);
         }
         return true;
@@ -566,10 +645,10 @@ angular.module('app.services', ['ngProgress'])
     };
 
     this.logout = function () {
-      sUtils.openStore(function(store){
+      sUtils.openStore(function (store) {
         store.clear();
       });
-      localStorageService.clearAll();
+      sUtils.getLocal().clearAll();
       $rootScope.$broadcast(mCODE.MSG.ISLOGOUT);
     };
 
@@ -579,6 +658,24 @@ angular.module('app.services', ['ngProgress'])
       }
       return null;
     };
+
+    /**
+     * Setup initial data when logic success
+     * - Save host and authen string to localStorageService
+     * - Setup defaults header for http
+     * - Update host for sApiCall
+     * @param host
+     * @param authen
+     * @param orgUid
+     */
+    this.setupAuthenSuccess = function (host, authen, orgUid) {
+      sUtils.getLocal().set(mCODE.STORAGE.URL, host);
+      sUtils.getLocal().set(mCODE.STORAGE.AUTHEN, authen);
+      sUtils.getLocal().set(mCODE.STORAGE.ORGUID, orgUid);
+      if (this.isLogin(true)) {
+        sInitDataService.populateData();
+      }
+    }
   })
 
   .factory('sBlankFactory', [function () {

@@ -3,26 +3,9 @@
  */
 angular.module('app.configs', [])
 
-  .service('sInitApp', function (mInitdata, mCODE, sInitDataService, sConfigVariableApp) {
-
-    this.populateData = function () {
-      if (angular.isUndefined(mInitdata.initial)) {
-        sConfigVariableApp.initApp(mCODE.EVN.DEV);
-
-        sInitDataService.initCommonDB();
-
-        //sInitDataService.initMockupCommonDB();
-        //sInitDataService.mockupEventDB();
-
-      }
-    };
-
-  })
-
   .service('sConfigVariableApp', function (mInitdata, mCODE) {
     this.initApp = function (evironment) {
       mInitdata.environment = evironment;
-      mInitdata.initial = false;
     };
     this.isDEV = function () {
       return (mInitdata.environment == mCODE.EVN.DEV);

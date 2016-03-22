@@ -20,17 +20,17 @@ angular.module('app.controllers', ['ionic', 'ngMessages'])
     }
   })
 
-  .controller('cBidReportAppCtrl', function ($state, sAuthentication) {
-    sAuthentication.isLogin(true);
+  .controller('cBidReportAppCtrl', function ($state, sAuthentication, sInitDataService) {
+
   })
 
   .controller('cScheduleVaccineTodayCtrl', function ($scope, ngProgressFactory, mInitdata, mCODE, mDataCommon, sAuthentication, sUtils) {
-    sAuthentication.isLogin(true);
+
     var progressbar = ngProgressFactory.createInstance();
     progressbar.setParent(document.getElementById("progress"));
     progressbar.setAbsolute();
     $scope.mEventDetails = [];
-    const de = $scope.dataElements = {
+    $scope.dataElements = {
       "bpBUOvqy1Jn": {groupby: "BCG", name: "BCG"},
       "EMcT5j5zR81": {groupby: "BCG", name: "BCG scar"},
       "KRF40x6EILp": {groupby: "BCG", name: "BCG repeat dose"},
@@ -50,13 +50,14 @@ angular.module('app.controllers', ['ionic', 'ngMessages'])
       "Bxh1xgIY9nA": {groupby: "Measles", name: "Measles 2"}
     };
 
-    const attr = $scope.attributes = {
+    $scope.attributes = {
       eventId: "Event ID",
       dueDate: "Due date",
       sB1IHYu2xQT: "First Name",
       wbtl3uN0spv: "Child Name",
-      age: "Age"
+      rKtHjgcO2Bn: "Age"
     };
+
     progressbar.start();
     //update progress when commondb updated
     $scope.$on(mCODE.MSG.UPDATECOMMONDB, function () {
@@ -299,7 +300,7 @@ angular.module('app.controllers', ['ionic', 'ngMessages'])
     });
   })
 
-  .controller('cLoginCtrl', function ($http, $rootScope, $scope, $ionicPopup, $state, ngProgressFactory, localStorageService, mCODE, sAuthentication, sUtils, sApiCall) {
+  .controller('cLoginCtrl', function ($http, $scope, $ionicPopup, $state, ngProgressFactory, sAuthentication, sUtils, sApiCall) {
 
     var progressbar = ngProgressFactory.createInstance();
     progressbar.setParent(document.getElementById("progress"));
@@ -321,11 +322,7 @@ angular.module('app.controllers', ['ionic', 'ngMessages'])
         var host = login.host;
         var authen = "Basic " + btoa(login.username + ":" + login.password);
         sApiCall.getMe(host, authen).then(function (data) {
-          localStorageService.set(mCODE.STORAGE.AUTHEN, authen);
-          localStorageService.set(mCODE.STORAGE.URL, host);
-          localStorageService.set(mCODE.STORAGE.ORGUID, data.organisationUnits[0].id);
-          $http.defaults.headers.common.Authorization = authen;
-          $rootScope.$broadcast(mCODE.MSG.ISLOGIN);
+          sAuthentication.setupAuthenSuccess(host, authen, data.organisationUnits[0].id);
           progressbar.complete();
         }, function (error) {
           progressbar.reset();
@@ -347,7 +344,7 @@ angular.module('app.controllers', ['ionic', 'ngMessages'])
     };
   })
 
-  .controller('cConsoleCtrl', function ($scope, ngProgressFactory, localStorageService, mCODE, mInitdata, sAuthentication, sInitApp, sApiCall, sUtils) {
+  .controller('cConsoleCtrl', function ($scope, ngProgressFactory, mCODE, mInitdata, sAuthentication, sApiCall, sUtils) {
       sAuthentication.isLogin(true);
 
       var progressbar = ngProgressFactory.createInstance();

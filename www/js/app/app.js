@@ -45,7 +45,7 @@ angular.module('app', ['ionic', 'ngSanitize', 'indexedDB',
       }
     });
   })
-  .run(function ($ionicHistory, $state, $rootScope, $location, mDataCommon, mCODE, sUtils, sAuthentication) {
+  .run(function ($ionicHistory, $state, $rootScope, $location, mDataCommon, mCODE, sUtils, sAuthentication, sInitDataService) {
     $rootScope.$on(mCODE.MSG.ISLOGIN, function () {
       if ($location.path() == "/side-menu21/page_login") {
         $ionicHistory.clearHistory();
@@ -63,8 +63,9 @@ angular.module('app', ['ionic', 'ngSanitize', 'indexedDB',
       });
       $state.go('menu.login');
     });
-    sAuthentication.isLogin(true);
-
+    if (sAuthentication.isLogin(true)) {
+      sInitDataService.populateData();
+    }
     $rootScope.$on(mCODE.MSG.EVENTDETAILS, function (event, args) {
       var eventInfo = args.evenInfo;
       mDataCommon.eventCacheReports.push(eventInfo);
@@ -74,7 +75,7 @@ angular.module('app', ['ionic', 'ngSanitize', 'indexedDB',
           "dueDate": eventInfo.dueDate,
           "sB1IHYu2xQT": eventInfo.sB1IHYu2xQT,
           "wbtl3uN0spv": eventInfo.wbtl3uN0spv,
-          "age": eventInfo.age,
+          "rKtHjgcO2Bn": eventInfo.rKtHjgcO2Bn,
 
           "bpBUOvqy1Jn": eventInfo.bpBUOvqy1Jn,
           "EMcT5j5zR81": eventInfo.EMcT5j5zR81,
@@ -98,6 +99,9 @@ angular.module('app', ['ionic', 'ngSanitize', 'indexedDB',
           (mDataCommon.eventCacheReports.length >= (mDataCommon.events.length / 2)) ||
           (mDataCommon.eventCacheReports.length >= (mDataCommon.events.length))) {
           $rootScope.$broadcast(mCODE.MSG.EVENTRENDER);
+        }
+        if(mDataCommon.eventCacheReports.length >= (mDataCommon.events.length)){
+          sInitDataService.updateDetailExpire();
         }
       });
 
