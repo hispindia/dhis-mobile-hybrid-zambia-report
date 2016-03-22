@@ -1,25 +1,50 @@
-Ionic App Base
-=====================
 
-A starting project for Ionic that optionally supports using custom SCSS.
+# Zambia Report
 
-## Using this project
+**Zambia Report** is an application for mobile developed on Ionic base. It had been installed crosswalk browser ionic 12.41.296.5 equivalent Chromium v41, support indexedDB and localStorage also and stable for all android version (4+)
 
-We recommend using the [Ionic CLI](https://github.com/driftyco/ionic-cli) to create new Ionic projects that are based on this project but use a ready-made starter template.
 
-For example, to start a new Ionic project with the default tabs interface, make sure the `ionic` utility is installed:
 
-```bash
-$ npm install -g ionic
+----------
+
+[TOC]
+
+## Development
+
+> Install ionic http://ionicframework.com/getting-started/
+> You can use ionic lab application for easier create project, build and run http://lab.ionic.io/
+> You can create new template which you want faster at https://creator.ionic.io
+> You can update app at here for manage, share your app with clients, coworkers, and testers https://apps.ionic.io/
+> Overview framework: http://ionicframework.com/
+> Ionic market: http://market.ionic.io/
+> 
+
+## Install
+
+### Install Ionic
+- Install nodejs 4 (node 5 does not work at the moment) https://nodejs.org
+- Install latest Cordova and Ionic: 
+> $npm install -g cordova ionic
+### Start with new project
+> $ ionic start myApp tabs
+#### Run it
+``` javascript
+> $ cd myApp
+> $ ionic platform add android
+Build for android
+> $ ionic build android
+Emulator on android
+> $ ionic emulate android
+Run on android
+> $ ionic run android
 ```
+### Testing in a Browser
+> $ ionic serve 
+### Start with this project
+> Check out project 
+> Testing in a browser or if you want to run on device, remember build first.
 
-Then run:
+## Feedback & Bug Report 
+- Email: <caovannhan2002@gmail.com>
 
-```bash
-$ ionic start myProject tabs
-```
 
-More info on this can be found on the Ionic [Getting Started](http://ionicframework.com/getting-started) page and the [Ionic CLI](https://github.com/driftyco/ionic-cli) repo.
-
-## Issues
-Issues have been disabled on this repo, if you do find an issue or have a question consider posting it on the [Ionic Forum](http://forum.ionicframework.com/).  Or else if there is truly an error, follow our guidelines for [submitting an issue](http://ionicframework.com/submit-issue/) to the main Ionic repository.
