@@ -300,8 +300,10 @@ angular.module('app.controllers', ['ionic', 'ngMessages'])
     });
   })
 
-  .controller('cLoginCtrl', function ($http, $scope, $ionicPopup, $state, ngProgressFactory, sAuthentication, sUtils, sApiCall) {
-
+  .controller('cLoginCtrl', function ($http, $scope, $ionicPopup, $state, ngProgressFactory, sInitDataService, sAuthentication, sUtils, sApiCall) {
+    if (sAuthentication.isLogin(true)) {
+      sInitDataService.populateData();
+    }
     var progressbar = ngProgressFactory.createInstance();
     progressbar.setParent(document.getElementById("progress"));
     progressbar.setAbsolute();

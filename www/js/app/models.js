@@ -57,10 +57,10 @@ angular.module('app.models', [])
     programStageUID: "s53RFfXA75f",
     ouMode: "SELECTED",
     eventStatus: "SCHEDULE",
-    commonExpire: 1,
-    commonExpireUnit: "minutes",
+    commonExpire: 3,
+    commonExpireUnit: "days",
     detailsExpire: 1,
-    detailsExpireUnit: "minutes",
+    detailsExpireUnit: "days",
 
   })
   .constant("mDataCommon", {

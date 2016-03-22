@@ -101,8 +101,6 @@ angular.module('app', ['ionic', 'ngSanitize', 'indexedDB',
           sInitDataService.updateDetailExpire();
         }
       });
-
-
     });
 
     if (sAuthentication.isLogin(true)) {
