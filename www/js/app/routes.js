@@ -13,7 +13,7 @@ angular.module('app.routes', [])
         views: {
           'side-menu21': {
             templateUrl: 'templates/login.html',
-            controller: 'cLoginCtrl'
+            controller: 'cLogin'
           }
         }
       })
@@ -23,7 +23,7 @@ angular.module('app.routes', [])
         views: {
           'side-menu21': {
             templateUrl: 'templates/bidReportApp.html',
-            controller: 'cBidReportAppCtrl'
+            controller: 'cBidReportApp'
           }
         }
       })
@@ -33,7 +33,7 @@ angular.module('app.routes', [])
         views: {
           'side-menu21': {
             templateUrl: 'templates/scheduleVaccineToday.html',
-            controller: 'cScheduleVaccineTodayCtrl'
+            controller: 'cScheduleVaccineToday'
           }
         }
       })
@@ -43,7 +43,7 @@ angular.module('app.routes', [])
         views: {
           'side-menu21': {
             templateUrl: 'templates/stockInHand.html',
-            controller: 'cStockInHandCtrl'
+            controller: 'cStockInHand'
           }
         }
       })
@@ -53,7 +53,7 @@ angular.module('app.routes', [])
         views: {
           'side-menu21': {
             templateUrl: 'templates/stockInHandVsDemand.html',
-            controller: 'cStockInHandVsDemandCtrl'
+            controller: 'cStockInHandVsDemand'
           }
         }
       })
@@ -63,7 +63,7 @@ angular.module('app.routes', [])
         views: {
           'side-menu21': {
             templateUrl: 'templates/vaccineHistoryReport.html',
-            controller: 'cVaccineHistoryReportCtrl'
+            controller: 'cVaccineHistoryReport'
           }
         }
       })
@@ -71,7 +71,7 @@ angular.module('app.routes', [])
       .state('menu', {
         url: '/side-menu21',
         templateUrl: 'templates/menu.html',
-        controller: 'cMenuCtrl',
+        controller: 'cMenu',
         abstract: true
       })
 
@@ -90,7 +90,7 @@ angular.module('app.routes', [])
         views: {
           'side-menu21': {
             templateUrl: 'templates/console.html',
-            controller: 'cConsoleCtrl'
+            controller: 'cConsole'
           }
         }
       })

@@ -1,6 +1,6 @@
 angular.module('app.controllers', ['ionic', 'ngMessages'])
 
-  .controller('cMenuCtrl', function ($scope, $state, $ionicPopup, $ionicSideMenuDelegate, mCODE, sAuthentication) {
+  .controller('cMenu', function ($scope, $state, $ionicPopup, $ionicSideMenuDelegate, mCODE, sAuthentication) {
     $scope.isLogin = function () {
       return sAuthentication.isLogin();
     };
@@ -20,45 +20,21 @@ angular.module('app.controllers', ['ionic', 'ngMessages'])
     }
   })
 
-  .controller('cBidReportAppCtrl', function ($state, sAuthentication, sInitDataService) {
+  .controller('cBidReportApp', function ($state, sAuthentication, sInitDataService) {
 
   })
 
-  .controller('cScheduleVaccineTodayCtrl', function ($scope, ngProgressFactory, mInitdata, mCODE, mDataCommon, sAuthentication, sUtils) {
-
+  .controller('cScheduleVaccineToday', function ($scope, ngProgressFactory, mInitdata, mCODE, mDataCommon, sAuthentication, sUtils) {
+    var firstLoadDb = false;
     var progressbar = ngProgressFactory.createInstance();
     progressbar.setParent(document.getElementById("progress"));
     progressbar.setAbsolute();
     $scope.mEventDetails = [];
-    $scope.dataElements = {
-      "bpBUOvqy1Jn": {groupby: "BCG", name: "BCG"},
-      "EMcT5j5zR81": {groupby: "BCG", name: "BCG scar"},
-      "KRF40x6EILp": {groupby: "BCG", name: "BCG repeat dose"},
-      "no7SkAxepi7": {groupby: "OPV", name: "OPV 0"},
-      "CfPM8lsEMzH": {groupby: "OPV", name: "OPV 1"},
-      "K3TcJM1ySQA": {groupby: "DPT", name: "DPT-HepB-Hib1"},
-      "fmXCCPENnwR": {groupby: "PCV", name: "PCV 1"},
-      "nIqQYeSwU9E": {groupby: "RV", name: "RV 1"},
-      "sDORmAKh32v": {groupby: "OPV", name: "OPV 2"},
-      "PvHUllrtPiy": {groupby: "PCV", name: "PCV 2"},
-      "wYg2gOWSyJG": {groupby: "RV", name: "RV 2"},
-      "nQeUfqPjK5o": {groupby: "OPV", name: "OPV 3"},
-      "pxCZNoqDVJC": {groupby: "DPT", name: "DPT-HepB-Hib3"},
-      "B4eJCy6LFLZ": {groupby: "PCV", name: "PCV 3"},
-      "cNA9EmFaiAa": {groupby: "OPV", name: "OPV 4"},
-      "g8dMiUOTFla": {groupby: "Measles", name: "Measles 1"},
-      "Bxh1xgIY9nA": {groupby: "Measles", name: "Measles 2"}
-    };
+    $scope.dataElements = mDataCommon.dataElements;
 
-    $scope.attributes = {
-      eventId: "Event ID",
-      dueDate: "Due date",
-      sB1IHYu2xQT: "First Name",
-      wbtl3uN0spv: "Child Name",
-      rKtHjgcO2Bn: "Age"
-    };
+    $scope.attributes = mDataCommon.attributes;
 
-    progressbar.start();
+
     //update progress when commondb updated
     $scope.$on(mCODE.MSG.UPDATECOMMONDB, function () {
       progressbar.reset();
@@ -69,6 +45,7 @@ angular.module('app.controllers', ['ionic', 'ngMessages'])
     });
     //update ui from cache
     $scope.$on(mCODE.MSG.EVENTRENDER, function (event, args) {
+      console.log("EVENTRENDER");
       $scope.mEventDetails = mDataCommon.eventCacheReports;
       if (progressbar.status() == 0) {
         progressbar.start();
@@ -80,26 +57,26 @@ angular.module('app.controllers', ['ionic', 'ngMessages'])
     });
 
     //if caching, get full db in local, remember init cache in the first time
-    sUtils.openStore(function (store) {
-      store.getAll().then(function (data) {
-        if (data.length >= mDataCommon.eventCacheReports.length) {
-          $scope.mEventDetails = data;
-          if (data.length <= mDataCommon.events.length && mDataCommon.events.length <= mDataCommon.eventCacheReports.length) {
+    if(!firstLoadDb){
+      progressbar.start();
+      sUtils.openStore(function (store) {
+        store.getAll().then(function (data) {
+          if (data.length >= mDataCommon.eventCacheReports.length) {
+            $scope.mEventDetails = data;
+            progressbar.complete();
+          } else {
+            $scope.mEventDetails = mDataCommon.eventCacheReports;
             progressbar.complete();
           }
-        } else {
-          $scope.mEventDetails = mDataCommon.eventCacheReports;
-          progressbar.complete();
-        }
+          firstLoadDb=true;
+        });
       });
-    });
-
-    if ($scope.mEventDetails.length <= mDataCommon.events.length && mDataCommon.events.length <= mDataCommon.eventCacheReports.length) {
+    }else{
       progressbar.complete();
     }
   })
 
-  .controller('cStockInHandCtrl', function ($scope) {
+  .controller('cStockInHand', function ($scope) {
     $(function () {
       $('#container').highcharts({
         title: {
@@ -152,7 +129,7 @@ angular.module('app.controllers', ['ionic', 'ngMessages'])
 
   })
 
-  .controller('cStockInHandVsDemandCtrl', function ($scope) {
+  .controller('cStockInHandVsDemand', function ($scope) {
 
     $(function () {
       $(document).ready(function () {
@@ -233,7 +210,7 @@ angular.module('app.controllers', ['ionic', 'ngMessages'])
 
   })
 
-  .controller('cVaccineHistoryReportCtrl', function ($scope) {
+  .controller('cVaccineHistoryReport', function ($scope) {
     $(function () {
       $('#container').highcharts({
         title: {
@@ -300,7 +277,7 @@ angular.module('app.controllers', ['ionic', 'ngMessages'])
     });
   })
 
-  .controller('cLoginCtrl', function ($http, $scope, $ionicPopup, $state, ngProgressFactory, sInitDataService, sAuthentication, sUtils, sApiCall) {
+  .controller('cLogin', function ($http, $scope, $ionicPopup, $state, ngProgressFactory, sInitDataService, sAuthentication, sUtils, sApiCall) {
     if (sAuthentication.isLogin(true)) {
       sInitDataService.populateData();
     }
@@ -346,7 +323,7 @@ angular.module('app.controllers', ['ionic', 'ngMessages'])
     };
   })
 
-  .controller('cConsoleCtrl', function ($scope, ngProgressFactory, mCODE, mInitdata, sAuthentication, sApiCall, sUtils) {
+  .controller('cConsole', function ($scope, ngProgressFactory, mCODE, mInitdata, sAuthentication, sApiCall, sUtils) {
       sAuthentication.isLogin(true);
 
       var progressbar = ngProgressFactory.createInstance();

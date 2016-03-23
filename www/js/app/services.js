@@ -564,6 +564,10 @@ angular.module('app.services', ['ngProgress'])
       return json.prettyPrint(obj);
     };
 
+    this.countObjectLength = function(obj){
+      return Object.keys(obj).length;
+    };
+
     this.deepCopy = function deepCopy(obj) {
       if (Object.prototype.toString.call(obj) === '[object Array]') {
         var out = [], i = 0, len = obj.length;

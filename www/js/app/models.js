@@ -72,7 +72,35 @@ angular.module('app.models', [])
     programStageDataElements: [],
     programTrackedEntityAttributes: [],
     events: [],
-    eventCacheReports: []
+    eventCacheReports: [],
+
+    dataElements: {
+      "bpBUOvqy1Jn": {groupby: "BCG", name: "BCG"},
+      "EMcT5j5zR81": {groupby: "BCG", name: "BCG scar"},
+      "KRF40x6EILp": {groupby: "BCG", name: "BCG repeat dose"},
+      "no7SkAxepi7": {groupby: "OPV", name: "OPV 0"},
+      "CfPM8lsEMzH": {groupby: "OPV", name: "OPV 1"},
+      "K3TcJM1ySQA": {groupby: "DPT", name: "DPT-HepB-Hib1"},
+      "fmXCCPENnwR": {groupby: "PCV", name: "PCV 1"},
+      "nIqQYeSwU9E": {groupby: "RV", name: "RV 1"},
+      "sDORmAKh32v": {groupby: "OPV", name: "OPV 2"},
+      "PvHUllrtPiy": {groupby: "PCV", name: "PCV 2"},
+      "wYg2gOWSyJG": {groupby: "RV", name: "RV 2"},
+      "nQeUfqPjK5o": {groupby: "OPV", name: "OPV 3"},
+      "pxCZNoqDVJC": {groupby: "DPT", name: "DPT-HepB-Hib3"},
+      "B4eJCy6LFLZ": {groupby: "PCV", name: "PCV 3"},
+      "cNA9EmFaiAa": {groupby: "OPV", name: "OPV 4"},
+      "g8dMiUOTFla": {groupby: "Measles", name: "Measles 1"},
+      "Bxh1xgIY9nA": {groupby: "Measles", name: "Measles 2"}
+    },
+
+    attributes: {
+      eventId: "Event ID",
+      dueDate: "Due date",
+      sB1IHYu2xQT: "First Name",
+      wbtl3uN0spv: "Child Name",
+      rKtHjgcO2Bn: "Age"
+    }
   })
   .constant("mEventData", {
     trackedEntityInstances: undefined,
