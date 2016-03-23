@@ -9,7 +9,7 @@ angular.module('app.routes', [])
     $stateProvider
 
       .state('menu.login', {
-        url: '/page_login',
+        url: '/page-login',
         views: {
           'side-menu21': {
             templateUrl: 'templates/page-login.html',
@@ -19,7 +19,7 @@ angular.module('app.routes', [])
       })
 
       .state('menu.bidReportApp', {
-        url: '/page_home',
+        url: '/page-home',
         views: {
           'side-menu21': {
             templateUrl: 'templates/page-bid-report-app.html',
@@ -29,7 +29,7 @@ angular.module('app.routes', [])
       })
 
       .state('menu.scheduleVaccineToday', {
-        url: '/page_schedule_vaccine_today',
+        url: '/page-schedule-vaccine-today',
         views: {
           'side-menu21': {
             templateUrl: 'templates/page-schedule-vaccine-today.html',
@@ -37,9 +37,27 @@ angular.module('app.routes', [])
           }
         }
       })
+      .state('menu.vaccineToday', {
+        url: '/page-vaccine-today',
+        views: {
+          'side-menu21': {
+            templateUrl: 'templates/page-vaccine-today.html',
+            controller: 'cScheduleVaccineToday'
+          }
+        }
+      })
+      .state('menu.vaccineCompleted', {
+        url: '/page-vaccine-completed',
+        views: {
+          'side-menu21': {
+            templateUrl: 'templates/page-vaccine-completed.html',
+            controller: 'cScheduleVaccineToday'
+          }
+        }
+      })
 
       .state('menu.stockInHand', {
-        url: '/page_stock_in_hand',
+        url: '/page-stock-in-hand',
         views: {
           'side-menu21': {
             templateUrl: 'templates/page-stock-in-hand.html',
@@ -48,8 +66,8 @@ angular.module('app.routes', [])
         }
       })
 
-      .state('menu.stockInHandVsDemand', {
-        url: '/page_stock_in_hand_vs_demand',
+      .state('menu.stockInHandDemand', {
+        url: '/page-stock-in-hand-demand',
         views: {
           'side-menu21': {
             templateUrl: 'templates/page-stock-in-hand-demand.html',
@@ -59,7 +77,7 @@ angular.module('app.routes', [])
       })
 
       .state('menu.vaccineHistoryReport', {
-        url: '/page_vaccine_history_report',
+        url: '/page-vaccine-history-report',
         views: {
           'side-menu21': {
             templateUrl: 'templates/page-vaccine-history-report.html',
@@ -76,7 +94,7 @@ angular.module('app.routes', [])
       })
 
       .state('menu.about', {
-        url: '/page_about',
+        url: '/page-about',
         views: {
           'side-menu21': {
             templateUrl: 'templates/page-about.html',
@@ -86,7 +104,7 @@ angular.module('app.routes', [])
 
       //Define test console
       .state('menu.console', {
-        url: '/page_console',
+        url: '/page-console',
         views: {
           'side-menu21': {
             templateUrl: 'templates/page-console.html',
@@ -98,7 +116,7 @@ angular.module('app.routes', [])
 
     ;
 
-    $urlRouterProvider.otherwise('/side-menu21/page_login');
+    $urlRouterProvider.otherwise('/side-menu21/page-login');
 
 
   });

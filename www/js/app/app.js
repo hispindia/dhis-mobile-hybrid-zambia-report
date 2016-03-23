@@ -47,7 +47,7 @@ angular.module('app', ['ionic', 'ngSanitize', 'indexedDB',
   })
   .run(function ($ionicHistory, $state, $rootScope, $location, mDataCommon, mCODE, sUtils, sAuthentication, sInitDataService) {
     $rootScope.$on(mCODE.MSG.ISLOGIN, function () {
-      if ($location.path() == "/side-menu21/page_login") {
+      if ($location.path() == "/side-menu21/page-login") {
         $ionicHistory.clearHistory();
         $ionicHistory.nextViewOptions({
           disableBack: true

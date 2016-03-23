@@ -1,0 +1,16 @@
+<ion-view title="Vaccine Today">
+  <ion-content overflow-scroll="true" padding="true" class="has-header">
+    <div id="progress"></div>
+    <form class="list">
+      <label class="item item-input">
+        <i class="icon ion-search placeholder-icon"></i>
+        <input type="search" ng-model="dueDateInput" placeholder="">
+      </label>
+    </form>
+    <div class="list">
+      <schedule-event
+        ng-repeat="item	in mEventDetails | fEventListFilter:0 | filter:dueDateInput | orderBy:'-dueDate' track by $index ">
+      </schedule-event>
+    </div>
+  </ion-content>
+</ion-view>

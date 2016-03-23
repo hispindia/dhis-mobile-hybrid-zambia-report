@@ -41,12 +41,22 @@
             </button>
           </li>
           <li class="item">
+            <button class="button button-clear button-positive button-full" ui-sref="menu.vaccineToday"
+                    ng-disabled="!isLogin()" menu-close="">Vaccine Today
+            </button>
+          </li>
+          <li class="item">
+            <button class="button button-clear button-positive button-full" ui-sref="menu.vaccineCompleted"
+                    ng-disabled="!isLogin()" menu-close="">Vaccine Completed
+            </button>
+          </li>
+          <li class="item">
             <button class="button button-clear button-positive button-full" ui-sref="menu.stockInHand"
                     ng-disabled="!isLogin()" menu-close="">Stock In Hand
             </button>
           </li>
           <li class="item">
-            <button class="button button-clear button-positive button-full" ui-sref="menu.stockInHandVsDemand"
+            <button class="button button-clear button-positive button-full" ui-sref="menu.stockInHandDemand"
                     ng-disabled="!isLogin()" menu-close="">Stock In Hand vs Demand
             </button>
           </li>
