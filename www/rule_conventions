@@ -11,4 +11,12 @@ Priority parameter:
 
 $http, $q, localStorageService, mCODE, sUtils
 
+- Name of file use lower case and separate by '-' (ex: item-event-report.html)
+- Fist character prefix for folder by '_' (ex: _scss)
+
+Prefix for file html templates:
+- With item-views: prefix is "item" (ex: item-event-report.html)
+- With page: prefix is "page" (ex: page-bid-report-app.html)
+
+
 

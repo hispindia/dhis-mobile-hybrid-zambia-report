@@ -3,7 +3,7 @@ angular.module('app.directives', [])
   .directive('scheduleEvent', function () {
     return {
       restrict: 'EA',
-      templateUrl: 'templates/item-views/item_event_report.html'
+      templateUrl: 'templates/item-views/item-event-report.html'
     };
   })
 

@@ -12,7 +12,7 @@ angular.module('app.routes', [])
         url: '/page_login',
         views: {
           'side-menu21': {
-            templateUrl: 'templates/login.html',
+            templateUrl: 'templates/page-login.html',
             controller: 'cLogin'
           }
         }
@@ -22,7 +22,7 @@ angular.module('app.routes', [])
         url: '/page_home',
         views: {
           'side-menu21': {
-            templateUrl: 'templates/bidReportApp.html',
+            templateUrl: 'templates/page-bid-report-app.html',
             controller: 'cBidReportApp'
           }
         }
@@ -32,7 +32,7 @@ angular.module('app.routes', [])
         url: '/page_schedule_vaccine_today',
         views: {
           'side-menu21': {
-            templateUrl: 'templates/scheduleVaccineToday.html',
+            templateUrl: 'templates/page-schedule-vaccine-today.html',
             controller: 'cScheduleVaccineToday'
           }
         }
@@ -42,7 +42,7 @@ angular.module('app.routes', [])
         url: '/page_stock_in_hand',
         views: {
           'side-menu21': {
-            templateUrl: 'templates/stockInHand.html',
+            templateUrl: 'templates/page-stock-in-hand.html',
             controller: 'cStockInHand'
           }
         }
@@ -52,7 +52,7 @@ angular.module('app.routes', [])
         url: '/page_stock_in_hand_vs_demand',
         views: {
           'side-menu21': {
-            templateUrl: 'templates/stockInHandVsDemand.html',
+            templateUrl: 'templates/page-stock-in-hand-demand.html',
             controller: 'cStockInHandVsDemand'
           }
         }
@@ -62,7 +62,7 @@ angular.module('app.routes', [])
         url: '/page_vaccine_history_report',
         views: {
           'side-menu21': {
-            templateUrl: 'templates/vaccineHistoryReport.html',
+            templateUrl: 'templates/page-vaccine-history-report.html',
             controller: 'cVaccineHistoryReport'
           }
         }
@@ -70,7 +70,7 @@ angular.module('app.routes', [])
 
       .state('menu', {
         url: '/side-menu21',
-        templateUrl: 'templates/menu.html',
+        templateUrl: 'templates/page-menu.html',
         controller: 'cMenu',
         abstract: true
       })
@@ -79,7 +79,7 @@ angular.module('app.routes', [])
         url: '/page_about',
         views: {
           'side-menu21': {
-            templateUrl: 'templates/about.html',
+            templateUrl: 'templates/page-about.html',
           }
         }
       })
@@ -89,7 +89,7 @@ angular.module('app.routes', [])
         url: '/page_console',
         views: {
           'side-menu21': {
-            templateUrl: 'templates/console.html',
+            templateUrl: 'templates/page-console.html',
             controller: 'cConsole'
           }
         }
